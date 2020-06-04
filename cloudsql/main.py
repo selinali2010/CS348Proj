@@ -35,6 +35,14 @@ def main():
         unix_socket = '/cloudsql/{}'.format(db_connection_name)
         cnx = pymysql.connect(user=db_user, password=db_password,
                               unix_socket=unix_socket, db=db_name)
+
+        with cnx:
+
+            cur = cnx.cursor()
+            cur.execute("SELECT * FROM recipe")
+
+            rows = cur.fetchall()
+
     else:
         # If running locally, use the TCP connections instead
         # Set up Cloud SQL Proxy (cloud.google.com/sql/docs/mysql/sql-proxy)
@@ -50,7 +58,7 @@ def main():
         current_time = result[0][0]
     cnx.close()
 
-    return str(current_time)
+    return str(rows[0])
 # [END gae_python37_cloudsql_mysql]
 
 
