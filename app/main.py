@@ -14,6 +14,7 @@
 
 # [START gae_python37_cloudsql_mysql]
 import os
+from typing import List
 
 from flask import Flask
 import pymysql
@@ -25,40 +26,50 @@ db_connection_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME')
 
 app = Flask(__name__)
 
+# sql = sql query as string
+def query(sql : str) -> List[List[str]]:
+    result = None
+    try:
+        # When deployed to App Engine, the `GAE_ENV` environment variable will be
+        # set to `standard`
+        if os.environ.get('GAE_ENV') == 'standard':
+            # If deployed, use the local socket interface for accessing Cloud SQL
+            unix_socket = '/cloudsql/{}'.format(db_connection_name)
+            connection = pymysql.connect(user=db_user, password=db_password, unix_socket=unix_socket, db=db_name)
 
-@app.route('/')
-def main():
-    # When deployed to App Engine, the `GAE_ENV` environment variable will be
-    # set to `standard`
-    if os.environ.get('GAE_ENV') == 'standard':
-        # If deployed, use the local socket interface for accessing Cloud SQL
-        unix_socket = '/cloudsql/{}'.format(db_connection_name)
-        cnx = pymysql.connect(user=db_user, password=db_password,
-                              unix_socket=unix_socket, db=db_name)
+        else:
+            # If running locally, use the TCP connections instead
+            # Set up Cloud SQL Proxy (cloud.google.com/sql/docs/mysql/sql-proxy)
+            # so that your application can use 127.0.0.1:3306 to connect to your
+            # Cloud SQL instance
+            host = '127.0.0.1'
+            connection = pymysql.connect(user=db_user, password=db_password, host=host, db=db_name)
 
-        with cnx:
+        with connection.cursor() as cursor:
+            # Create a new record
+            cursor.execute(sql)
+            result = cursor.fetchall()
 
-            cur = cnx.cursor()
-            cur.execute("SELECT * FROM recipe")
+        # connection is not autocommit by default. So you must commit to save
+        # your changes.
+        connection.commit()
 
-            rows = cur.fetchall()
+    finally:
+        connection.close()
 
-    else:
-        # If running locally, use the TCP connections instead
-        # Set up Cloud SQL Proxy (cloud.google.com/sql/docs/mysql/sql-proxy)
-        # so that your application can use 127.0.0.1:3306 to connect to your
-        # Cloud SQL instance
-        host = '127.0.0.1'
-        cnx = pymysql.connect(user=db_user, password=db_password,
-                              host=host, db=db_name)
+    return result
 
-    with cnx.cursor() as cursor:
-        cursor.execute('SELECT NOW() as now;')
-        result = cursor.fetchall()
-        current_time = result[0][0]
-    cnx.close()
 
-    return str(rows[0])
+@app.route("/api/recipes", methods=["GET"])
+def recipes(self):
+    result = query("SELECT * FROM recipe")
+    # return json(result)
+    return str(result or "oof")
+
+@app.route("/", methods=["GET"])
+def get_root_handler(self):
+    return """<a href="/api/recipes">Get recipes</a>"""
+
 # [END gae_python37_cloudsql_mysql]
 
 
