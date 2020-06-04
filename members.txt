@@ -1,5 +1,22 @@
-Selina Li (sk6li) - Participated in project brainstorm and preparation
-Ethan Guo (ehguo) - Participated in project brainstorm and preparation
-Hemit Shah (h39shah) - Participated in project brainstorm and preparation
-Linda Zheng (ll2zheng) - Participated in project brainstorm and preparation
-Robert Nadal (rmnadal) - Participated in project brainstorm and preparation
+Selina Li (sk6li)
+- Participated in project brainstorm and preparation
+- Added SQL scripts to create basic tables
+
+Ethan Guo (ehguo)
+- Participated in project brainstorm and preparation
+- Set up back-end Python server
+- Connected flask server to gcp mysql server
+
+Hemit Shah (h39shah)
+- Participated in project brainstorm and preparation
+- Set up back-end Python server
+- Connected flask server to gcp mysql server
+
+Linda Zheng (ll2zheng)
+- Participated in project brainstorm and preparation
+- Set up back-end Python server
+- Connected flask server to gcp mysql server
+
+Robert Nadal (rmnadal)
+- Participated in project brainstorm and preparation
+- Set up front-end React app
