@@ -16,7 +16,6 @@ Http.onreadystatechange= (e) => {
 function App() {
   const [displayRecipe, setDisplayRecipe] = useState([]);
   const fetchRecipes = () => {
-    console.log(counter + " " + allRecipes[counter]);
     setDisplayRecipe(allRecipes[counter++]);
     counter %= 4;
   }
