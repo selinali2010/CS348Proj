@@ -17,6 +17,7 @@ import os
 from typing import List
 
 from flask import Flask
+from flask_cors import CORS
 import pymysql
 
 db_user = os.environ.get('CLOUD_SQL_USERNAME')
@@ -25,6 +26,7 @@ db_name = os.environ.get('CLOUD_SQL_DATABASE_NAME')
 db_connection_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME')
 
 app = Flask(__name__)
+CORS(app)
 
 # sql = sql query as string
 def query(sql : str) -> List[List[str]]:
