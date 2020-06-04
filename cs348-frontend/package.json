@@ -32,6 +32,9 @@
     ]
   },
   "engines": {
-      "node": "9.x"
+    "node": ">9"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
   }
 }
