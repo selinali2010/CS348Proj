@@ -61,13 +61,13 @@ def query(sql : str) -> List[List[str]]:
 
 
 @app.route("/api/recipes", methods=["GET"])
-def recipes(self):
+def recipes():
     result = query("SELECT * FROM recipe")
     # return json(result)
     return str(result or "oof")
 
 @app.route("/", methods=["GET"])
-def get_root_handler(self):
+def get_root_handler():
     return """<a href="/api/recipes">Get recipes</a>"""
 
 # [END gae_python37_cloudsql_mysql]
