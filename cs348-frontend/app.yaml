@@ -1,5 +1,5 @@
 runtime: nodejs10
-service: frontend
+service: foodmood
 handlers:
 
 - url: /(.*\..+)$
