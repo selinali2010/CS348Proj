@@ -1,0 +1,13 @@
+runtime: php55
+api_version: 1
+application: cs348s2020
+version: v1
+
+handlers:
+- url: /.*
+  script: index.php
+
+env_variables:
+  MYSQL_DSN: mysql:unix_socket=/cloudsql/cs348s2020:us-central1:cs348-1;db_name=db_1
+  MYSQL_USER: root
+  MYSQL_PASSWORD: cs348
