@@ -7,7 +7,7 @@ let allRecipes;
 let counter = 0;
 
 const Http = new XMLHttpRequest();
-Http.open("GET", process.env.REACT_APP_API_URL + "api/recipes");
+Http.open("GET", process.env.NODE_ENV == 'production' ? process.env.REACT_APP_API_URL : 'http://localhost:8080/'+ "api/recipes");
 Http.send();    
 Http.onreadystatechange= (e) => {
   allRecipes = Http.responseText.split(')');

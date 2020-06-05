@@ -14,6 +14,7 @@
 
 # [START gae_python37_cloudsql_mysql]
 import os
+from flask import jsonify
 from typing import List
 
 from flask import Flask
@@ -45,7 +46,7 @@ def query(sql : str) -> List[List[str]]:
             # so that your application can use 127.0.0.1:3306 to connect to your
             # Cloud SQL instance
             host = '127.0.0.1'
-            connection = pymysql.connect(user=db_user, password=db_password, host=host, db=db_name)
+            connection = pymysql.connect(user='root', password='cs348', host=host, db='db_1', cursorclass=pymysql.cursors.DictCursor)
 
         with connection.cursor() as cursor:
             # Create a new record
@@ -65,8 +66,8 @@ def query(sql : str) -> List[List[str]]:
 @app.route("/api/recipes", methods=["GET"])
 def recipes():
     result = query("SELECT * FROM recipe")
-    # return json(result)
-    return str(result or "oof")
+    return jsonify(result)
+    # return str(result or "oof")
 
 @app.route("/", methods=["GET"])
 def get_root_handler():
