@@ -1,6 +1,6 @@
 # CS348Proj
 
-# Starting local server
+## Starting local server
 Ensure you have a credentials file for your GCP MySQL server.
 ```creds.json```
 
@@ -12,3 +12,10 @@ Start your proxy in a terminal.
 
 In a new terminal, start your server.
 ```python test.py```
+
+## Sample Database
+To create sample tables, run the commands in ```sql_scripts/createTables.sql```.
+
+To populate tables with sample data, run the commands in ```sql_scripts/populateTables.sql```.
+
+To drop sample tables, run the commands in ```sql_scripts/dropTables.sql```.
