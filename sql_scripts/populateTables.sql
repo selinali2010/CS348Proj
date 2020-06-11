@@ -1,11 +1,11 @@
 -- Populate recipe Table
-INSERT INTO recipe (name, cookTime, difficulty, cuisine, servings, image, url, author) 
+INSERT INTO recipe (recipeName, cookTime, difficulty, cuisine, servings, image, url, authorName) 
 VALUES("Apple Pie", 30, 4, "pastry", 8, "randomImageUrl", "www.google.com", "Rob Nadal");
-INSERT INTO recipe (name, cookTime, difficulty, cuisine, servings, image, url, author) 
+INSERT INTO recipe (recipeName, cookTime, difficulty, cuisine, servings, image, url, authorName) 
 VALUES("Cheesecake", 45, 3, "cake", 10, "cheesecakeUrl", "www.google.com", "Hemit Shah");
-INSERT INTO recipe (name, cookTime, difficulty, cuisine, servings, image, url, author) 
+INSERT INTO recipe (recipeName, cookTime, difficulty, cuisine, servings, image, url, authorName) 
 VALUES("Banana Bread", 50, 1, "bread", 6, "bananaBreadUrl", "www.google.com", "Selina Li");
-INSERT INTO recipe (name, cookTime, difficulty, cuisine, servings, image, url, author) 
+INSERT INTO recipe (recipeName, cookTime, difficulty, cuisine, servings, image, url, authorName) 
 VALUES("Bubble Tea", 60, 5, "drink", 4, "bubbleTeaUrl", "www.google.com", "Linda Zheng");
 
 -- Populate ingredient Table
