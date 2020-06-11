@@ -4,9 +4,9 @@ CREATE TABLE recipe (
   cookTime INT,
   difficulty SMALLINT,
   cuisine VARCHAR(40),
-  servings INT NOT NULL, 
-  image VARCHAR(40), 
-  url VARCHAR(40),
+  servings INT NOT NULL,
+  imageUrl VARCHAR(40),
+  instructionsLink VARCHAR(40),
   authorName VARCHAR(40)
 );
 CREATE TABLE user
