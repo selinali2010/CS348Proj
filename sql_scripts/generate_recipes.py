@@ -14,7 +14,7 @@ author_set = ['Rob Nadal', 'Selina Li', 'Hemit Shah', 'Ethan Guo', 'Linda Zheng'
 'Mufeez Amjad', 'Hrithvik Alex', 'Cosmo Zhao', 'Bob Su']
 
 f = open('recipes.txt', 'w+') 
-for i in range(1000):
+for i in range(25):
     recipeId = i
     recipeName = "recipe"+str(i)
     cookTime = random.randint(1,75)
@@ -24,4 +24,4 @@ for i in range(1000):
     imageURL = image_set[random.randint(0,len(image_set)-1)]
     instructionsLink = link_set[random.randint(0,len(link_set)-1)]
     authorName = author_set[random.randint(0,len(author_set)-1)]
-    f.write(','.join(map(str,[recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageURL, instructionsLink, authorName]))+"\n")
+    f.write('\t'.join(map(str,[recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageURL, instructionsLink, authorName]))+"\n")

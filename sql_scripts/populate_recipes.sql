@@ -1,1 +1,1 @@
-import from recipes.txt of del insert into recipe;
+LOAD DATA LOCAL INFILE 'sql_scripts/recipes.txt' INTO TABLE recipe;

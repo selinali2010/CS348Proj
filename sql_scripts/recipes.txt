@@ -1,0 +1,25 @@
+0	recipe0	59	3	French	13	https://images2.minutemediacdn.com/image/upload/c_crop,h_1193,w_2121,x_0,y_64/f_auto,q_auto,w_1100/v1565279671/shape/mentalfloss/578211-gettyimages-542930526.jpg	www.google.ca	Cindy Wang
+1	recipe1	24	3	Japanese	2	https://images2.minutemediacdn.com/image/upload/c_crop,h_1188,w_2121,x_0,y_142/f_auto,q_auto,w_1100/v1554733134/shape/mentalfloss/78996-istock-682216682.jpg	www.google.ca	Hrithvik Alex
+2	recipe2	41	4	Fast food	1	https://images2.minutemediacdn.com/image/upload/c_crop,h_1193,w_2121,x_0,y_64/f_auto,q_auto,w_1100/v1565279671/shape/mentalfloss/578211-gettyimages-542930526.jpg	www.google.ca	Peggy Li
+3	recipe3	17	1	Greek	6	https://www.sciencemag.org/sites/default/files/styles/article_main_image_-_1280w__no_aspect_/public/dogs_1280p_0.jpg?itok=6jQzdNB8	www.google.ca	Peggy Li
+4	recipe4	62	5	Japanese	15	https://images2.minutemediacdn.com/image/upload/c_crop,h_1193,w_2121,x_0,y_64/f_auto,q_auto,w_1100/v1565279671/shape/mentalfloss/578211-gettyimages-542930526.jpg	www.google.ca	Selina Li
+5	recipe5	49	5	Mexican	5	https://www.sciencemag.org/sites/default/files/styles/article_main_image_-_1280w__no_aspect_/public/dogs_1280p_0.jpg?itok=6jQzdNB8	www.google.ca	Jacky Liao
+6	recipe6	55	2	Mexican	5	https://static.toiimg.com/thumb/msid-67586673,width-800,height-600,resizemode-75,imgsize-3918697,pt-32,y_pad-40/67586673.jpg	www.google.ca	Michael Jiang
+7	recipe7	64	3	Mexican	14	https://images2.minutemediacdn.com/image/upload/c_crop,h_1188,w_2121,x_0,y_142/f_auto,q_auto,w_1100/v1554733134/shape/mentalfloss/78996-istock-682216682.jpg	www.google.ca	Bob Su
+8	recipe8	44	1	Chinese	13	https://images2.minutemediacdn.com/image/upload/c_crop,h_1193,w_2121,x_0,y_64/f_auto,q_auto,w_1100/v1565279671/shape/mentalfloss/578211-gettyimages-542930526.jpg	www.google.ca	Hrithvik Alex
+9	recipe9	31	3	French	2	https://static.toiimg.com/thumb/msid-67586673,width-800,height-600,resizemode-75,imgsize-3918697,pt-32,y_pad-40/67586673.jpg	www.google.ca	Chandana Satish
+10	recipe10	41	1	Mediterranean	8	https://images2.minutemediacdn.com/image/upload/c_crop,h_1193,w_2121,x_0,y_64/f_auto,q_auto,w_1100/v1565279671/shape/mentalfloss/578211-gettyimages-542930526.jpg	www.google.ca	Michael Jiang
+11	recipe11	44	5	Middle Eastern	13	https://static.toiimg.com/thumb/msid-67586673,width-800,height-600,resizemode-75,imgsize-3918697,pt-32,y_pad-40/67586673.jpg	www.google.ca	Hannah Li
+12	recipe12	11	5	Japanese	4	https://www.sciencemag.org/sites/default/files/styles/article_main_image_-_1280w__no_aspect_/public/dogs_1280p_0.jpg?itok=6jQzdNB8	www.google.ca	Sara Hosseini
+13	recipe13	20	3	American	4	https://www.sciencealert.com/images/2020-03/processed/010-pomeranian_1024.jpg	www.google.ca	Sara Hosseini
+14	recipe14	35	2	Indian	3	https://www.sciencemag.org/sites/default/files/styles/article_main_image_-_1280w__no_aspect_/public/dogs_1280p_0.jpg?itok=6jQzdNB8	www.google.ca	Chandana Satish
+15	recipe15	21	4	Fast food	8	https://static.toiimg.com/thumb/msid-67586673,width-800,height-600,resizemode-75,imgsize-3918697,pt-32,y_pad-40/67586673.jpg	www.google.ca	Sara Hosseini
+16	recipe16	57	1	Japanese	3	https://images2.minutemediacdn.com/image/upload/c_crop,h_1188,w_2121,x_0,y_142/f_auto,q_auto,w_1100/v1554733134/shape/mentalfloss/78996-istock-682216682.jpg	www.google.ca	Michael Jiang
+17	recipe17	41	2	Chinese	14	https://www.sciencemag.org/sites/default/files/styles/article_main_image_-_1280w__no_aspect_/public/dogs_1280p_0.jpg?itok=6jQzdNB8	www.google.ca	Rushi Ghandi
+18	recipe18	70	1	Chinese	5	https://www.sciencemag.org/sites/default/files/styles/article_main_image_-_1280w__no_aspect_/public/dogs_1280p_0.jpg?itok=6jQzdNB8	www.google.ca	Thomas Cheng
+19	recipe19	10	1	Greek	4	https://static.toiimg.com/thumb/msid-67586673,width-800,height-600,resizemode-75,imgsize-3918697,pt-32,y_pad-40/67586673.jpg	www.google.ca	Chandana Satish
+20	recipe20	52	2	Greek	9	https://images2.minutemediacdn.com/image/upload/c_crop,h_1188,w_2121,x_0,y_142/f_auto,q_auto,w_1100/v1554733134/shape/mentalfloss/78996-istock-682216682.jpg	www.google.ca	Jerry Yu
+21	recipe21	48	2	Eastern European	2	https://www.sciencealert.com/images/2020-03/processed/010-pomeranian_1024.jpg	www.google.ca	Linda Zheng
+22	recipe22	49	1	Japanese	3	https://www.sciencealert.com/images/2020-03/processed/010-pomeranian_1024.jpg	www.google.ca	Mufeez Amjad
+23	recipe23	6	4	Eastern European	4	https://images2.minutemediacdn.com/image/upload/c_crop,h_1188,w_2121,x_0,y_142/f_auto,q_auto,w_1100/v1554733134/shape/mentalfloss/78996-istock-682216682.jpg	www.google.ca	David Gu
+24	recipe24	56	5	Mediterranean	10	https://images2.minutemediacdn.com/image/upload/c_crop,h_1188,w_2121,x_0,y_142/f_auto,q_auto,w_1100/v1554733134/shape/mentalfloss/78996-istock-682216682.jpg	www.google.ca	Mark Zhang
