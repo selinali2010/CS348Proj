@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 require('dotenv').config();
@@ -6,18 +6,31 @@ require('dotenv').config();
 let allRecipes;
 let counter = 0;
 
-const Http = new XMLHttpRequest();
-Http.open("GET", process.env.NODE_ENV == 'production' ? process.env.REACT_APP_API_URL : 'http://localhost:8080/'+ "api/recipes");
-Http.send();    
-Http.onreadystatechange= (e) => {
-  allRecipes = Http.responseText.split(')');
-}
-
 function App() {
   const [displayRecipe, setDisplayRecipe] = useState([]);
+
+  useEffect(async ()  => {
+    const response = await fetch(process.env.NODE_ENV == 'production' ? process.env.REACT_APP_API_URL : 'http://localhost:8080/'+ "api/recipes")
+    const data = await response.json();
+    allRecipes = data;
+  }, []);
+
   const fetchRecipes = () => {
     setDisplayRecipe(allRecipes[counter++]);
-    counter %= 4;
+    counter %= allRecipes.length;
+  }
+
+  // TODO: Replace this with a component to render a recipe
+  const showRecipe = () => {
+    if(!displayRecipe){
+      return;
+    }
+    let view = [];
+    for(let i in displayRecipe){
+      console.log(displayRecipe[i]);
+      view.push(<li key={i} type>{i + ": " + displayRecipe[i]}</li>);
+    }
+    return view;
   }
 
   return (
@@ -28,7 +41,7 @@ function App() {
           Mood Food!
         </p>
         <button onClick={fetchRecipes}> Send me a Recipe! </button>
-        <p> {displayRecipe} </p>
+        { showRecipe() }
       </header>
     </div>
   );
