@@ -1,4 +1,4 @@
-DROP TABLE requiredfor;
+DROP TABLE requiredFor;
 DROP TABLE owns;
 DROP TABLE tags;
 DROP TABLE substitutes;

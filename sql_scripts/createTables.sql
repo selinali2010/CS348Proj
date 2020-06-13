@@ -5,8 +5,8 @@ CREATE TABLE recipe (
   difficulty SMALLINT,
   cuisine VARCHAR(40),
   servings INT NOT NULL,
-  imageUrl VARCHAR(40),
-  instructionsLink VARCHAR(40),
+  imageUrl VARCHAR(225),
+  instructionsLink VARCHAR(225),
   authorName VARCHAR(40)
 );
 CREATE TABLE user
@@ -35,11 +35,11 @@ CREATE TABLE reacts
 );
 CREATE TABLE substitutes
 ( 
+  recipeId INT(24) NOT NULL,
   foodName VARCHAR(30) NOT NULL,
   substituteName VARCHAR(30) NOT NULL,
-  PRIMARY KEY(foodName, substituteName),
-  FOREIGN KEY(foodName) REFERENCES ingredients(foodName),
-  FOREIGN KEY(substituteName) REFERENCES ingredients(foodName)
+  PRIMARY KEY(recipeId, foodName, substituteName),
+  FOREIGN KEY(recipeId, foodName) REFERENCES ingredient(recipeId, foodName)
 );
 CREATE TABLE tags
 ( 
@@ -55,7 +55,7 @@ CREATE TABLE owns
   PRIMARY KEY(userId, equipmentName),
   FOREIGN KEY(userId) REFERENCES user(userId)
 );
-CREATE TABLE requiredfor
+CREATE TABLE requiredFor
 ( 
 	recipeId INT NOT NULL,
 	equipmentName VARCHAR(30) NOT NULL,
