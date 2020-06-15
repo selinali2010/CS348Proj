@@ -35,11 +35,10 @@ const ResultsContentBox = () => {
         <div className="results-content-box">
             <div className="section-title">
                 <div className="section-title-text">
-                    Search
+                    Search Results
                 </div>
             </div>
             <div className="section-body results-content-body">
-                This is where the search results will go.
               <button onClick={fetchRecipes}> Send me a Recipe! </button>
               { showRecipe() }
             </div>

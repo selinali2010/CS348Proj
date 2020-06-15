@@ -5,7 +5,7 @@ const SearchContentBox = () => {
         <div className="search-content-box">
             <div className="section-title">
                 <div className="section-title-text">
-                    Search Results
+                    Search
                 </div>
             </div>
             <div className="section-body search-content-body">
