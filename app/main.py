@@ -15,7 +15,7 @@
 # [START gae_python37_cloudsql_mysql]
 import os
 from flask import jsonify
-from typing import List
+from typing import *
 
 from flask import Flask
 from flask_cors import CORS
@@ -30,7 +30,7 @@ app = Flask(__name__)
 CORS(app)
 
 # sql = sql query as string
-def query(sql : str) -> List[List[str]]:
+def query(sql : str, data : list[str] = []) -> List[List[str]]:
     result = None
     try:
         # When deployed to App Engine, the `GAE_ENV` environment variable will be
@@ -46,11 +46,11 @@ def query(sql : str) -> List[List[str]]:
             # so that your application can use 127.0.0.1:3306 to connect to your
             # Cloud SQL instance
             host = '127.0.0.1'
-            connection = pymysql.connect(user='root', password='cs348', host=host, db='db_1', cursorclass=pymysql.cursors.DictCursor)
+            connection = pymysql.connect(user='root', password='cs348', host=host, db='db_1')
 
-        with connection.cursor() as cursor:
+        with connection.cursor(pymysql.cursors.DictCursor) as cursor:
             # Create a new record
-            cursor.execute(sql)
+            cursor.execute(sql, data)
             result = cursor.fetchall()
 
         # connection is not autocommit by default. So you must commit to save
@@ -67,7 +67,6 @@ def query(sql : str) -> List[List[str]]:
 def recipes():
     result = query("SELECT * FROM recipe")
     return jsonify(result)
-    # return str(result or "oof")
 
 @app.route("/", methods=["GET"])
 def get_root_handler():

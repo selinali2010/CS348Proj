@@ -5,11 +5,13 @@ const ResultsContentBox = () => {
     let counter = 0;
     const [displayRecipe, setDisplayRecipe] = useState([]);
 
-    useEffect(async ()  => {
-        // const response = await fetch(process.env.NODE_ENV == 'production' ? process.env.REACT_APP_API_URL : 'http://localhost:8080/'+ "api/recipes")
-        const response = await fetch(process.env.REACT_APP_API_URL + "api/recipes")
+    useEffect(() => {
+        async function fetchData() {
+        const response = await fetch(process.env.NODE_ENV == 'production' ? process.env.REACT_APP_API_URL: 'http://localhost:8080/'+ "api/recipes");
         const data = await response.json();
         allRecipes = data;
+        }
+        fetchData();
     }, []);
 
     const fetchRecipes = () => {
@@ -24,8 +26,7 @@ const ResultsContentBox = () => {
         }
         let view = [];
         for(let i in displayRecipe){
-        console.log(displayRecipe[i]);
-        view.push(<li key={i} type>{i + ": " + displayRecipe[i]}</li>);
+        view.push(<li key={i}>{i + ": " + displayRecipe[i]}</li>);
         }
         return view;
     }
