@@ -2,17 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -24,15 +13,76 @@
   color: white;
 }
 
+.App-background {
+  background: url('assets/fall_background_tinted.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+}
+
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.left-col {
+  margin-left: 2rem;
+  margin-top: 2rem;
+  bottom: 10px;
+}
+
+.title-background {
+  padding-top: 0.1rem;
+  text-align: center;
+  height: 7rem;
+  width: 100%;
+  background: #703B16;
+}
+
+.title-text {
+  margin-left: -2.2rem;
+  margin-top: 1rem;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 2.5rem;
+  line-height: 2.2rem;
+  color: white
+}
+
+.title-text-lower {
+  margin-left: 1rem;
+}
+
+.title-text-lower {
+  margin-right: 1rem;
+  text-indent: 50px;
+}
+
+.search-content-box { margin-top: 1rem; }
+.search-content-body { height: 27rem; }
+.user-content-box { margin-top: 2rem; }
+.user-content-body { height: 6rem; }
+.results-content-box { margin-top: 1rem; }
+.results-content-body { height: 25rem; }
+
+.section-title {
+  text-align: left;
+  background: #9CA537;
+  height: 3rem;
+}
+
+.section-title-text {
+  padding-top: 1rem;
+  padding-left: 1rem;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 100%;
+  color: white;
+}
+                
+.section-body {
+  width: 100%;
+  background: #FCF6E8;
 }

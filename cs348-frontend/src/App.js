@@ -1,48 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import React from 'react';
+import Title from './Title';
+import SearchContentBox from './SearchContentBox';
+import UserContentBox from './UserContentBox';
+import ResultsContentBox from './ResultsContentBox';
 import './App.css';
 require('dotenv').config();
 
-let allRecipes;
-let counter = 0;
-
 function App() {
-  const [displayRecipe, setDisplayRecipe] = useState([]);
-
-  useEffect(async ()  => {
-    const response = await fetch(process.env.NODE_ENV == 'production' ? process.env.REACT_APP_API_URL : 'http://localhost:8080/'+ "api/recipes")
-    const data = await response.json();
-    allRecipes = data;
-  }, []);
-
-  const fetchRecipes = () => {
-    setDisplayRecipe(allRecipes[counter++]);
-    counter %= allRecipes.length;
-  }
-
-  // TODO: Replace this with a component to render a recipe
-  const showRecipe = () => {
-    if(!displayRecipe){
-      return;
-    }
-    let view = [];
-    for(let i in displayRecipe){
-      console.log(displayRecipe[i]);
-      view.push(<li key={i} type>{i + ": " + displayRecipe[i]}</li>);
-    }
-    return view;
-  }
-
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Mood Food!
-        </p>
-        <button onClick={fetchRecipes}> Send me a Recipe! </button>
-        { showRecipe() }
-      </header>
+      <div className="App-background container-fluid">
+        <div className = "row full-height">
+          <div className="col-3">
+            <div className = "left-col">
+              <Title />
+              <SearchContentBox />
+            </div>
+            </div>
+            <div className="col-9">
+              <div className="right-col">
+              <UserContentBox />
+              <ResultsContentBox />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
