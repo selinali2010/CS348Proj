@@ -30,7 +30,7 @@ app = Flask(__name__)
 CORS(app)
 
 # sql = sql query as string
-def query(sql : str) -> List[Dict[str, Any]]:
+def query(sql : str, data : list[str] = []) -> List[List[str]]:
     result = None
     try:
         # When deployed to App Engine, the `GAE_ENV` environment variable will be
@@ -50,7 +50,7 @@ def query(sql : str) -> List[Dict[str, Any]]:
 
         with connection.cursor(pymysql.cursors.DictCursor) as cursor:
             # Create a new record
-            cursor.execute(sql)
+            cursor.execute(sql, data)
             result = cursor.fetchall()
 
         # connection is not autocommit by default. So you must commit to save
