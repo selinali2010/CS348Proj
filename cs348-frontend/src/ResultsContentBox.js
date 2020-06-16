@@ -1,35 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import RecipeCard from './RecipeCard';
 
 const ResultsContentBox = () => {
-    let allRecipes;
-    let counter = 0;
-    const [displayRecipe, setDisplayRecipe] = useState([]);
+    const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
         async function fetchData() {
         const response = await fetch(process.env.NODE_ENV == 'production' ? process.env.REACT_APP_API_URL: 'http://localhost:8080/'+ "api/recipes");
+        // const response = await fetch(process.env.REACT_APP_API_URL + "api/recipes");
         const data = await response.json();
-        allRecipes = data;
+            setRecipes(data);
         }
         fetchData();
     }, []);
-
-    const fetchRecipes = () => {
-        setDisplayRecipe(allRecipes[counter++]);
-        counter %= allRecipes.length;
-    }
-
-    // TODO: Replace this with a component to render a recipe
-    const showRecipe = () => {
-        if(!displayRecipe){
-        return;
-        }
-        let view = [];
-        for(let i in displayRecipe){
-        view.push(<li key={i}>{i + ": " + displayRecipe[i]}</li>);
-        }
-        return view;
-    }
 
     return (        
         <div className="results-content-box">
@@ -38,9 +21,8 @@ const ResultsContentBox = () => {
                     Search Results
                 </div>
             </div>
-            <div className="section-body results-content-body">
-              <button onClick={fetchRecipes}> Send me a Recipe! </button>
-              { showRecipe() }
+            <div className="section-body results-content-body resultsContainer">
+              {recipes.map(e => <RecipeCard recipe={e}></RecipeCard>)}
             </div>
         </div>
       );
