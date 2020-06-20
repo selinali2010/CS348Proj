@@ -73,9 +73,9 @@ INSERT INTO tags VALUES(3, "nut free");
 INSERT INTO tags VALUES(4, "drink");
 INSERT INTO tags VALUES(4, "hot");
 INSERT INTO tags VALUES(4, "cold");
-INSERT INTO tags VALUES(4, "seafood");
-INSERT INTO tags VALUES(4, "fresh");
-INSERT INTO tags VALUES(4, "nut free");
+INSERT INTO tags VALUES(5, "seafood");
+INSERT INTO tags VALUES(5, "fresh");
+INSERT INTO tags VALUES(5, "nut free");
 
 -- Populate owns Table
 INSERT INTO owns VALUES(1, "oven");

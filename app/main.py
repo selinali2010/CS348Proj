@@ -17,7 +17,7 @@ import os
 from flask import jsonify
 from typing import *
 
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 import pymysql
 
@@ -30,7 +30,7 @@ app = Flask(__name__)
 CORS(app)
 
 # sql = sql query as string
-def query(sql : str, data : list[str] = []) -> List[List[str]]:
+def query(sql : str, data : List[str] = []) -> List[List[str]]:
     result = None
     try:
         # When deployed to App Engine, the `GAE_ENV` environment variable will be
@@ -67,6 +67,45 @@ def query(sql : str, data : list[str] = []) -> List[List[str]]:
 def recipes():
     result = query("SELECT * FROM recipe")
     return jsonify(result)
+
+@app.route("/api/ingredients/<int:id>", methods=["GET"])
+def ingredients(id):
+    with open("../sql_scripts/ingredientsQuery.sql") as file:
+        queryText = file.read()
+    result = query(queryText, id)
+    return jsonify(result)
+
+@app.route("/api/tags/<int:id>", methods=["GET"])
+def tags(id):
+    with open("../sql_scripts/tagsQuery.sql") as file:
+        queryText = file.read()
+    result = query(queryText, id)
+    return jsonify(result)
+
+
+@app.route("/api/search", methods=["GET"])
+def search():
+    args = request.json
+    if ("recipeName" in args):
+        with open("../sql_scripts/recipeNameQuery.sql") as file:
+            queryText = file.read()
+        params = args["recipeName"]
+        result = query(queryText, params)
+        return jsonify(result)
+    elif ("ingredients" in args):
+        with open("../sql_scripts/recipeByIngredientsQuery.sql") as file:
+            queryText = file.read()
+        params = "|".join(args["ingredients"])
+        result = query(queryText, params)
+        return jsonify(result)
+    elif ("tags" in args):
+        with open("../sql_scripts/recipeByTagQuery.sql") as file:
+            queryText = file.read()
+        params = "|".join(args["tags"])
+        result = query(queryText, params)
+        return jsonify(result)
+    else:
+        return jsonify({"error": "Invalid argument key provided."})
 
 @app.route("/", methods=["GET"])
 def get_root_handler():
