@@ -83,7 +83,7 @@ def tags(id):
     return jsonify(result)
 
 
-@app.route("/api/search", methods=["GET"])
+@app.route("/api/search", methods=["POST"])
 def search():
     args = request.json
     if ("recipeName" in args):
