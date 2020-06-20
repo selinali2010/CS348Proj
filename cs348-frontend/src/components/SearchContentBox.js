@@ -7,9 +7,21 @@ const SearchContentBox = ({addResults}) => {
 
     const searchRecipes = () => {
         async function fetchData() {
-            let ingredientName = document.getElementById('ingredientName').value;
+            let recipeName = document.getElementById('recipeName').value;
+            let ingredients = document.getElementById('ingredientName').value;
+            let tags = document.getElementById('tagName').value;
             // const response = await fetch(process.env.NODE_ENV == 'production' ? process.env.REACT_APP_API_URL: 'http://localhost:8080/'+ "api/recipes");
-            const response = await fetch(process.env.REACT_APP_API_URL + "api/recipes");
+            const response = await fetch(process.env.REACT_APP_API_URL + "search", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    recipeName: recipeName,
+                    ingredients: ingredients,
+                    tags: tags
+                }),
+            });
             const data = await response.json();
             addResults(data);
         }
