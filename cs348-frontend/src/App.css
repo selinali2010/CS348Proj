@@ -227,3 +227,19 @@
 .user-content-buttons {
   margin-top: 1rem;
 }
+
+
+/* CHIP INPUT */
+.chipInputBase {
+  background-color: white;
+}
+
+.chipList {
+  display: inline-block;
+}
+
+.addChipInput {
+  display: inline-block;
+  background-color: white;
+  border: none;
+}
