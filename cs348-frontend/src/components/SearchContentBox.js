@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { addResults } from '../redux/actions';
+import ChipInput from './ChipInput';
 
 const SearchContentBox = ({addResults}) => {
 
@@ -40,9 +41,9 @@ const SearchContentBox = ({addResults}) => {
                     <div> Search By Recipe Name: </div>
                     <input type="text" id="recipeName" name="recipeName" placeholder='Search by recipe name...'/>
                     <div> Search By Ingredients: </div>
-                    <input type="text" id="ingredientName" name="ingredientName" placeholder='Search by ingredient...'/>
+                    <ChipInput id="ingredientName" name="ingredientName" placeholder='Search by ingredient...'/>
                     <div> Search By Tags: </div>
-                    <input type="text" id="tagName" name="tagName" placeholder='Search by tags...'/>
+                    <ChipInput id="tagName" name="tagName" placeholder='Search by tags...'/>
                 </form>
                 <button onClick={searchRecipes}>
                     Search!
