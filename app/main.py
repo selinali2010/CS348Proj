@@ -86,11 +86,26 @@ def tags(id):
 @app.route("/api/search", methods=["GET"])
 def search():
     args = request.json
-    with open("../sql_scripts/recipeNameQuery.sql") as file:
-        queryText = file.read()
-    params = "|".join(args["recipeName"]);
-    result = query(queryText, params)
-    return jsonify(result)
+    if ("recipeName" in args):
+        with open("../sql_scripts/recipeNameQuery.sql") as file:
+            queryText = file.read()
+        params = args["recipeName"]
+        result = query(queryText, params)
+        return jsonify(result)
+    elif ("ingredients" in args):
+        with open("../sql_scripts/recipeByIngredientsQuery.sql") as file:
+            queryText = file.read()
+        params = "|".join(args["ingredients"])
+        result = query(queryText, params)
+        return jsonify(result)
+    elif ("tags" in args):
+        with open("../sql_scripts/recipeByTagQuery.sql") as file:
+            queryText = file.read()
+        params = "|".join(args["tags"])
+        result = query(queryText, params)
+        return jsonify(result)
+    else:
+        return jsonify({"error": "Invalid argument key provided."})
 
 @app.route("/", methods=["GET"])
 def get_root_handler():
