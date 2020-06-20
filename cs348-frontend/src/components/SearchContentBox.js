@@ -1,5 +1,4 @@
 import React from 'react';
-import search from '../redux/reducers/search';
 import { connect } from "react-redux";
 import { addResults } from '../redux/actions';
 
@@ -7,9 +6,9 @@ const SearchContentBox = ({addResults}) => {
 
     const searchRecipes = () => {
         async function fetchData() {
-            let recipeName = document.getElementById('recipeName').value;
-            let ingredients = document.getElementById('ingredientName').value;
-            let tags = document.getElementById('tagName').value;
+            // let recipeName = document.getElementById('recipeName').value;
+            // let ingredients = document.getElementById('ingredientName').value;
+            // let tags = document.getElementById('tagName').value;
             // const response = await fetch(process.env.NODE_ENV == 'production' ? process.env.REACT_APP_API_URL: 'http://localhost:8080/'+ "api/recipes");
             // const response = await fetch(process.env.REACT_APP_API_URL + "api/search", {
             //     method: 'POST',
