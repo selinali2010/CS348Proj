@@ -17,8 +17,10 @@ const ResultsContentBox = ({results}) => {
                     Search Results
                 </div>
             </div>
-            <div className="section-body results-content-body resultsContainer">
-              {results.map(e => <RecipeCard recipe={e}></RecipeCard>)}
+            <div className="section-body results-content-body">
+                <div className="results-container">
+                    {results.map(e => <RecipeCard recipe={e}></RecipeCard>)}
+                </div>
             </div>
         </div>
       );
