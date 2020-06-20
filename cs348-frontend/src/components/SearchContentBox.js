@@ -1,4 +1,5 @@
 import React from 'react';
+import search from '../redux/reducers/search';
 import { connect } from "react-redux";
 import { addResults } from '../redux/actions';
 
@@ -6,22 +7,32 @@ const SearchContentBox = ({addResults}) => {
 
     const searchRecipes = () => {
         async function fetchData() {
-            // let recipeName = document.getElementById('recipeName').value;
-            // let ingredients = document.getElementById('ingredientName').value;
-            // let tags = document.getElementById('tagName').value;
-            // const response = await fetch(process.env.NODE_ENV == 'production' ? process.env.REACT_APP_API_URL: 'http://localhost:8080/'+ "api/recipes");
-            // const response = await fetch(process.env.REACT_APP_API_URL + "api/search", {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify({
-            //         recipeName: recipeName,
-            //         ingredients: ingredients,
-            //         tags: tags
-            //     }),
-            // });
-            const response = await fetch(process.env.REACT_APP_API_URL + "api/recipes");
+            let recipeName = document.getElementById('recipeName').value;
+            let ingredients = document.getElementById('ingredientName').value;
+            let tags = document.getElementById('tagName').value;
+            let searchParams = {};
+            if (recipeName.length > 0) {
+                //console.log("entered recipe name");
+                searchParams["recipeName"] = recipeName;
+            }
+            if (ingredients.length > 0) {
+                //console.log("entered ingredients");
+                searchParams["ingredients"] = ingredients.split(" ");
+            }
+            if (tags.length > 0) {
+                //console.log("entered tags");
+                searchParams["tags"] = tags.split(" ");
+            }
+            //console.log(JSON.stringify(searchParams));
+            // const response = await fetch(process.env.NODE_ENV == 'production' ? process.env.REACT_APP_API_URL: 'http://localhost:8080/'+ "api/recipes");          
+            const response = await fetch(process.env.REACT_APP_API_URL+"api/search", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },                
+                body: JSON.stringify(searchParams),
+            });
+            //fetch(process.env.REACT_APP_API_URL + "api/recipes");
             const data = await response.json();
             addResults(data);
         }
