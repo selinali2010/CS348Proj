@@ -38,6 +38,8 @@
   "devDependencies": {
     "bootstrap": "^4.5.0",
     "dotenv": "^8.2.0",
-    "react-bootstrap": "^1.0.1"
+    "react-bootstrap": "^1.0.1",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5"
   }
 }
