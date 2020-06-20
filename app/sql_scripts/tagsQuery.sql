@@ -1,4 +1,4 @@
--- Select specific recipe and get all details;
+-- Returns tags for a specific recipe
 SELECT tagName
 FROM recipe 
 JOIN tags 

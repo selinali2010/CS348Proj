@@ -1,12 +1,12 @@
 -- Populate recipe Table
 INSERT INTO recipe (recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName) 
-VALUES("Apple Pie", 30, 4, "pastry", 8, "https://cdn-image.foodandwine.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/200411-xl-lattice-apple-pie.jpg", "www.google.com", "Rob Nadal");
+VALUES("Apple Pie", 30, 4, "Pastry", 8, "https://cdn-image.foodandwine.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/200411-xl-lattice-apple-pie.jpg", "www.google.com", "Rob Nadal");
 INSERT INTO recipe (recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName) 
-VALUES("Cheesecake", 45, 3, "cake", 10, "https://www.seriouseats.com/recipes/images/2017/06/20170526-no-bake-cheesecake-vicky-wasik-18-1500x1125.jpg", "www.google.com", "Hemit Shah");
+VALUES("Cheesecake", 45, 3, "Cake", 10, "https://www.seriouseats.com/recipes/images/2017/06/20170526-no-bake-cheesecake-vicky-wasik-18-1500x1125.jpg", "www.google.com", "Hemit Shah");
 INSERT INTO recipe (recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName) 
-VALUES("Banana Bread", 50, 1, "bread", 6, "https://www.seriouseats.com/images/2016/09/20160826-banana-bread-vicky-wasik-15.jpg", "www.google.com", "Selina Li");
+VALUES("Banana Bread", 50, 1, "Bread", 6, "https://www.seriouseats.com/images/2016/09/20160826-banana-bread-vicky-wasik-15.jpg", "www.google.com", "Selina Li");
 INSERT INTO recipe (recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName) 
-VALUES("Bubble Tea", 60, 5, "drink", 4, "http://blog.lollicupstore.com/wp-content/uploads/2018/03/what-is-boba-main.jpeg", "www.google.com", "Linda Zheng");
+VALUES("Bubble Tea", 60, 5, "Drink", 4, "http://blog.lollicupstore.com/wp-content/uploads/2018/03/what-is-boba-main.jpeg", "www.google.com", "Linda Zheng");
 INSERT INTO recipe (recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName) 
 VALUES("Paella", 45, 3, "Spanish", 4, "https://blog.fuertehoteles.com/wp-content/uploads/2014/03/paella-2-compressor.jpg", "www.google.com", "Ethan Guo");
 

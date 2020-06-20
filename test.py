@@ -10,14 +10,25 @@ connection = pymysql.connect(host='127.0.0.1', #unix_socket='./cloudsql/cs348s20
 with connection:
 
     cur = connection.cursor()
-    cur.execute("SELECT * FROM recipe")
+    # cur.execute("SELECT * FROM recipe")
 
-    rows = cur.fetchall()
+    # rows = cur.fetchall()
 
-    for row in rows:
-        print(row)
+    # for row in rows:
+    #     print(row)
 
     # code to run the sql script:
-    # for line in open("sql_scripts/populate_recipes.sql"):
-    #     print(line)
-    #     cur.execute(line)
+    with open("test-sample.sql") as file:
+        query = file.read()
+
+    with open("test-sample.out", "w") as file:
+        print(query)
+        for line in query.strip().split(";"):
+            print(line, ";")
+            if (line != ""):
+                cur.execute(line)
+                result = cur.fetchall()
+                print(result)
+                file.write(str(result) + "\n")
+    
+    
