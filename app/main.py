@@ -65,7 +65,9 @@ def query(sql : str, data : List[str] = []) -> List[List[str]]:
 
 @app.route("/api/recipes", methods=["GET"])
 def recipes():
-    result = query("SELECT * FROM recipe")
+    with open("sql_scripts/recipeAll.sql") as file:
+        queryText = file.read()
+    result = query(queryText)
     return jsonify(result)
 
 @app.route("/api/ingredients/<int:id>", methods=["GET"])
@@ -86,26 +88,50 @@ def tags(id):
 @app.route("/api/search", methods=["POST"])
 def search():
     args = request.json
+    recipe_dict = {}
+
+    # use recipe_dict to keep track of recipes from query results
+    # add a score field to keep track of relevant recipes
+    def addToDict(res: dict) -> None:
+        for r in res:
+            if "recipeId" in r:
+                if r["recipeId"] in recipe_dict:
+                    recipe_dict[r["recipeId"]]["score"] += 1
+                else:
+                    recipe_dict[r["recipeId"]] = r
+                    recipe_dict[r["recipeId"]]["score"] = 1
+
     if ("recipeName" in args):
         with open("sql_scripts/recipeByNameQuery.sql") as file:
             queryText = file.read()
         params = args["recipeName"]
-        result = query(queryText, params)
-        return jsonify(result)
-    elif ("ingredients" in args):
+        addToDict(query(queryText, params))
+    
+    if ("ingredients" in args):
         with open("sql_scripts/recipeByIngredientsQuery.sql") as file:
             queryText = file.read()
         params = "|".join(args["ingredients"])
-        result = query(queryText, params)
-        return jsonify(result)
-    elif ("tags" in args):
+        addToDict(query(queryText, params))
+        
+    if ("tags" in args):
         with open("sql_scripts/recipeByTagQuery.sql") as file:
             queryText = file.read()
         params = "|".join(args["tags"])
-        result = query(queryText, params)
-        return jsonify(result)
-    else:
-        return jsonify({"error": "Invalid argument key provided."})
+        addToDict(query(queryText, params))
+
+    result = [v for i,v in recipe_dict.items()]
+    # sort recipes by their scores
+    result.sort(key=lambda x: x["score"], reverse=True)
+
+    # if there are no results, backfill query for all recipes
+    if (len(result) == 0):
+        with open("sql_scripts/recipeAll.sql") as file:
+            queryText = file.read()
+        result = query(queryText)
+        for r in result:
+            r["score"] = 0
+
+    return jsonify(result)
 
 @app.route("/", methods=["GET"])
 def get_root_handler():

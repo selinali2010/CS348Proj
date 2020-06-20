@@ -1,6 +1,6 @@
 -- Populate recipe Table
 INSERT INTO recipe (recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName) 
-VALUES("Apple Pie", 30, 4, "pastry", 8, "https://lexiscleankitchen.com/wp-content/uploads/2018/07/Paleo-Apple-Pie.jpg", "www.google.com", "Rob Nadal");
+VALUES("Apple Pie", 30, 4, "pastry", 8, "https://cdn-image.foodandwine.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/200411-xl-lattice-apple-pie.jpg", "www.google.com", "Rob Nadal");
 INSERT INTO recipe (recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName) 
 VALUES("Cheesecake", 45, 3, "cake", 10, "https://www.seriouseats.com/recipes/images/2017/06/20170526-no-bake-cheesecake-vicky-wasik-18-1500x1125.jpg", "www.google.com", "Hemit Shah");
 INSERT INTO recipe (recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName) 
