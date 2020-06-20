@@ -70,14 +70,14 @@ def recipes():
 
 @app.route("/api/ingredients/<int:id>", methods=["GET"])
 def ingredients(id):
-    with open("../sql_scripts/ingredientsQuery.sql") as file:
+    with open("sql_scripts/ingredientsQuery.sql") as file:
         queryText = file.read()
     result = query(queryText, id)
     return jsonify(result)
 
 @app.route("/api/tags/<int:id>", methods=["GET"])
 def tags(id):
-    with open("../sql_scripts/tagsQuery.sql") as file:
+    with open("sql_scripts/tagsQuery.sql") as file:
         queryText = file.read()
     result = query(queryText, id)
     return jsonify(result)
@@ -87,19 +87,19 @@ def tags(id):
 def search():
     args = request.json
     if ("recipeName" in args):
-        with open("../sql_scripts/recipeNameQuery.sql") as file:
+        with open("sql_scripts/recipeByNameQuery.sql") as file:
             queryText = file.read()
         params = args["recipeName"]
         result = query(queryText, params)
         return jsonify(result)
     elif ("ingredients" in args):
-        with open("../sql_scripts/recipeByIngredientsQuery.sql") as file:
+        with open("sql_scripts/recipeByIngredientsQuery.sql") as file:
             queryText = file.read()
         params = "|".join(args["ingredients"])
         result = query(queryText, params)
         return jsonify(result)
     elif ("tags" in args):
-        with open("../sql_scripts/recipeByTagQuery.sql") as file:
+        with open("sql_scripts/recipeByTagQuery.sql") as file:
             queryText = file.read()
         params = "|".join(args["tags"])
         result = query(queryText, params)
