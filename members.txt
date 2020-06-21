@@ -1,22 +1,39 @@
 Selina Li (sk6li)
 - Participated in project brainstorm and preparation
-- Added SQL scripts to create basic tables
+- Added SQL scripts to create, insert and delete a sample database
+- Participated in E/R diagram development and schema planning
+- Implemented backend API endpoints to run queries and return results as JSON
+- Wrote SQL scripts for neccessary queries
 
 Ethan Guo (ehguo)
 - Participated in project brainstorm and preparation
 - Set up back-end Python server
 - Connected flask server to gcp mysql server
+- Participated in E/R diagram development and schema planning
+- Participated in designing the UI
+- Added chip functionality for multi input search bars
 
 Hemit Shah (h39shah)
 - Participated in project brainstorm and preparation
 - Set up back-end Python server
 - Connected flask server to gcp mysql server
+- Participated in E/R diagram development and schema planning
+- Participated in designing the UI
+- Wrote SQL scripts for neccessary queries
+- Wrote code to scrape data for the production database
 
 Linda Zheng (ll2zheng)
 - Participated in project brainstorm and preparation
 - Set up back-end Python server
 - Connected flask server to gcp mysql server
+- Participated in E/R diagram development and schema planning
+- Participated in designing the UI
+- Wrote SQL scripts for neccessary queries
+- Added scoring to query results for better search results
 
 Robert Nadal (rmnadal)
 - Participated in project brainstorm and preparation
 - Set up front-end React app
+- Participated in E/R diagram development and schema planning
+- Participated in designing the UI
+- Set up components and Redux structure to front-end

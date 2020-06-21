@@ -76,37 +76,3 @@ INSERT INTO tags VALUES(4, "cold");
 INSERT INTO tags VALUES(5, "seafood");
 INSERT INTO tags VALUES(5, "fresh");
 INSERT INTO tags VALUES(5, "nut free");
-
--- Populate owns Table
-INSERT INTO owns VALUES(1, "oven");
-INSERT INTO owns VALUES(1, "baking tray");
-INSERT INTO owns VALUES(1, "mixer");
-INSERT INTO owns VALUES(1, "stove");
-INSERT INTO owns VALUES(1, "instant pot");
-INSERT INTO owns VALUES(2, "oven");
-INSERT INTO owns VALUES(2, "toaster oven");
-INSERT INTO owns VALUES(2, "stove");
-INSERT INTO owns VALUES(3, "oven");
-INSERT INTO owns VALUES(3, "baking tray");
-INSERT INTO owns VALUES(3, "mixer");
-INSERT INTO owns VALUES(4, "oven");
-INSERT INTO owns VALUES(4, "baking tray");
-INSERT INTO owns VALUES(4, "mixer");
-INSERT INTO owns VALUES(4, "stove");
-INSERT INTO owns VALUES(5, "oven");
-INSERT INTO owns VALUES(5, "stove");
-INSERT INTO owns VALUES(5, "instant pot");
-INSERT INTO owns VALUES(6, "oven");
-
--- Populate requiredFor Table
-INSERT INTO requiredFor VALUES(1, "oven");
-INSERT INTO requiredFor VALUES(2, "oven");
-INSERT INTO requiredFor VALUES(2, "mixer");
-INSERT INTO requiredFor VALUES(2, "baking tray");
-INSERT INTO requiredFor VALUES(3, "oven");
-INSERT INTO requiredFor VALUES(3, "mixer");
-INSERT INTO requiredFor VALUES(3, "baking tray");
-INSERT INTO requiredFor VALUES(4, "oven");
-INSERT INTO requiredFor VALUES(4, "mixer");
-INSERT INTO requiredFor VALUES(4, "stove");
-INSERT INTO requiredFor VALUES(5, "stove");

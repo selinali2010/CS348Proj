@@ -48,17 +48,3 @@ CREATE TABLE tags
 	PRIMARY KEY (recipeId, tagName),
 	FOREIGN KEY (recipeId) REFERENCES recipe(recipeId)
 );
-CREATE TABLE owns
-( 
-  userId INT NOT NULL,
-  equipmentName VARCHAR(30) NOT NULL,
-  PRIMARY KEY(userId, equipmentName),
-  FOREIGN KEY(userId) REFERENCES user(userId)
-);
-CREATE TABLE requiredFor
-( 
-	recipeId INT NOT NULL,
-	equipmentName VARCHAR(30) NOT NULL,
-	PRIMARY KEY (recipeId, equipmentName),
-	FOREIGN KEY (recipeId) REFERENCES recipe(recipeId)
-);

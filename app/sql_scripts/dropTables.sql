@@ -1,5 +1,3 @@
-DROP TABLE requiredFor;
-DROP TABLE owns;
 DROP TABLE tags;
 DROP TABLE substitutes;
 DROP TABLE reacts;
