@@ -30,7 +30,13 @@
   bottom: 10px;
 }
 
+.right-col-layout {height: 100%}
+
 .right-col {
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   margin-right: 2rem;
 }
 
@@ -62,12 +68,23 @@
   text-indent: 50px;
 }
 
+.favorites-content-box { margin-top: 2rem; }
+.favorites-content-body { height: 13.5rem; }
 .search-content-box { margin-top: 1rem; }
 .search-content-body { height: 27rem; }
 .user-content-box { margin-top: 2rem; }
-.user-content-body { height: 6rem; }
-.results-content-box { margin-top: 1rem; }
-.results-content-body { height: 25rem; overflow: hidden; }
+.user-content-body {
+  padding-bottom: 1rem;
+}
+.results-content-box {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem; 
+  flex-grow: 1;
+}
+.results-content-body {
+  flex-grow: 1;
+}
 
 .section-title {
   text-align: left;
@@ -182,9 +199,31 @@
 }
 
 .cuisine-Cake, .cuisine-Drink {
-  background: rgba(171, 85, 85, 0.8);
+  background: rgba(171,  85, 85, 0.8);
 }
 
 .cuisine-Pasty, .cuisine-Spanish {
   background: rgba(171, 149, 85, 0.8);
+}
+
+.username-column, .password-column {
+  text-align: left;
+  margin: 1rem 0 0 1rem;
+}
+
+.user-box-error {
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+
+.alert {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0;
+}
+
+.user-content-buttons {
+  margin-top: 1rem;
 }

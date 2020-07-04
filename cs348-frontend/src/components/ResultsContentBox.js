@@ -9,7 +9,6 @@ const mapStateToProps = state => {
 };
 
 const ResultsContentBox = ({results}) => {
-
     return (        
         <div className="results-content-box">
             <div className="section-title">

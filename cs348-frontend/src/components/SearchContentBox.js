@@ -1,5 +1,4 @@
 import React from 'react';
-import search from '../redux/reducers/search';
 import { connect } from "react-redux";
 import { addResults } from '../redux/actions';
 

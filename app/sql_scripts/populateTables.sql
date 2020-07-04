@@ -38,21 +38,21 @@ INSERT INTO ingredient VALUES(5, "butter", 20, "mL");
 INSERT INTO ingredient VALUES(5, "shrimp", 10, NULL);
 
 -- Populate reacts Table
-INSERT INTO reacts VALUES(1, 1, "heart eyes");
-INSERT INTO reacts VALUES(2, 1, "throw up");
-INSERT INTO reacts VALUES(6, 3, "throw up");
-INSERT INTO reacts VALUES(4, 2, "thumbs down");
-INSERT INTO reacts VALUES(2, 1, "drooling");
-INSERT INTO reacts VALUES(3, 4, "thumbs up");
-INSERT INTO reacts VALUES(5, 3, "skull");
-INSERT INTO reacts VALUES(3, 2, "thumbs up");
-INSERT INTO reacts VALUES(1, 2, "heart eyes");
-INSERT INTO reacts VALUES(1, 3, "heart eyes");
-INSERT INTO reacts VALUES(1, 4, "heart eyes");
-INSERT INTO reacts VALUES(1, 5, "heart eyes");
-INSERT INTO reacts VALUES(2, 5, "heart eyes");
-INSERT INTO reacts VALUES(3, 5, "heart eyes");
-INSERT INTO reacts VALUES(4, 5, "heart eyes");
+INSERT INTO reacts VALUES(1, 1, 1);
+INSERT INTO reacts VALUES(2, 1, 5);
+INSERT INTO reacts VALUES(6, 3, 5);
+INSERT INTO reacts VALUES(4, 2, 4);
+INSERT INTO reacts VALUES(2, 1, 2);
+INSERT INTO reacts VALUES(3, 4, 3);
+INSERT INTO reacts VALUES(5, 3, 6);
+INSERT INTO reacts VALUES(3, 2, 3);
+INSERT INTO reacts VALUES(1, 2, 1);
+INSERT INTO reacts VALUES(1, 3, 1);
+INSERT INTO reacts VALUES(1, 4, 1);
+INSERT INTO reacts VALUES(1, 5, 1);
+INSERT INTO reacts VALUES(2, 5, 1);
+INSERT INTO reacts VALUES(3, 5, 1);
+INSERT INTO reacts VALUES(4, 5, 1);
 
 -- Populate substitutes Table
 INSERT INTO substitutes VALUES(1, "brown sugar", "white sugar");

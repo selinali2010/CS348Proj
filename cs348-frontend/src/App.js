@@ -1,8 +1,7 @@
 import React from 'react';
 import Title from './components/Title';
 import SearchContentBox from './components/SearchContentBox';
-import UserContentBox from './components/UserContentBox';
-import ResultsContentBox from './components/ResultsContentBox';
+import RightColLayout from './components/RightColLayout';
 
 import { Provider } from "react-redux";
 import store from "./redux/store";
@@ -23,10 +22,7 @@ function App() {
               </div>
               </div>
               <div className="col-9">
-                <div className="right-col">
-                <UserContentBox />
-                <ResultsContentBox />
-              </div>
+                <RightColLayout />
             </div>
           </div>
         </div>
