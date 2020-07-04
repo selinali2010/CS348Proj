@@ -17,7 +17,7 @@ import os
 from flask import jsonify
 from typing import *
 
-from flask import Flask, request
+from flask import Flask, request, make_response
 from flask_cors import CORS
 import pymysql
 
@@ -84,6 +84,47 @@ def tags(id):
     result = query(queryText, id)
     return jsonify(result)
 
+
+@app.route("/api/login", methods=["POST"])
+def login():
+    args = request.json
+    username = args["username"] if "username" in args else ""
+    password = args["password"] if "password" in args else ""
+    result = {}
+
+    with open("sql_scripts/checkUserExistence.sql") as file:
+        check = query(file.read(), [username, password])
+
+    if check[0]["count"] != 1:
+        result["error"] = "The username or password is incorrect"
+        return make_response(jsonify(result), 401)
+    
+    with open("sql_scripts/getUserIdQuery.sql") as file:
+        result = query(file.read(), username)[0]
+
+    return make_response(jsonify(result), 200)
+
+@app.route("/api/register", methods=["POST"])
+def register():
+    args = request.json
+    username = args["username"] if "username" in args else ""
+    password = args["password"] if "password" in args else ""
+    result = {}
+
+    with open("sql_scripts/checkUniqueUserName.sql") as file:
+        check = query(file.read(), username)
+
+    if check[0]["count"] != 0:
+        result["error"] = "The username " + username + " is already in use. Please choose a new one."
+        return make_response(jsonify(result), 400)
+
+    with open("sql_scripts/insertNewUser.sql") as file:
+        query(file.read(), [username, password, None])
+
+    with open("sql_scripts/getUserIdQuery.sql") as file:
+        result = query(file.read(), username)[0]
+
+    return make_response(jsonify(result), 200)
 
 @app.route("/api/search", methods=["POST"])
 def search():
