@@ -17,7 +17,7 @@ import os
 from flask import jsonify
 from typing import *
 
-from flask import Flask, request
+from flask import Flask, request, make_response
 from flask_cors import CORS
 import pymysql
 
@@ -84,6 +84,28 @@ def tags(id):
     result = query(queryText, id)
     return jsonify(result)
 
+
+@app.route("/api/login", methods=["POST"])
+def login():
+    args = request.json
+    username = args["username"] if "username" in args else ""
+    password = args["password"] if "password" in args else ""
+    result = {}
+    if username == "rob":
+        result["error"] = "unauthorized"
+        return make_response(jsonify(result), 401) 
+    return make_response(jsonify(result), 200)
+
+@app.route("/api/register", methods=["POST"])
+def register():
+    args = request.json
+    username = args["username"] if "username" in args else ""
+    password = args["password"] if "password" in args else ""
+    result = {}
+    if username == "rob":
+        result["error"] = "error message"
+        return make_response(jsonify(result), 400) 
+    return make_response(jsonify(result), 200)
 
 @app.route("/api/search", methods=["POST"])
 def search():
