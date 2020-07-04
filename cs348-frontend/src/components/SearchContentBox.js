@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from "react-redux";
 import { addResults } from '../redux/actions';
 import ChipInput from './ChipInput';
-import TextInput from './TextInput';
 
 const SearchContentBox = ({addResults}) => {
 
