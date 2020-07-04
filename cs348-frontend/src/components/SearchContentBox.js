@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import { addResults } from '../redux/actions';
 import ChipInput from './ChipInput';
+import TextInput from './TextInput';
 
 const SearchContentBox = ({addResults}) => {
 
@@ -47,9 +48,10 @@ const SearchContentBox = ({addResults}) => {
                 </div>
             </div>
             <div className="section-body search-content-body">
-                <form action="/action_page.php">
+                <form>
                     <div> Search By Recipe Name: </div>
-                    <input type="text" id="recipeName" name="recipeName" placeholder='Search by recipe name...' />
+                    <input type="text" className="fm-text-input" id="recipeName" name="recipeName"
+                        placeholder='Search by recipe name...' />
                     <div> Search By Ingredients: </div>
                     <ChipInput id="ingredientName" name="ingredientName" typeName="ingredient" />
                     <div> Search By Tags: </div>
