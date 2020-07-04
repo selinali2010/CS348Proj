@@ -245,7 +245,7 @@ html {
 
 input[type="text"] {
   outline: none;
-  padding: 4px;
+  padding: 0.25rem;
   border: 1px solid black;
 }
 
@@ -255,7 +255,11 @@ input[type="text"]:focus {
 
 input[type="text"]::placeholder {
   color: var(--olive-dark);
-  font-style: italic;
+  /* font-style: italic; */
+}
+
+.fm-text-input {
+  width: 100%;
 }
 
 /* CHIP INPUT */
@@ -264,8 +268,8 @@ input[type="text"]::placeholder {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
+  align-content: center;
   background-color: white;
-  padding: 2px;
   border: 1px solid black;
 }
 
@@ -276,17 +280,14 @@ input[type="text"]::placeholder {
 .fm-chip-input-add-chip {
   display: inline-flex;
   flex-grow: 1;
-  border: none;
-  background: none;
-}
-
-.fm-chip-input-add-chip {
   border: none !important;
+  background: none;
   outline: none;
 }
 
 .fm-chip {
   display: inline-flex;
+  margin: 0.25rem;
   padding: 0;
   height: 1.5rem;
   border-radius: 0.75rem;
@@ -301,6 +302,13 @@ input[type="text"]::placeholder {
 
 .fm-chip-label {
   color: white;
-  padding: 0 0.625rem;
+  margin: 0 0.625rem;
   font-size: 1rem;
+}
+
+.fm-chip-delete-icon {
+  font-size: 1rem !important;
+  color: white;
+  margin-left: -0.3125rem;
+  margin-right: 0.3125rem;
 }
