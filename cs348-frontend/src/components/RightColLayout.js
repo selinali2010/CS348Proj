@@ -22,11 +22,9 @@ const RightColLayout = ({ userId }) => {
     }
 
     return (        
-        <div className="right-col-layout">
-            <div className="right-col">
-                {SelectUserContentBox()}
-                <ResultsContentBox />
-            </div>
+        <div className="col-layout right-col">
+            {SelectUserContentBox()}
+            <ResultsContentBox />
         </div>
       );
 }

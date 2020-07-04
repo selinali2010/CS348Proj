@@ -22,7 +22,7 @@ const FavoriteContentBox = () => {
       }, []);
 
     return (        
-        <div className="favorites-content-box">
+        <div className="section favorites-content-box">
             <div className="section-title">
                 <div className="section-title-text">
                     My Saved Recipes

@@ -32,7 +32,7 @@ class SearchContentBox extends React.Component {
 
     render() {
         return (
-            <div className="search-content-box">
+            <div className="section section-fill-height search-content-box">
                 <div className="section-title">
                     <div className="section-title-text">
                         Search
@@ -55,9 +55,11 @@ class SearchContentBox extends React.Component {
                             values={this.state.tags}
                             setValues={ (values) => this.setState({tags: values}) } />
                     </form>
-                    <button onClick={this.searchRecipes}>
-                        Search!
-                    </button>
+                    <div className="fm-centered-button">
+                        <button className="fm-button" onClick={this.searchRecipes}>
+                            Search!
+                        </button>
+                    </div>
                     <div>{JSON.stringify(this.state)}</div>
                 </div>
             </div>

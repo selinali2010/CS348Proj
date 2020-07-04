@@ -71,7 +71,7 @@ const UserContentBox = ({loginUser}) => {
     const handlePassChange = (event) => {setPass(event.target.value)}
 
     return (        
-        <div className="user-content-box">
+        <div className="section user-content-box">
             <div className="section-title">
                 <div className="section-title-text">
                     Register / Login
@@ -82,21 +82,21 @@ const UserContentBox = ({loginUser}) => {
                     <div className="col-4">
                         <div className="username-column">
                             <div> Username: </div>
-                            <input type="text " id="username" name="username" onChange={handleUserChange} placeholder='Enter your username...'/>
+                            <input type="text" className="fm-text-input" id="username" name="username" onChange={handleUserChange} placeholder='Enter your username...'/>
                         </div>
                     </div>
                     <div className="col-4">
                         <div className="password-column">
                             <div> Password: </div>
-                            <input type="password" id="password" name="password" onChange={handlePassChange} placeholder='Enter your password...'/>
+                            <input type="password" className="fm-text-input" id="password" name="password" onChange={handlePassChange} placeholder='Enter your password...'/>
                         </div>
                     </div>
                     <div className="col-4">
                         <div className="user-content-buttons">
-                            <button onClick={login}>
+                            <button className="fm-button" onClick={login}>
                                 Login!
                             </button>
-                            <button onClick={register}>
+                            <button className="fm-button" onClick={register}>
                                 Register
                             </button>
                         </div>

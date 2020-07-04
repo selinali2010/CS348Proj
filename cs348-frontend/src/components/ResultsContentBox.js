@@ -23,7 +23,7 @@ const ResultsContentBox = ({results}) => {
     const handleClose = () => setShow(false);
 
     return (        
-        <div className="results-content-box">
+        <div className="section section-fill-height results-content-box">
             <div className="section-title">
                 <div className="section-title-text">
                     Search Results

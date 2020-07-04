@@ -1,141 +1,81 @@
-/* BRAND COLORS */
 :root {
+  /* DESIGN */
   --brown: #703b16;
   --paper: #fcf6e8;
   --olive: #9ca537;
   --olive-dark: #656b15;
-  --highlight: #61dafb;
-  --text-on-white: #30330a;
-}
-
-html {
+  --highlight: #30330a;
+  --text: #30330a;
   /* 1rem == 16px by default */
-  font-family: "Open Sans", sans-serif;
 }
 
-.App {
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-background {
+body {
   margin: 0;
   padding: 0;
   background: url('assets/fall_background_tinted.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 100vh;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100vh;
+
+  font-family: "Open Sans", sans-serif;
+  color: var(--text);
 }
 
-.App-link {
-  color: var(--highlight);
+/* LAYOUT */
+
+.App {
+  padding: 1rem;
+  height: 100vh;
+  max-width: 1440px;
 }
 
-.left-col {
+.row {
   height: 100%;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  margin-left: 2rem;
-  bottom: 10px;
 }
 
-.right-col-layout, .left-col-layout {height: 100%}
-
-.right-col {
+.col-layout {
   height: 100%;
-  flex: 1;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  margin-right: 2rem;
 }
 
-.title-background {
-  margin-top: 1.5rem;
-  padding-top: 0.1rem;
-  text-align: center;
-  height: 7rem;
-  width: 100%;
-  background: var(--brown);
-}
-
-.title-text {
-  margin-left: -2.2rem;
-  margin-top: 1rem;
-  font-family: Raleway;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 2.5rem;
-  line-height: 2.2rem;
-  color: white
-}
-
-.title-text-lower {
-  margin-left: 1rem;
-}
-
-.title-text-lower {
-  margin-right: 1rem;
-  text-indent: 50px;
-}
-
-.account-content-box { margin-top: 1rem; }
-.favorites-content-box { margin-top: 1.5rem; }
-.favorites-content-body { height: 13.5rem; }
-.search-content-box {
+.section {
+  margin: 1rem;
   display: flex;
   flex-direction: column;
-  margin-top: 1rem; 
-  flex-grow: 1;
-  margin-bottom: 1.5rem;
 }
-.search-content-body {
-  flex-grow: 1;
+
+.favorites-content-body {
+  height: 13.5rem;
 }
-.user-content-box { margin-top: 1.5rem; }
-.user-content-body {
-  padding-bottom: 1rem;
-}
-.results-content-box {
-  display: flex;
-  flex-direction: column;
-  margin-top: 1rem; 
-  flex-grow: 1;
-  margin-bottom: 1.5rem;
-}
-.results-content-body {
+
+.section-fill-height,
+.section-fill-height > .section-body {
   flex-grow: 1;
 }
 
 .section-title {
-  text-align: left;
   background: var(--olive);
-  height: 3rem;
+  height: 3.5rem;
 }
 
 .section-title-text {
-  padding-top: 1rem;
-  padding-left: 1rem;
-  font-family: Raleway;
+  padding: 1.25rem 1.25rem;
+  font-family: Raleway, sans-serif;
   font-style: normal;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   line-height: 100%;
   color: white;
 }
-                
+
 .section-body {
   width: 100%;
   background: var(--paper);
+  padding: 1.25rem;
 }
 
 .results-container {
@@ -144,7 +84,67 @@ html {
   height: 100%;
 }
 
+/* TITLE BOX */
+
+.title-background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 8rem;
+  width: 100%;
+  background: var(--brown);
+}
+
+.title-text {
+  font-family: Raleway, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 3rem;
+  line-height: 0.9em;
+  color: white;
+}
+
+.title-text-upper {
+  padding-right: 0.625em;
+}
+
+.title-text-lower {
+  padding-left: 0.625em;
+}
+
+/* USER BOX */
+
+.user-box-error {
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+
+.alert {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0;
+}
+
+.user-content-buttons {
+  margin-top: 1.75rem;
+}
+
+.user-content-buttons > .fm-button {
+  margin-right: 1rem;
+}
+
+/* ACCOUNT BOX */
+
+.welcome-text {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
 /* RECIPE CARD STYLING */
+
 .card-img-top {
   object-fit: cover;
   width: 100%;
@@ -160,7 +160,6 @@ html {
 }
 
 .recipe-card-top {
-  text-align: left;
   position: absolute;
   width: 100%;
   height: 2rem;
@@ -169,7 +168,7 @@ html {
 }
 
 .recipe-card-top-text {
-  font-family: Raleway;
+  font-family: Raleway, sans-serif;
   margin-top: 0.3rem;
   margin-left: 0.5rem;
   color: white;
@@ -180,7 +179,6 @@ html {
 }
 
 .recipe-card-body {
-  text-align: left;
 }
 
 .card-recipe-name {
@@ -188,31 +186,33 @@ html {
   overflow: hidden;
   text-overflow: ellipsis;
   padding-right: 0.2rem;
-  font-family: Raleway;
+  font-family: Raleway, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 1.4rem;
   line-height: 100%;
-  color: black;
+  color: var(--text);
   margin-top: 0.3rem;
   margin-left: 0.8rem;
 }
 .card-recipe-author {
-  font-family: Raleway;
+  font-family: Raleway, sans-serif;
   font-style: normal;
   font-size: 0.9rem;
-  color: black;
+  color: var(--text);
   margin-left: 0.8rem;
   padding-bottom: 0.5rem;
 }
 .card-recipe-time {
-  font-family: Raleway;
+  font-family: Raleway, sans-serif;
   font-style: normal;
   font-size: 0.9rem;
   position: absolute;
   bottom: 0.4rem;
-  right: 0.5rem
+  right: 0.5rem;
 }
+
+/* MODAL */
 
 .close{
   position: absolute;
@@ -252,12 +252,12 @@ html {
   overflow: hidden;
   text-overflow: ellipsis;
   padding-right: 0.2rem;
-  font-family: Raleway;
+  font-family: Raleway, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 1.4rem;
   line-height: 100%;
-  color: black;
+  color: var(--text);
   margin-top: 0.3rem;
   margin-left: 0.8rem;
   padding-bottom: 0.3rem;
@@ -268,22 +268,22 @@ html {
   overflow: hidden;
   text-overflow: ellipsis;
   padding-right: 0.2rem;
-  font-family: Raleway;
+  font-family: Raleway, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 1.2rem;
   line-height: 100%;
-  color: black;
+  color: var(--text);
   margin-top: 0.3rem;
   margin-left: 0.8rem;
   padding-bottom: 0.3rem;
 }
 
 .modal-recipe-details {
-  font-family: Raleway;
+  font-family: Raleway, sans-serif;
   font-style: normal;
   font-size: 0.8rem;
-  color: black;
+  color: var(--text);
   margin-left: 0.8rem;
   padding-bottom: 0.5rem;
 }
@@ -297,123 +297,60 @@ html {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
 
 .cuisine-Cake, .cuisine-Drink {
   background: rgba(171,  85, 85, 0.8);
 }
 
-.cuisine-Pasty, .cuisine-Spanish {
+.cuisine-Pastry, .cuisine-Spanish {
   background: rgba(171, 149, 85, 0.8);
 }
 
-.username-column, .password-column {
-  text-align: left;
-  margin: 1rem 0 0 1rem;
-}
-
-.user-box-error {
-  margin-top: 1rem;
-  margin-left: auto;
-  margin-right: auto;
-  width: fit-content;
-}
-
-.alert {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  margin-bottom: 0;
-}
-
-.user-content-buttons {
-  margin-top: 1rem;
-}
-
-input[type="text"] {
-  outline: none;
-  padding: 4px;
-  border: 1px solid black;
-}
-
-input[type="text"]:focus {
-  border: 1px solid var(--highlight);
-}
-
-input[type="text"]::placeholder {
-  color: var(--olive-dark);
-  /* font-style: italic; */
-}
+/* INPUT ELEMENTS */
 
 .fm-text-input {
   width: 100%;
-  font-style: italic;
+  height: 2rem;
+  border: 1px solid var(--text);
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 
-/* CHIP INPUT */
-.fm-chip-input {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  background-color: white;
-  padding: 2px;
-  border: 1px solid black;
+.fm-text-input:focus {
+  border-color: var(--highlight);
+  outline: 1px solid var(--highlight);
 }
 
-.fm-chip-input:focus-within {
-  border: 1px solid var(--highlight);
+.fm-text-input::placeholder {
+  color: var(--olive);
+  /* font-style: italic; */
 }
 
-.fm-chip-input-add-chip {
-  display: inline-flex;
-  flex-grow: 1;
-  border: none !important;
-  background: none;
-  border: none;
-  background: none;
-  outline: none;
-}
-
-.fm-chip {
-  display: inline-flex;
-  margin: 0.25rem;
-  padding: 0;
-  height: 1.5rem;
-  border-radius: 0.75rem;
-  margin-left: 0.125rem;
-  margin-right: 0.125rem;
+.fm-button {
+  display: inline-block;
+  height: 2rem;
+  min-width: 8rem;
   background-color: var(--olive-dark);
-  align-items: center;
+  border: none;
+  color: white;
+}
+
+.fm-button:focus {
+  border: 1px solid var(--highlight);
+  outline: 1px solid var(--highlight);
+}
+
+.fm-centered-button {
+  display: flex;
   justify-content: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.fm-chip-label {
-  color: white;
-  margin: 0 0.625rem;
-  font-size: 1rem;
-}
-
-.fm-chip-delete-icon {
-  font-size: 1rem !important;
-  color: white;
-  margin-left: -0.3125rem;
-  margin-right: 0.3125rem;
-}
-
-.welcome-text {
-  padding-top: 0.5rem;
+  padding-top: 1rem;
   padding-bottom: 0.5rem;
-}
-
-.logout-button {
-  padding-bottom: 0.8rem;
 }

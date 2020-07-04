@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CloseIcon from '@material-ui/icons/Close';
 
+import "./Chip.css";
+
 const Chip = (props) => {
     return (
         <div className="fm-chip">

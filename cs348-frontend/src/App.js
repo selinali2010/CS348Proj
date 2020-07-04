@@ -12,13 +12,15 @@ require('dotenv').config();
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">
-        <div className="App-background container-fluid row">
-          <div className="col-3">
-              <LeftColLayout />
-          </div>
-          <div className="col-9">
-              <RightColLayout />
+      <div className="App-background">
+        <div className="App container-fluid">
+          <div className="row no-gutters">
+            <div className="col-md-3">
+                <LeftColLayout />
+            </div>
+            <div className="col-md-9">
+                <RightColLayout />
+            </div>
           </div>
         </div>
       </div>
