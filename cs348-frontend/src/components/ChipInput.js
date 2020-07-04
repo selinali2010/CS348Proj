@@ -1,8 +1,5 @@
 import React from 'react';
-import { Chip } from '@material-ui/core';
-import search from '../redux/reducers/search';
-import { connect } from "react-redux";
-import { addResults } from '../redux/actions';
+import Chip from './Chip';
 
 const ChipInput = (props) => {
     const [chips, setChips] = React.useState([
@@ -25,16 +22,16 @@ const ChipInput = (props) => {
         }
     }
 
+    let placeholderText = "Add " + props.typeName + "...";
+
     return (
-        <div class="chipInputBase">
-            <div class="chipList">
-                { chips.map(chip => 
-                    <Chip label={chip} 
-                        onDelete={handleDelete(chip)}
-                    />
-                )}
-            </div>
-            <input class="addChipInput" type="text" onKeyDown={tryAddChip} />
+        <div class="fm-chip-input">
+            { chips.map(chip => 
+                <Chip label={chip} 
+                    onDelete={handleDelete(chip)}
+                />
+            )}
+            <input class="fm-chip-input-add-chip" type="text" placeholder={placeholderText} size={placeholderText.length} onKeyDown={tryAddChip} />
         </div>
     );
 }

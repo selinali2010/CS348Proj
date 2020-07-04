@@ -39,11 +39,11 @@ const SearchContentBox = ({addResults}) => {
             <div className="section-body search-content-body">
                 <form action="/action_page.php">
                     <div> Search By Recipe Name: </div>
-                    <input type="text" id="recipeName" name="recipeName" placeholder='Search by recipe name...'/>
+                    <input type="text" id="recipeName" name="recipeName" placeholder='Search by recipe name...' />
                     <div> Search By Ingredients: </div>
-                    <ChipInput id="ingredientName" name="ingredientName" placeholder='Search by ingredient...'/>
+                    <ChipInput id="ingredientName" name="ingredientName" typeName="ingredient" />
                     <div> Search By Tags: </div>
-                    <ChipInput id="tagName" name="tagName" placeholder='Search by tags...'/>
+                    <ChipInput id="tagName" name="tagName" typeName="tag" />
                 </form>
                 <button onClick={searchRecipes}>
                     Search!
