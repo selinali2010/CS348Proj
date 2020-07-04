@@ -13,7 +13,7 @@ CREATE TABLE user
 ( 
   userId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   userName VARCHAR(30) NOT NULL UNIQUE,
-  password VARCHAR(16) NOT NULL,
+  password VARCHAR(60) NOT NULL,
   skillLevel SMALLINT
 );
 CREATE TABLE ingredient (
@@ -28,7 +28,7 @@ CREATE TABLE reacts
 ( 
 	userId INT(24) NOT NULL,
 	recipeId INT(24) NOT NULL,
-	mood VARCHAR(30) NOT NULL,
+	mood SMALLINT NOT NULL CHECK (mood BETWEEN 1 AND 6),
 	PRIMARY KEY (userId, recipeId),
 	FOREIGN KEY (userId) REFERENCES user(userId),
 	FOREIGN KEY (recipeId) REFERENCES recipe(recipeId)
