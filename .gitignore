@@ -1,5 +1,10 @@
 creds.json
 cloud_sql_proxy
 cloud_sql_proxy.exe
-.env
-recipeData/
+data_extraction/RAW_recipes.csv
+data_extraction/StateNames.csv
+__pycache__
+data_extraction/chromedriver
+data_extraction/recipes.csv
+data_extraction/chromedriver.exe
+data_extraction/APIkey.txt
