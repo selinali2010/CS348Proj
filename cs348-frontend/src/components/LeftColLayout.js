@@ -20,8 +20,8 @@ const LeftColLayout = ({ userId }) => {
     }
 
     return (        
-        <div className="right-col-layout">
-            <div className="right-col">
+        <div className="left-col-layout">
+            <div className="left-col">
                 <Title />
                 {ShowAccountContentBox()}
                 <SearchContentBox />

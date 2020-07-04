@@ -29,6 +29,8 @@ html {
 }
 
 .App-background {
+  margin: 0;
+  padding: 0;
   background: url('assets/fall_background_tinted.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -40,12 +42,15 @@ html {
 }
 
 .left-col {
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   margin-left: 2rem;
-  margin-top: 2rem;
   bottom: 10px;
 }
 
-.right-col-layout {height: 100%}
+.right-col-layout, .left-col-layout {height: 100%}
 
 .right-col {
   height: 100%;
@@ -56,6 +61,7 @@ html {
 }
 
 .title-background {
+  margin-top: 1.5rem;
   padding-top: 0.1rem;
   text-align: center;
   height: 7rem;
@@ -84,11 +90,19 @@ html {
 }
 
 .account-content-box { margin-top: 1rem; }
-.favorites-content-box { margin-top: 2rem; }
+.favorites-content-box { margin-top: 1.5rem; }
 .favorites-content-body { height: 13.5rem; }
-.search-content-box { margin-top: 1rem; }
-.search-content-body { }
-.user-content-box { margin-top: 2rem; }
+.search-content-box {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem; 
+  flex-grow: 1;
+  margin-bottom: 1.5rem;
+}
+.search-content-body {
+  flex-grow: 1;
+}
+.user-content-box { margin-top: 1.5rem; }
 .user-content-body {
   padding-bottom: 1rem;
 }
@@ -97,6 +111,7 @@ html {
   flex-direction: column;
   margin-top: 1rem; 
   flex-grow: 1;
+  margin-bottom: 1.5rem;
 }
 .results-content-body {
   flex-grow: 1;
