@@ -167,6 +167,84 @@
   right: 0.5rem
 }
 
+.close{
+  position: absolute;
+  left: 95%;
+  outline: none;
+}
+
+.modal-img {
+  object-fit: cover;
+  width: 100%;
+  height: 12rem;
+}
+
+.modal-content {
+  height: calc(100vh - 3.50rem);
+}
+
+.modal-recipe {
+  height: 100%;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.modal-recipe-left-col {
+  margin: 1.75rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.modal-recipe-right-col {
+  margin: 1.75rem auto;
+}
+
+.modal-recipe-header{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 0.2rem;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 100%;
+  color: black;
+  margin-top: 0.3rem;
+  margin-left: 0.8rem;
+  padding-bottom: 0.3rem;
+}
+
+.modal-recipe-subheader{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 0.2rem;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 100%;
+  color: black;
+  margin-top: 0.3rem;
+  margin-left: 0.8rem;
+  padding-bottom: 0.3rem;
+}
+
+.modal-recipe-details {
+  font-family: Raleway;
+  font-style: normal;
+  font-size: 0.8rem;
+  color: black;
+  margin-left: 0.8rem;
+  padding-bottom: 0.5rem;
+}
+
+.modal-recipe-url {
+  margin-left: 0.8rem;
+}
+
 /* CUSTOM SCROLLBAR */
 ::-webkit-scrollbar {
   width: 10px;
