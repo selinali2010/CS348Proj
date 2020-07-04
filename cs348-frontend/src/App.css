@@ -1,3 +1,18 @@
+/* BRAND COLORS */
+:root {
+  --brown: #703b16;
+  --paper: #fcf6e8;
+  --olive: #9ca537;
+  --olive-dark: #656b15;
+  --highlight: #61dafb;
+  --text-on-white: #30330a;
+}
+
+html {
+  /* 1rem == 16px by default */
+  font-family: "Open Sans", sans-serif;
+}
+
 .App {
   text-align: center;
 }
@@ -21,7 +36,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: var(--highlight);
 }
 
 .left-col {
@@ -45,7 +60,7 @@
   text-align: center;
   height: 7rem;
   width: 100%;
-  background: #703B16;
+  background: var(--brown);
 }
 
 .title-text {
@@ -88,7 +103,7 @@
 
 .section-title {
   text-align: left;
-  background: #9CA537;
+  background: var(--olive);
   height: 3rem;
 }
 
@@ -105,7 +120,7 @@
                 
 .section-body {
   width: 100%;
-  background: #FCF6E8;
+  background: var(--paper);
 }
 
 .results-container {
@@ -226,4 +241,74 @@
 
 .user-content-buttons {
   margin-top: 1rem;
+}
+
+input[type="text"] {
+  outline: none;
+  padding: 0.25rem;
+  border: 1px solid black;
+}
+
+input[type="text"]:focus {
+  border: 1px solid var(--highlight);
+}
+
+input[type="text"]::placeholder {
+  color: var(--olive-dark);
+  /* font-style: italic; */
+}
+
+.fm-text-input {
+  width: 100%;
+}
+
+/* CHIP INPUT */
+.fm-chip-input {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.fm-chip-input:focus-within {
+  border: 1px solid var(--highlight);
+}
+
+.fm-chip-input-add-chip {
+  display: inline-flex;
+  flex-grow: 1;
+  border: none !important;
+  background: none;
+  outline: none;
+}
+
+.fm-chip {
+  display: inline-flex;
+  margin: 0.25rem;
+  padding: 0;
+  height: 1.5rem;
+  border-radius: 0.75rem;
+  margin-left: 0.125rem;
+  margin-right: 0.125rem;
+  background-color: var(--olive-dark);
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fm-chip-label {
+  color: white;
+  margin: 0 0.625rem;
+  font-size: 1rem;
+}
+
+.fm-chip-delete-icon {
+  font-size: 1rem !important;
+  color: white;
+  margin-left: -0.3125rem;
+  margin-right: 0.3125rem;
 }
