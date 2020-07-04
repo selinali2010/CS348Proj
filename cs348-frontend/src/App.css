@@ -83,10 +83,11 @@ html {
   text-indent: 50px;
 }
 
+.account-content-box { margin-top: 1rem; }
 .favorites-content-box { margin-top: 2rem; }
 .favorites-content-body { height: 13.5rem; }
 .search-content-box { margin-top: 1rem; }
-.search-content-body { height: 27rem; }
+.search-content-body { }
 .user-content-box { margin-top: 2rem; }
 .user-content-body {
   padding-bottom: 1rem;
@@ -303,4 +304,13 @@ input[type="text"]::placeholder {
   color: white;
   padding: 0 0.625rem;
   font-size: 1rem;
+}
+
+.welcome-text {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.logout-button {
+  padding-bottom: 0.8rem;
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Cancel } from '@material-ui/icons';
 
 const Chip = (props) => {
     return (

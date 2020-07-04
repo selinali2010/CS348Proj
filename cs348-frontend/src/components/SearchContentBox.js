@@ -12,18 +12,14 @@ const SearchContentBox = ({addResults}) => {
             let tags = document.getElementById('tagName').value;
             let searchParams = {};
             if (recipeName.length > 0) {
-                //console.log("entered recipe name");
                 searchParams["recipeName"] = recipeName;
             }
             if (ingredients.length > 0) {
-                //console.log("entered ingredients");
                 searchParams["ingredients"] = ingredients.split(" ");
             }
             if (tags.length > 0) {
-                //console.log("entered tags");
                 searchParams["tags"] = tags.split(" ");
             }
-            //console.log(JSON.stringify(searchParams));
             // const response = await fetch(process.env.NODE_ENV == 'production' ? process.env.REACT_APP_API_URL: 'http://localhost:8080/'+ "api/recipes");          
             const response = await fetch(process.env.REACT_APP_API_URL+"api/search", {
                 method: 'POST',
