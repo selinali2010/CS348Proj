@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { addResults } from '../redux/actions';
+import ChipInput from './ChipInput';
 
 const SearchContentBox = ({addResults}) => {
 
@@ -11,18 +12,14 @@ const SearchContentBox = ({addResults}) => {
             let tags = document.getElementById('tagName').value;
             let searchParams = {};
             if (recipeName.length > 0) {
-                //console.log("entered recipe name");
                 searchParams["recipeName"] = recipeName;
             }
             if (ingredients.length > 0) {
-                //console.log("entered ingredients");
                 searchParams["ingredients"] = ingredients.split(" ");
             }
             if (tags.length > 0) {
-                //console.log("entered tags");
                 searchParams["tags"] = tags.split(" ");
             }
-            //console.log(JSON.stringify(searchParams));
             // const response = await fetch(process.env.NODE_ENV == 'production' ? process.env.REACT_APP_API_URL: 'http://localhost:8080/'+ "api/recipes");          
             const response = await fetch(process.env.REACT_APP_API_URL+"api/search", {
                 method: 'POST',
@@ -46,13 +43,14 @@ const SearchContentBox = ({addResults}) => {
                 </div>
             </div>
             <div className="section-body search-content-body">
-                <form action="/action_page.php">
+                <form>
                     <div> Search By Recipe Name: </div>
-                    <input type="text" id="recipeName" name="recipeName" placeholder='Search by recipe name...'/>
+                    <input type="text" className="fm-text-input" id="recipeName" name="recipeName"
+                        placeholder='Search by recipe name...' />
                     <div> Search By Ingredients: </div>
-                    <input type="text" id="ingredientName" name="ingredientName" placeholder='Search by ingredient...'/>
+                    <ChipInput id="ingredientName" name="ingredientName" typeName="ingredient" />
                     <div> Search By Tags: </div>
-                    <input type="text" id="tagName" name="tagName" placeholder='Search by tags...'/>
+                    <ChipInput id="tagName" name="tagName" typeName="tag" />
                 </form>
                 <button onClick={searchRecipes}>
                     Search!

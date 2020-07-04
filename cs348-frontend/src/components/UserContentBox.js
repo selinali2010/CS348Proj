@@ -5,6 +5,7 @@ import { loginUser } from '../redux/actions';
 const UserContentBox = ({loginUser}) => {
     const [username, setUser] = useState('');
     const [password, setPass] = useState('');
+    const [errorState, setErr] = useState('');
 
     const getAccountDetails = () => {
         return {
@@ -22,23 +23,48 @@ const UserContentBox = ({loginUser}) => {
     const login = async () => {
         const response = await fetch(process.env.REACT_APP_API_URL+"api/login", getAccountDetails());
         if (response.status === 200) {
-            console.log("Login Succeeded!")
-            loginUser(response.json().userId, username)
+            const data = await response.json(); 
+            loginUser(data.userId, username)
+        } else if (response.status === 401) {
+            setErr("Invalid username or password.")
         } else {
-            // Output the error message
-            console.log("Login Failed!")
+            setErr("Cannot connect to the server. Please try again later.")
         }
     }
 
     const register = async () => {
+        let registerError = "";
+        if (username.length < 8 || username.length > 30) {
+            registerError += "Username must be betweeen 8 and 30 characters. "
+        }
+        if (password.length < 8 || password.length > 30) {
+            registerError += "Password must be betweeen 8 and 30 characters."
+        }
+
+        if (registerError !== "") {
+            return setErr(registerError);
+        }
+
         const response = await fetch(process.env.REACT_APP_API_URL+"api/register", getAccountDetails());
         if (response.status === 200) {
-            console.log("Register Succeeded!")
             loginUser(response.json().userId, username)
+        } else if (response.status === 400) {
+            setErr("The username " + username + " has already been taken! Please try again. ")
         } else {
-            // Output the error message
-            console.log("Register Failed!")
+            setErr("Cannot connect to the server. Please try again later.")
         }
+    }
+
+    const getErrorMessage = () => {
+        if (errorState !== "") {
+            return  <div className="user-box-error">
+                <div className="alert alert-danger" role="alert">
+                    {errorState}
+                </div>
+            </div>
+        }
+        else return <div className="empty-error-message"></div>
+        
     }
 
     const handleUserChange = (event) => {setUser(event.target.value)}
@@ -66,14 +92,17 @@ const UserContentBox = ({loginUser}) => {
                         </div>
                     </div>
                     <div className="col-4">
-                        <button onClick={login}>
-                            Login!
-                        </button>
-                        <button onClick={register}>
-                            Register
-                        </button>
+                        <div className="user-content-buttons">
+                            <button onClick={login}>
+                                Login!
+                            </button>
+                            <button onClick={register}>
+                                Register
+                            </button>
+                        </div>
                     </div>
                 </div>
+                {getErrorMessage()}
             </div>
         </div>
       );
