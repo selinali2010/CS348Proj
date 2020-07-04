@@ -14,7 +14,6 @@ html {
 }
 
 .App {
-  text-align: center;
 }
 
 .App-header {
@@ -408,8 +407,6 @@ input[type="text"]::placeholder {
   color: white;
   margin-left: -0.3125rem;
   margin-right: 0.3125rem;
-  padding: 0 0.625rem;
-  font-size: 1rem;
 }
 
 .welcome-text {

@@ -1,15 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Chip from './Chip';
 
 const ChipInput = (props) => {
-    const [chips, setChips] = React.useState([
-        "Flour",
-        "Baking soda",
-    ]);
 
-    const handleDelete = (chipToDelete) => () => {
-        setChips((chips) => chips.filter((chip) => chip !== chipToDelete));
-    };
+    const handleDelete = (chipToDelete) => {
+        return () => {
+            props.setValues(props.values.filter((chip) => chip !== chipToDelete));
+        }
+    }
 
     const tryAddChip = (e) => {
         if (e.key === "Enter" ||
@@ -19,13 +18,13 @@ const ChipInput = (props) => {
             let newChip = e.target.value;
             if (newChip === "")
                 return;
-            for (const c of chips)
+            for (const c of props.values)
             {
                 if (c.toUpperCase() === newChip.toUpperCase())
                     return;
             }
-            setChips((chips) => chips.concat(newChip))
             e.target.value = "";
+            props.setValues(props.values.concat(newChip))
         }
     }
 
@@ -33,14 +32,20 @@ const ChipInput = (props) => {
 
     return (
         <div className="fm-chip-input">
-            { chips.map(chip => 
-                <Chip label={chip} 
+            { props.values.map((chip, index) => 
+                <Chip key={index} label={chip} 
                     onDelete={handleDelete(chip)}
                 />
             )}
             <input className="fm-chip-input-add-chip" type="text" placeholder={placeholderText} size={placeholderText.length} onKeyDown={tryAddChip} />
         </div>
     );
+}
+
+ChipInput.propTypes = {
+    typeName: PropTypes.string.isRequired,
+    values: PropTypes.arrayOf(PropTypes.string).isRequired,
+    setValues: PropTypes.func.isRequired,
 }
 
 export default ChipInput;

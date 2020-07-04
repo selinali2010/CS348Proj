@@ -1,65 +1,71 @@
-import React from 'react';
+import React from "react";
 import { connect } from "react-redux";
-import { addResults } from '../redux/actions';
-import ChipInput from './ChipInput';
+import { addResults } from "../redux/actions";
+import ChipInput from "./ChipInput";
 
-const SearchContentBox = ({addResults}) => {
+class SearchContentBox extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            recipeName: "",
+            ingredients: [],
+            tags: [],
+        };
+    }
 
-    const searchRecipes = () => {
-        async function fetchData() {
-            let recipeName = document.getElementById('recipeName').value;
-            let ingredients = document.getElementById('ingredientName').value;
-            let tags = document.getElementById('tagName').value;
-            let searchParams = {};
-            if (recipeName.length > 0) {
-                searchParams["recipeName"] = recipeName;
-            }
-            if (ingredients.length > 0) {
-                searchParams["ingredients"] = ingredients.split(" ");
-            }
-            if (tags.length > 0) {
-                searchParams["tags"] = tags.split(" ");
-            }
-            // const response = await fetch(process.env.NODE_ENV == 'production' ? process.env.REACT_APP_API_URL: 'http://localhost:8080/'+ "api/recipes");          
+    searchRecipes = () => {
+        const fetchData = async () => {
+            // const response = await fetch(process.env.NODE_ENV == "production" ? process.env.REACT_APP_API_URL: "http://localhost:8080/"+ "api/recipes");
             const response = await fetch(process.env.REACT_APP_API_URL+"api/search", {
-                method: 'POST',
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
-                },                
-                body: JSON.stringify(searchParams),
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(this.state),
             });
             //fetch(process.env.REACT_APP_API_URL + "api/recipes");
             const data = await response.json();
-            addResults(data);
+            this.props.addResults(data);
         }
         fetchData();
     }
 
-    return (        
-        <div className="search-content-box">
-            <div className="section-title">
-                <div className="section-title-text">
-                    Search
+    render() {
+        return (
+            <div className="search-content-box">
+                <div className="section-title">
+                    <div className="section-title-text">
+                        Search
+                    </div>
+                </div>
+                <div className="section-body search-content-body">
+                    <form>
+                        <div> Search By Recipe Name: </div>
+                        <input type="text" className="fm-text-input" placeholder="Search by recipe name..."
+                            value={this.state.recipeName}
+                            onChange={ (e) => this.setState({recipeName: e.target.value}) } />
+
+                        <div> Search By Ingredients: </div>
+                        <ChipInput typeName="ingredient"
+                            values={this.state.ingredients}
+                            setValues={ (values) => this.setState({ingredients: values}) } />
+
+                        <div> Search By Tags: </div>
+                        <ChipInput typeName="tag"
+                            values={this.state.tags}
+                            setValues={ (values) => this.setState({tags: values}) } />
+                    </form>
+                    <button onClick={this.searchRecipes}>
+                        Search!
+                    </button>
+                    <div>{JSON.stringify(this.state)}</div>
                 </div>
             </div>
-            <div className="section-body search-content-body">
-                <form>
-                    <div> Search By Recipe Name: </div>
-                    <input type="text" className="fm-text-input" id="recipeName" name="recipeName"
-                        placeholder='Search by recipe name...' />
-                    <div> Search By Ingredients: </div>
-                    <ChipInput id="ingredientName" name="ingredientName" typeName="ingredient" />
-                    <div> Search By Tags: </div>
-                    <ChipInput id="tagName" name="tagName" typeName="tag" />
-                </form>
-                <button onClick={searchRecipes}>
-                    Search!
-                </button>
-            </div>
-        </div>
-      );
+        );
+    }
 }
+
 export default connect(
     null,
     { addResults }
-  )(SearchContentBox);
+)(SearchContentBox);
