@@ -23,8 +23,8 @@ const UserContentBox = ({loginUser}) => {
     const login = async () => {
         const response = await fetch(process.env.REACT_APP_API_URL+"api/login", getAccountDetails());
         if (response.status === 200) {
-            console.log("Login Succeeded!")
-            loginUser(response.json().userId, username)
+            const data = await response.json(); 
+            loginUser(data.userId, username)
         } else if (response.status === 401) {
             setErr("Invalid username or password.")
         } else {
@@ -47,7 +47,6 @@ const UserContentBox = ({loginUser}) => {
 
         const response = await fetch(process.env.REACT_APP_API_URL+"api/register", getAccountDetails());
         if (response.status === 200) {
-            console.log("Register Succeeded!")
             loginUser(response.json().userId, username)
         } else if (response.status === 400) {
             setErr("The username " + username + " has already been taken! Please try again. ")

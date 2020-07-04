@@ -8,11 +8,11 @@ const initialState = {
 export default function(state = initialState, action) {
     switch (action.type) {
       case LOGIN_USER: {
-        const { id, name} = action.payload;
+        const {userId, userName} = action.payload;
         return {
           ...state,
-          userId: id,
-          userName: name
+          userId: userId,
+          userName: userName
         };
       }
       case LOGOUT_USER: {

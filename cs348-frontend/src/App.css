@@ -83,10 +83,11 @@ html {
   text-indent: 50px;
 }
 
+.account-content-box { margin-top: 1rem; }
 .favorites-content-box { margin-top: 2rem; }
 .favorites-content-body { height: 13.5rem; }
 .search-content-box { margin-top: 1rem; }
-.search-content-body { height: 27rem; }
+.search-content-body { }
 .user-content-box { margin-top: 2rem; }
 .user-content-body {
   padding-bottom: 1rem;
@@ -245,7 +246,7 @@ html {
 
 input[type="text"] {
   outline: none;
-  padding: 0.25rem;
+  padding: 4px;
   border: 1px solid black;
 }
 
@@ -260,6 +261,7 @@ input[type="text"]::placeholder {
 
 .fm-text-input {
   width: 100%;
+  font-style: italic;
 }
 
 /* CHIP INPUT */
@@ -268,8 +270,8 @@ input[type="text"]::placeholder {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  align-content: center;
   background-color: white;
+  padding: 2px;
   border: 1px solid black;
 }
 
@@ -281,6 +283,8 @@ input[type="text"]::placeholder {
   display: inline-flex;
   flex-grow: 1;
   border: none !important;
+  background: none;
+  border: none;
   background: none;
   outline: none;
 }
@@ -311,4 +315,15 @@ input[type="text"]::placeholder {
   color: white;
   margin-left: -0.3125rem;
   margin-right: 0.3125rem;
+  padding: 0 0.625rem;
+  font-size: 1rem;
+}
+
+.welcome-text {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.logout-button {
+  padding-bottom: 0.8rem;
 }
