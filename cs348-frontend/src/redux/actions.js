@@ -7,11 +7,11 @@ export const addResults = content => ({
   }
 });
 
-export const loginUser = (userId, userPass) => ({
+export const loginUser = (userId, userName) => ({
   type: LOGIN_USER,
   payload: {
       userId: userId,
-      userPass: userPass
+      userName: userName
   }
 });
 

@@ -2,24 +2,24 @@ import { LOGIN_USER, LOGOUT_USER } from "../actionTypes";
 
 const initialState = {
     userId: "",
-    userPass: ""
+    userName: ""
 };
 
 export default function(state = initialState, action) {
     switch (action.type) {
       case LOGIN_USER: {
-        const { id, pass} = action.payload;
+        const { id, name} = action.payload;
         return {
           ...state,
           userId: id,
-          userPass: pass
+          userName: name
         };
       }
       case LOGOUT_USER: {
         return {
           ...state,
           userId: "",
-          userPass: ""
+          userName: ""
         };
       }
       default:

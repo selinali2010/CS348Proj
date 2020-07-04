@@ -188,3 +188,8 @@
 .cuisine-Pasty, .cuisine-Spanish {
   background: rgba(171, 149, 85, 0.8);
 }
+
+.username-column, .password-column {
+  text-align: left;
+  margin: 1rem 0 0 1rem;
+}
