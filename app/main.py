@@ -145,20 +145,29 @@ def search():
     if ("recipeName" in args):
         with open("sql_scripts/recipeByNameQuery.sql") as file:
             queryText = file.read()
+        
+        # Only make query if recipeName is not empty
         params = args["recipeName"]
-        addToDict(query(queryText, params))
+        if(params != ""):
+            addToDict(query(queryText, params))
     
     if ("ingredients" in args):
         with open("sql_scripts/recipeByIngredientsQuery.sql") as file:
             queryText = file.read()
-        params = "|".join(args["ingredients"])
-        addToDict(query(queryText, params))
+
+        # Only make query if ingredients are not empty
+        if(len(args["ingredients"]) > 0):
+            params = "|".join(args["ingredients"])
+            addToDict(query(queryText, params))
         
     if ("tags" in args):
         with open("sql_scripts/recipeByTagQuery.sql") as file:
             queryText = file.read()
-        params = "|".join(args["tags"])
-        addToDict(query(queryText, params))
+        
+        # Only make query if tags are not empty
+        if(len(args["tags"]) > 0):
+            params = "|".join(args["tags"])
+            addToDict(query(queryText, params))
 
     result = [v for i,v in recipe_dict.items()]
     # sort recipes by their scores
