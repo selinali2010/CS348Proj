@@ -33,11 +33,9 @@ const RightColLayout = ({ userId }) => {
     }
 
     return (        
-        <div className="col-layout">
-            <div className="right-col">
-                {SelectUserContentBox()}
-                <ResultsContentBox handleClick={handleShow}/>
-            </div>
+        <div className="col-layout right-col">
+            {SelectUserContentBox()}
+            <ResultsContentBox handleClick={handleShow}/>
             <Modal open={show} onClose={handleClose} className="modal-recipe">
                 <DialogContent className="modal-dialog">
                     <RecipeDetails recipe={displayRecipe} handleClose={handleClose}></RecipeDetails>

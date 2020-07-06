@@ -77,7 +77,6 @@ const UserContentBox = ({loginUser}) => {
                     Register / Login
                 </div>
             </div>
-            <form>
             <div className="section-body user-content-body">
                 <div className="row">
                     <div className="col-4">
@@ -108,7 +107,6 @@ const UserContentBox = ({loginUser}) => {
                 </div>
                 {getErrorMessage()}
             </div>
-            </form>
         </div>
       );
 }
