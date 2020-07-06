@@ -77,18 +77,22 @@ const UserContentBox = ({loginUser}) => {
                     Register / Login
                 </div>
             </div>
+            <form>
             <div className="section-body user-content-body">
                 <div className="row">
                     <div className="col-4">
                         <div className="username-column">
                             <div> Username: </div>
-                            <input type="text" className="fm-text-input" id="username" name="username" onChange={handleUserChange} placeholder='Enter your username...'/>
+                            <input type="text" className="fm-text-input" id="username" name="username" onChange={handleUserChange} placeholder='Enter your username...'
+	                            onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}/>
                         </div>
                     </div>
                     <div className="col-4">
                         <div className="password-column">
                             <div> Password: </div>
-                            <input type="password" className="fm-text-input" id="password" name="password" onChange={handlePassChange} placeholder='Enter your password...'/>
+                            <input type="password" className="fm-text-input" id="password" name="password" onChange={handlePassChange}
+                                placeholder='Enter your password...' autoComplete="new-password current-password"
+                                onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}/>
                         </div>
                     </div>
                     <div className="col-4">
@@ -104,6 +108,7 @@ const UserContentBox = ({loginUser}) => {
                 </div>
                 {getErrorMessage()}
             </div>
+            </form>
         </div>
       );
 }

@@ -15,7 +15,7 @@ class SearchContentBox extends React.Component {
 
     searchRecipes = () => {
         const fetchData = async () => {
-            // const response = await fetch(process.env.NODE_ENV == "production" ? process.env.REACT_APP_API_URL: "http://localhost:8080/"+ "api/recipes");
+            // const response = await fetch(process.env.NODE_ENV == "production" ? process.env.REACT_APP_API_URL: "http://localhost:8080/"+ "api/search");
             const response = await fetch(process.env.REACT_APP_API_URL+"api/search", {
                 method: "POST",
                 headers: {
@@ -23,7 +23,6 @@ class SearchContentBox extends React.Component {
                 },
                 body: JSON.stringify(this.state),
             });
-            //fetch(process.env.REACT_APP_API_URL + "api/recipes");
             const data = await response.json();
             this.props.addResults(data);
         }

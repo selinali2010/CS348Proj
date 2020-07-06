@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 
-const RecipeDetails = ({recipe, handleClose}) => {
+const RecipeDetails = forwardRef(({recipe, handleClose}, ref) => {
   const [ingredients, setIngredients] = useState(null);
   const [tags, setTags] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       if(Object.keys(recipe).length !== 0){
-        // const response = await fetch(process.env.NODE_ENV == 'production' ? process.env.REACT_APP_API_URL: 'http://localhost:8080/'+ "api/recipes");          
         const res1 = await fetch(process.env.REACT_APP_API_URL + "api/ingredients/" + recipe.recipeId, {method: 'GET'});
         const ingData = await res1.json();
         setIngredients(ingData);
@@ -21,7 +20,8 @@ const RecipeDetails = ({recipe, handleClose}) => {
   }, [recipe]);
 
   return (
-    <div className="row modal-recipe">
+    <div className="modal-content">
+    <div className="row modal-recipe" ref={ref}>
       <button className="close" aria-label="Close" onClick={handleClose}>
           <span aria-hidden="true">&times;</span>
         </button>
@@ -35,7 +35,7 @@ const RecipeDetails = ({recipe, handleClose}) => {
         <div className="modal-recipe-details"> Cuisine: {recipe.cuisine} </div>
         <div className="modal-recipe-details"> CookTime: {recipe.cookTime} mins</div>
         <div className="modal-recipe-details"> Serves: {recipe.servings} </div>
-        <a className="modal-recipe-url" href={"https://" + recipe.instructionsLink} target="_blank" className="button">View Full Recipe</a>
+        <a className="modal-recipe-url button" href={"https://" + recipe.instructionsLink} target="_blank" rel="noopener noreferrer">View Full Recipe</a>
         
         <div className="modal-recipe-subheader"> Tags </div>
         <ul>
@@ -49,7 +49,8 @@ const RecipeDetails = ({recipe, handleClose}) => {
         </ul>
       </div>
     </div>
+    </div>
   );
-}
+});
 
 export default (RecipeDetails);

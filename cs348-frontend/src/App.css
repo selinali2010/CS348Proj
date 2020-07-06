@@ -226,8 +226,12 @@ body {
   height: 12rem;
 }
 
+.modal-dialog {
+  outline: none;
+}
+
 .modal-content {
-  height: calc(100vh - 3.50rem);
+  height: 30rem;
 }
 
 .modal-recipe {
