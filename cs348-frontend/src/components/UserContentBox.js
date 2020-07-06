@@ -20,7 +20,8 @@ const UserContentBox = ({loginUser}) => {
         }
     }
 
-    const login = async () => {
+    const login = async (event) => {
+        event.preventDefault();
         const response = await fetch(process.env.REACT_APP_API_URL+"api/login", getAccountDetails());
         if (response.status === 200) {
             const data = await response.json(); 
@@ -32,7 +33,8 @@ const UserContentBox = ({loginUser}) => {
         }
     }
 
-    const register = async () => {
+    const register = async (event) => {
+        event.preventDefault();
         let registerError = "";
         if (username.length < 8 || username.length > 30) {
             registerError += "Username must be betweeen 8 and 30 characters. "
@@ -64,7 +66,6 @@ const UserContentBox = ({loginUser}) => {
             </div>
         }
         else return <div className="empty-error-message"></div>
-        
     }
 
     const handleUserChange = (event) => {setUser(event.target.value)}
@@ -77,6 +78,7 @@ const UserContentBox = ({loginUser}) => {
                     Register / Login
                 </div>
             </div>
+            <form>
             <div className="section-body user-content-body">
                 <div className="row">
                     <div className="col-4">
@@ -107,6 +109,7 @@ const UserContentBox = ({loginUser}) => {
                 </div>
                 {getErrorMessage()}
             </div>
+            </form>
         </div>
       );
 }
