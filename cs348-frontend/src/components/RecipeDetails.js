@@ -20,34 +20,31 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId, favourites, setF
   useEffect(() => {
     const fetchData = async () => {
       if(Object.keys(recipe).length !== 0){
-        const res1 = await fetch(process.env.REACT_APP_API_URL + "api/ingredients/" + recipe.recipeId, {method: 'GET'});
-        const ingData = await res1.json();
-        setIngredients(ingData);
-
-        const res2 = await fetch(process.env.REACT_APP_API_URL + "api/tags/" + recipe.recipeId, {method: 'GET'});
-        const tagsData = await res2.json();
-        setTags(tagsData);
-
-        const res3 = await fetch(process.env.REACT_APP_API_URL + "api/reactCount/" + recipe.recipeId, {method: 'GET'});
-        const moodData = await res3.json();
-        for (let i = 1; i <= 6; i++){
-          if (moodData.findIndex(e => e["mood"] === i) === -1){
-            moodData.push({ count: 0, mood: i })
-          }
-        }
-        setMoodCount(moodData.sort((a,b) => a["mood"] - b["mood"]));
-
+        // Fetch recipe ingredients
+        fetch(process.env.REACT_APP_API_URL + "api/ingredients/" + recipe.recipeId, {method: 'GET'}).then(res => {
+          res.json().then(ingredients => setIngredients(ingredients))
+        });
+        // Fetch recipe tags
+        fetch(process.env.REACT_APP_API_URL + "api/tags/" + recipe.recipeId, {method: 'GET'}).then(res => {
+          res.json().then(tags => setTags(tags))
+        });
+        // Fetch recipe moods
+        fetch(process.env.REACT_APP_API_URL + "api/reactCount/" + recipe.recipeId, {method: 'GET'}).then(res => {
+          res.json().then(moods => {
+            for (let i = 1; i <= 6; i++){
+              if (moods.findIndex(e => e["mood"] === i) === -1){
+                moods.push({ count: 0, mood: i })
+              }
+            }
+            setMoodCount(moods.sort((a,b) => a["mood"] - b["mood"]));
+          })
+        });
+        // Fetch user-specific reacts
         if (userId) {
-          const res3 = await fetch(process.env.REACT_APP_API_URL + "api/mood/userId=" + userId + "&recipeId=" + recipe.recipeId, {method: 'GET'});
-          const userMoodData = await res3.json();
-          if (userMoodData[0]) {
-            setMood(userMoodData[0].mood);
-          } else {
-            setMood(0);
-          }
-        } else {
-          setMood(0);
-        }
+          fetch(process.env.REACT_APP_API_URL + "api/mood/userId=" + userId + "&recipeId=" + recipe.recipeId, {method: 'GET'}).then(res => {
+            res.json().then(userReact => { setMood((userReact[0])? userReact[0].mood : 0)})
+          });
+        } else { setMood(0); }
 
         setIsLoading(true);
       }
