@@ -53,7 +53,7 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId, favourites, setF
       }
     }
     fetchData();
-  }, [recipe]);
+  }, [recipe, userId]);
 
   const setUserMood = async () => {
     let mood = 1;

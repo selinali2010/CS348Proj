@@ -24,7 +24,7 @@ const Chart = ({moodCount}) => {
     setMaxHeight(moodCount.reduce((total, value) => {
       return value["count"] >  total ? value["count"] : total
     }, 0))
-  }, moodCount)
+  }, [moodCount])
 
   const getBars = () => {
     if(moodCount.length > 0) {

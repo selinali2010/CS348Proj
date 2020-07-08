@@ -19,7 +19,7 @@ const FavoriteContentBox = ({handleClick, userId, favourites, setFavourites}) =>
             setFavourites(results);
         }
         fetchData();
-      }, []);
+      }, [userId, setFavourites]);
 
     return (        
         <div className="section">
