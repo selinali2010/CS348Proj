@@ -48,8 +48,8 @@ body {
   flex-direction: column;
 }
 
-.favorites-content-body {
-  height: 13.5rem;
+.favourites-content-body {
+  height: 14.3rem;
 }
 
 .section-fill-height,
@@ -79,7 +79,7 @@ body {
 }
 
 .results-container {
-  padding: 3% 0 0 3%;
+  padding: 0 0 0 3%;
   overflow-y: auto;
   height: 100%;
 }

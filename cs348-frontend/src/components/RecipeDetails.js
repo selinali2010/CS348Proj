@@ -1,14 +1,16 @@
 import React, { forwardRef, useEffect, useState } from 'react';
-import { getUserState } from '../redux/selectors'
+import { getUserState, getUserFavourites } from '../redux/selectors'
+import { setFavourites } from "../redux/actions";
 import { connect } from "react-redux";
 import Chart from './Chart';
 
 const mapStateToProps = state => {
   const userId = getUserState(state);
-  return { userId };
+  const favourites = getUserFavourites(state);
+  return { userId, favourites };
 };
 
-const RecipeDetails = forwardRef(({recipe, handleClose, userId}, ref) => {
+const RecipeDetails = forwardRef(({recipe, handleClose, userId, favourites, setFavourites}, ref) => {
   const [ingredients, setIngredients] = useState(null);
   const [tags, setTags] = useState(null);
   const [mood, setMood] = useState(null);
@@ -16,7 +18,6 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId}, ref) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log(userId);
     const fetchData = async () => {
       if(Object.keys(recipe).length !== 0){
         const res1 = await fetch(process.env.REACT_APP_API_URL + "api/ingredients/" + recipe.recipeId, {method: 'GET'});
@@ -68,10 +69,13 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId}, ref) => {
       }),
     });
     setMood(mood);
+    const temp = favourites;
+    temp.push(recipe);
+    setFavourites(temp);
   }
 
   const removeUserMood = async () => {
-    const res = await fetch(process.env.REACT_APP_API_URL + "api/react", {
+    await fetch(process.env.REACT_APP_API_URL + "api/react", {
       method: 'DELETE',
       headers: {
         "Content-Type": "application/json",
@@ -81,14 +85,14 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId}, ref) => {
         recipeId: recipe.recipeId
       }),
     });
-    const data = await res.json();
-    setMood(0);
+    setMood(0);    
+    setFavourites(favourites.filter(item => item.recipeId !== recipe.recipeId));
   }
 
-  const setFavoritesButton = () =>{
+  const setFavouritesButton = () =>{
     if (mood === 0 && userId) {
       return <button className="fm-button" onClick={setUserMood}>
-        Add To Favorites!
+        Add To Favourites!
       </button>
     } else if (userId && mood !== null) {
       return <button className="fm-button" onClick={removeUserMood}>
@@ -145,11 +149,11 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId}, ref) => {
             {ingredients && ingredients.map(
               (ele, index) => <li key={index} className="modal-recipe-details">{ele.quantity} {ele.unit} {ele.foodName}</li>)}
           </ul>
-          {setFavoritesButton()}
+          {setFavouritesButton()}
         </div>
       </div>
     </div>
   );
 });
 
-export default connect(mapStateToProps)(RecipeDetails)
+export default connect(mapStateToProps, { setFavourites })(RecipeDetails)

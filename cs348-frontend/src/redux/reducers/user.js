@@ -1,8 +1,9 @@
-import { LOGIN_USER, LOGOUT_USER } from "../actionTypes";
+import { LOGIN_USER, LOGOUT_USER, SET_FAVOURITES } from "../actionTypes";
 
 const initialState = {
     userId: "",
-    userName: ""
+    userName: "",
+    favourites: []
 };
 
 export default function(state = initialState, action) {
@@ -20,6 +21,13 @@ export default function(state = initialState, action) {
           ...state,
           userId: "",
           userName: ""
+        };
+      }
+      case SET_FAVOURITES: {
+        const { favourites} = action.payload;
+        return {
+          ...state,
+          favourites: favourites
         };
       }
       default:

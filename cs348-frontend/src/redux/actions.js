@@ -1,9 +1,16 @@
-import { ADD_RESUlTS, LOGIN_USER, LOGOUT_USER } from "./actionTypes";
+import { ADD_RESUlTS, LOGIN_USER, LOGOUT_USER, SET_FAVOURITES } from "./actionTypes";
 
 export const addResults = content => ({
   type: ADD_RESUlTS,
   payload: {
     results: content
+  }
+});
+
+export const setFavourites = content => ({
+  type: SET_FAVOURITES,
+  payload: {
+    favourites: content
   }
 });
 
