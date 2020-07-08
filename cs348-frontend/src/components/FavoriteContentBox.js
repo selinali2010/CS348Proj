@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import RecipeCard from './RecipeCard';
+import { getUserState } from '../redux/selectors'
+import { connect } from "react-redux";
 
-const FavoriteContentBox = ({handleClick}) => {
+const mapStateToProps = state => {
+    const userId = getUserState(state);
+    return { userId };
+};
+
+const FavoriteContentBox = ({handleClick, userId}) => {
     const [favResults, setFavResults] = useState([]);
 
     useEffect(() => {
         async function fetchData() {
             // const response = await fetch(process.env.NODE_ENV == 'production' ? process.env.REACT_APP_API_URL: 'http://localhost:8080/'+ "api/recipes");          
-            const response = await fetch(process.env.REACT_APP_API_URL+"api/recipes", {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-            //fetch(process.env.REACT_APP_API_URL + "api/recipes");
+            const response = await fetch(process.env.REACT_APP_API_URL + "api/favourites/" + userId, {method: 'GET'});
             let results = await response.json();
             setFavResults(results);
-            
         }
         fetchData();
       }, []);
@@ -37,4 +37,4 @@ const FavoriteContentBox = ({handleClick}) => {
       );
 }
 
-export default FavoriteContentBox;
+export default connect(mapStateToProps)(FavoriteContentBox)

@@ -178,9 +178,6 @@ body {
   line-height: 100%;
 }
 
-.recipe-card-body {
-}
-
 .card-recipe-name {
   white-space: nowrap;
   overflow: hidden;
@@ -232,23 +229,50 @@ body {
 
 .modal-content {
   height: 30rem;
+  background: var(--paper);
 }
 
+.recipe-dot {
+  height: 10px;
+  width: 10px;
+  background-color: var(--paper);
+  border-radius: 50%;
+  position: absolute;
+  display: inline-block;
+}
+
+.dot1{left: 25px; top: 15px;}
+.dot2{left: 25px; top: 10.8rem;}
+.dot3{right: 15px; top: 10px;}
+.dot4{right: 15px; top: 10.8rem;}
+
 .modal-recipe {
+  overflow: hidden;
   height: 100%;
   margin-right: 0;
   margin-left: 0;
 }
 
+.fm-modal-header {
+  height: 1.7rem;
+}
+
 .modal-recipe-left-col {
-  margin: 1.75rem auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  padding-right: 0;
 }
 
 .modal-recipe-right-col {
-  margin: 1.75rem auto;
+  margin: auto;
+  overflow: auto;
+  margin-top: 0;
+  height: 100%;
+  padding-bottom: 1rem;
+}
+
+.modal-recipe-image {
+  margin-bottom: 1rem;
 }
 
 .modal-recipe-header{
@@ -262,7 +286,6 @@ body {
   font-size: 1.4rem;
   line-height: 100%;
   color: var(--text);
-  margin-top: 0.3rem;
   margin-left: 0.8rem;
   padding-bottom: 0.3rem;
 }
