@@ -65,25 +65,52 @@ def query(sql : str, data : List[str] = []) -> List[List[str]]:
 
 @app.route("/api/recipes", methods=["GET"])
 def recipes():
-    with open("sql_scripts/recipeAll.sql") as file:
+    with open("sql_scripts/search/recipeAll.sql") as file:
         queryText = file.read()
     result = query(queryText)
     return jsonify(result)
 
 @app.route("/api/ingredients/<int:id>", methods=["GET"])
 def ingredients(id):
-    with open("sql_scripts/ingredientsQuery.sql") as file:
+    with open("sql_scripts/recipeDetails/ingredientsQuery.sql") as file:
         queryText = file.read()
     result = query(queryText, id)
     return jsonify(result)
 
 @app.route("/api/tags/<int:id>", methods=["GET"])
 def tags(id):
-    with open("sql_scripts/tagsQuery.sql") as file:
+    with open("sql_scripts/recipeDetails/tagsQuery.sql") as file:
         queryText = file.read()
     result = query(queryText, id)
     return jsonify(result)
 
+@app.route("/api/substitutions/<int:id>", methods=["GET"])
+def substitutions(id):
+    with open("sql_scripts/recipeDetails/substitutionsQuery.sql") as file:
+        queryText = file.read()
+    result = query(queryText, id)
+    return jsonify(result)
+
+@app.route("/api/reactCount/<int:id>", methods=["GET"])
+def reactCount(id):
+    with open("sql_scripts/recipeDetails/reactCountQuery.sql") as file:
+        queryText = file.read()
+    result = query(queryText, id)
+    return jsonify(result)
+
+@app.route("/api/mood/userId=<int:userId>&recipeId=<int:recipeId>", methods=["GET"])
+def mood(userId, recipeId):
+    with open("sql_scripts/user/moodQuery.sql") as file:
+        queryText = file.read()
+    result = query(queryText, [userId, recipeId])
+    return jsonify(result)
+
+@app.route("/api/favourites/<int:id>", methods=["GET"])
+def userFavourites(id):
+    with open("sql_scripts/user/favouritesQuery.sql") as file:
+        queryText = file.read()
+    result = query(queryText, id)
+    return jsonify(result)
 
 @app.route("/api/login", methods=["POST"])
 def login():
@@ -92,17 +119,14 @@ def login():
     password = args["password"] if "password" in args else ""
     result = {}
 
-    with open("sql_scripts/checkUserExistence.sql") as file:
-        check = query(file.read(), [username, password])
+    with open("sql_scripts/user/signInQuery.sql") as file:
+        result = query(file.read(), [username, password])
+        if(type(result) == tuple):
+            result = {}
+            result["error"] = "The username or password is incorrect"
+            return make_response(jsonify(result), 401)
 
-    if check[0]["count"] != 1:
-        result["error"] = "The username or password is incorrect"
-        return make_response(jsonify(result), 401)
-    
-    with open("sql_scripts/getUserIdQuery.sql") as file:
-        result = query(file.read(), username)[0]
-
-    return make_response(jsonify(result), 200)
+    return make_response(jsonify(result[0]), 200)
 
 @app.route("/api/register", methods=["POST"])
 def register():
@@ -111,18 +135,59 @@ def register():
     password = args["password"] if "password" in args else ""
     result = {}
 
-    with open("sql_scripts/checkUniqueUserName.sql") as file:
-        check = query(file.read(), username)
+    if (username == "" or password == ""):
+        result["error"] = "Invalid request, cannot have empty parameters"
+        return make_response(jsonify(), 400)
 
-    if check[0]["count"] != 0:
-        result["error"] = "The username " + username + " is already in use. Please choose a new one."
+    with open("sql_scripts/user/insertUser.sql") as file:
+        try:
+            result = query(file.read(), [username, password, None])
+            print(result)
+        except pymysql.err.IntegrityError:
+            result["error"] = "The username " + username + " is already in use. Please choose a new one."
+            return make_response(jsonify(result), 400)
+
+    with open("sql_scripts/user/getUserIdQuery.sql") as file:
+        result = query(file.read(), username)[0]
+
+    return make_response(jsonify(result), 200)
+
+@app.route("/api/react", methods=["POST"])
+def addReact():
+    args = request.json
+    userId = args["userId"] if "userId" in args else ""
+    recipeId = args["recipeId"] if "recipeId" in args else ""
+    mood = args["mood"] if "mood" in args else ""
+    result = {}
+
+    if (userId == "" or recipeId == "" or mood == ""):
+        result["error"] = "Invalid request, missing a parameter"
         return make_response(jsonify(result), 400)
 
-    with open("sql_scripts/insertNewUser.sql") as file:
-        query(file.read(), [username, password, None])
+    with open("sql_scripts/user/insertReact.sql") as file:
+        try:
+            query(file.read(), [userId, recipeId, mood])
+            result["msg"] = "Successful insertion"
+        except pymysql.err.IntegrityError:
+            result["error"] = "Insert failed. Either userId or recipeId is invalid."
+            return make_response(jsonify(result), 400)
 
-    with open("sql_scripts/getUserIdQuery.sql") as file:
-        result = query(file.read(), username)[0]
+    return make_response(jsonify(result), 200)
+
+@app.route("/api/react", methods=["DELETE"])
+def deleteReact():
+    args = request.json
+    userId = args["userId"] if "userId" in args else ""
+    recipeId = args["recipeId"] if "recipeId" in args else ""
+    result = {}
+
+    if (userId == "" or recipeId == ""):
+        result["error"] = "Invalid request, missing a parameter"
+        return make_response(jsonify(result), 400)
+
+    with open("sql_scripts/user/deleteReact.sql") as file:
+        query(file.read(), [userId, recipeId])
+        result["msg"] = "Successful deletion"
 
     return make_response(jsonify(result), 200)
 
@@ -143,7 +208,7 @@ def search():
                     recipe_dict[r["recipeId"]]["score"] = 1
 
     if ("recipeName" in args):
-        with open("sql_scripts/recipeByNameQuery.sql") as file:
+        with open("sql_scripts/search/recipeByNameQuery.sql") as file:
             queryText = file.read()
         
         # Only make query if recipeName is not empty
@@ -152,7 +217,7 @@ def search():
             addToDict(query(queryText, params))
     
     if ("ingredients" in args):
-        with open("sql_scripts/recipeByIngredientsQuery.sql") as file:
+        with open("sql_scripts/search/recipeByIngredientsQuery.sql") as file:
             queryText = file.read()
 
         # Only make query if ingredients are not empty
@@ -161,7 +226,7 @@ def search():
             addToDict(query(queryText, params))
         
     if ("tags" in args):
-        with open("sql_scripts/recipeByTagQuery.sql") as file:
+        with open("sql_scripts/search/recipeByTagQuery.sql") as file:
             queryText = file.read()
         
         # Only make query if tags are not empty
@@ -175,7 +240,7 @@ def search():
 
     # if there are no results, backfill query for all recipes
     if (len(result) == 0):
-        with open("sql_scripts/recipeAll.sql") as file:
+        with open("sql_scripts/search/recipeAll.sql") as file:
             queryText = file.read()
         result = query(queryText)
         for r in result:
