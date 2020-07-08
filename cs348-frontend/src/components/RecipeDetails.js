@@ -1,6 +1,7 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 import { getUserState } from '../redux/selectors'
 import { connect } from "react-redux";
+import Chart from './Chart';
 
 const mapStateToProps = state => {
   const userId = getUserState(state);
@@ -11,6 +12,8 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId}, ref) => {
   const [ingredients, setIngredients] = useState(null);
   const [tags, setTags] = useState(null);
   const [mood, setMood] = useState(null);
+  const [moodCount, setMoodCount] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     console.log(userId);
@@ -24,6 +27,15 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId}, ref) => {
         const tagsData = await res2.json();
         setTags(tagsData);
 
+        const res3 = await fetch(process.env.REACT_APP_API_URL + "api/reactCount/" + recipe.recipeId, {method: 'GET'});
+        const moodData = await res3.json();
+        for (let i = 1; i <= 6; i++){
+          if (moodData.findIndex(e => e["mood"] === i) === -1){
+            moodData.push({ count: 0, mood: i })
+          }
+        }
+        setMoodCount(moodData.sort((a,b) => a["mood"] - b["mood"]));
+
         if (userId) {
           const res3 = await fetch(process.env.REACT_APP_API_URL + "api/mood/userId=" + userId + "&recipeId=" + recipe.recipeId, {method: 'GET'});
           const userMoodData = await res3.json();
@@ -35,6 +47,8 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId}, ref) => {
         } else {
           setMood(0);
         }
+
+        setIsLoading(true);
       }
     }
     fetchData();
@@ -83,6 +97,18 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId}, ref) => {
     }
   }
 
+  const getChart = () => {
+    return <Chart moodCount={moodCount}/>
+  }
+
+  if(!isLoading){
+    return (
+      <div className="modal-content">
+        Loading
+      </div>
+    )
+  }
+
   return (
     <div className="modal-content">
       <div className="fm-modal-header">
@@ -99,7 +125,7 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId}, ref) => {
             <span className="recipe-dot dot4"></span>
             <img src={recipe.imageUrl} className="modal-img" alt={"https://ak6.picdn.net/shutterstock/videos/28831216/thumb/1.jpg"}></img>
           </div>
-          <img src={recipe.imageUrl} className="modal-img" alt={"https://ak6.picdn.net/shutterstock/videos/28831216/thumb/1.jpg"}></img>
+          { moodCount && getChart() }
         </div>
         <div className="col-6 modal-recipe-right-col">
           <div className="modal-recipe-header"> {recipe.recipeName} </div>

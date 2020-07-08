@@ -319,6 +319,48 @@ body {
   margin-left: 0.8rem;
 }
 
+.chart-container {
+  display: flex;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+.chart-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.chart-bar-heart-eyes {
+  background-color: #DD2E44;
+  width: 25px;
+}
+
+.chart-bar-drooling {
+  background-color: #88C9F9;
+  width: 25px;
+}
+
+.chart-bar-thumbs-up {
+  background-color: #FFDB5E;
+  width: 25px;
+}
+
+.chart-bar-thumbs-down {
+  background-color: #EF9948;
+  width: 25px;
+}
+
+.chart-bar-throw-up {
+  background-color: #77AF57;
+  width: 25px;
+}
+
+.chart-bar-skull-crossbones {
+  background-color: #AAB8C2;
+  width: 25px;
+}
+
 /* CUSTOM SCROLLBAR */
 ::-webkit-scrollbar {
   width: 10px;

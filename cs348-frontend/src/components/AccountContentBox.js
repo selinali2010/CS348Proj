@@ -10,17 +10,17 @@ const mapStateToProps = state => {
 
 const AccountContentBox = ({userName, logoutUser}) => {
     return (        
-        <div className="section account-content-box">
+        <div className="section">
             <div className="section-title">
                 <div className="section-title-text">
                     My Account
                 </div>
             </div>
-            <div className="section-body results-content-body">
+            <div className="section-body">
                 <div className="welcome-text">
                     Welcome, {userName}!
                 </div>
-                <div className="logout-button">
+                <div className="fm-centered-button">
                     <button className="fm-button" onClick={logoutUser}>
                         Log out
                     </button>

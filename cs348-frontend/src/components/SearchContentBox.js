@@ -31,13 +31,13 @@ class SearchContentBox extends React.Component {
 
     render() {
         return (
-            <div className="section section-fill-height search-content-box">
+            <div className="section section-fill-height">
                 <div className="section-title">
                     <div className="section-title-text">
                         Search
                     </div>
                 </div>
-                <div className="section-body search-content-body">
+                <div className="section-body">
                     <form>
                         <div> Search By Recipe Name: </div>
                         <input type="text" className="fm-text-input" placeholder="Search by recipe name..."

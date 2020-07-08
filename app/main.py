@@ -106,7 +106,7 @@ def mood(userId, recipeId):
     return jsonify(result)
 
 @app.route("/api/favourites/<int:id>", methods=["GET"])
-def userFavourites(id):
+def favourites(id):
     with open("sql_scripts/user/favouritesQuery.sql") as file:
         queryText = file.read()
     result = query(queryText, id)
@@ -137,7 +137,7 @@ def register():
 
     if (username == "" or password == ""):
         result["error"] = "Invalid request, cannot have empty parameters"
-        return make_response(jsonify(), 400)
+        return make_response(jsonify(result), 400)
 
     with open("sql_scripts/user/insertUser.sql") as file:
         try:

@@ -10,13 +10,13 @@ const mapStateToProps = state => {
 
 const ResultsContentBox = ({results, handleClick}) => {
     return (        
-        <div className="section section-fill-height results-content-box">
+        <div className="section section-fill-height">
             <div className="section-title">
                 <div className="section-title-text">
                     Search Results
                 </div>
             </div>
-            <div className="section-body results-content-body">
+            <div className="section-body">
                 <div className="results-container">
                     {results.map(e => <RecipeCard key={e.recipeId} recipe={e} handleClick={handleClick}></RecipeCard>)}
                 </div>

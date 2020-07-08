@@ -22,7 +22,7 @@ const FavoriteContentBox = ({handleClick, userId}) => {
       }, []);
 
     return (        
-        <div className="section favorites-content-box">
+        <div className="section">
             <div className="section-title">
                 <div className="section-title-text">
                     My Saved Recipes
