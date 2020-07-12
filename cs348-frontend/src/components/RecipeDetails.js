@@ -3,6 +3,7 @@ import { getUserState, getUserFavourites } from '../redux/selectors'
 import { setFavourites } from "../redux/actions";
 import { connect } from "react-redux";
 import Chart from './Chart';
+import Chip from './Chip';
 
 const mapStateToProps = state => {
   const userId = getUserState(state);
@@ -126,9 +127,11 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId, favourites, setF
           <a className="modal-recipe-url button" href={recipe.instructionsLink} target="_blank" rel="noopener noreferrer">View Full Recipe</a>
           
           <div className="modal-recipe-subheader"> Tags </div>
-          <ul>
-            {tags && tags.map((ele, index) => <li key={index} className="modal-recipe-details">{ele.tagName}</li>)}
-          </ul>
+          <div className="chips">
+            { tags && tags.map((tag, index) => 
+                <Chip key={index} label={tag.tagName} />
+            )}
+          </div>
           
           <div className="modal-recipe-subheader"> Ingredients </div>
           <ul>
