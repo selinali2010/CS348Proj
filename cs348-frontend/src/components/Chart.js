@@ -6,6 +6,8 @@ import thumbsdown from '../assets/thumbsdown.png';
 import throwup from '../assets/throwup.png';
 import skull from '../assets/skull.png';
 
+import "./Chart.css"
+
 const moodMap = Object.freeze({
   1: "heart-eyes",
   2: "drooling",
