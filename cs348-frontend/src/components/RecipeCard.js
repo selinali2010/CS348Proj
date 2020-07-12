@@ -10,7 +10,7 @@ const RecipeCard = ({recipe, handleClick}) => {
                         {recipe.cuisine}
                     </div>
                 </div>
-                <img src={recipe.imageUrl} className="card-img-top" alt={"https://ak6.picdn.net/shutterstock/videos/28831216/thumb/1.jpg"}/>
+                <img srcSet={recipe.imageUrl} className="card-img-top" src={"https://ak6.picdn.net/shutterstock/videos/28831216/thumb/1.jpg"} alt="Recipe"/>
                 <div>
                     <div className="card-recipe-name"> {recipe.recipeName} </div>
                     <div className="card-recipe-author"> {recipe.authorName} </div>

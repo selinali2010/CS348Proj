@@ -84,6 +84,13 @@ body {
   height: 100%;
 }
 
+.results-message {
+  padding: 0 0 3% 3%;
+  overflow-y: auto;
+  height: 100%;
+  text-align: center;
+}
+
 /* TITLE BOX */
 
 .title-background {

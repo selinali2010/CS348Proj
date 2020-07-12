@@ -1,4 +1,4 @@
-import { ADD_RESUlTS } from "../actionTypes";
+import { ADD_RESULTS } from "../actionTypes";
 
 const initialState = {
     results: []
@@ -6,7 +6,7 @@ const initialState = {
 
 export default function(state = initialState, action) {
     switch (action.type) {
-      case ADD_RESUlTS: {
+      case ADD_RESULTS: {
         const { results} = action.payload;
         return {
           ...state,

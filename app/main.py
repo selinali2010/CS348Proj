@@ -234,19 +234,24 @@ def search():
             params = "|".join(args["tags"])
             addToDict(query(queryText, params))
 
-    result = [v for i,v in recipe_dict.items()]
+    result = {}
+    result["recipes"] = [v for i,v in recipe_dict.items()]
     # sort recipes by their scores
-    result.sort(key=lambda x: x["score"], reverse=True)
+    result["recipes"].sort(key=lambda x: x["score"], reverse=True)
+
+    isEmpty = len(result["recipes"]) == 0
+    result["isEmpty"] = isEmpty 
 
     # if there are no results, backfill query for all recipes
-    if (len(result) == 0):
+    if (isEmpty):
+        print(result)
         with open("sql_scripts/search/recipeAll.sql") as file:
             queryText = file.read()
-        result = query(queryText)
-        for r in result:
+        result["recipes"] = query(queryText)
+        for r in result["recipes"]:
             r["score"] = 0
 
-    return jsonify(result)
+    return make_response(jsonify(result), 200)
 
 @app.route("/", methods=["GET"])
 def get_root_handler():

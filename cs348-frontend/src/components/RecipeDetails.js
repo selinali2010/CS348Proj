@@ -15,7 +15,6 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId, favourites, setF
   const [tags, setTags] = useState(null);
   const [mood, setMood] = useState(null);
   const [moodCount, setMoodCount] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,8 +44,6 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId, favourites, setF
             res.json().then(userReact => { setMood((userReact[0])? userReact[0].mood : 0)})
           });
         } else { setMood(0); }
-
-        setIsLoading(true);
       }
     }
     fetchData();
@@ -102,14 +99,6 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId, favourites, setF
     return <Chart moodCount={moodCount}/>
   }
 
-  if(!isLoading){
-    return (
-      <div className="modal-content">
-        Loading
-      </div>
-    )
-  }
-
   return (
     <div className="modal-content">
       <div className="fm-modal-header">
@@ -124,7 +113,7 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId, favourites, setF
             <span className="recipe-dot dot2"></span>
             <span className="recipe-dot dot3"></span>
             <span className="recipe-dot dot4"></span>
-            <img src={recipe.imageUrl} className="modal-img" alt={"https://ak6.picdn.net/shutterstock/videos/28831216/thumb/1.jpg"}></img>
+            <img srcSet={recipe.imageUrl} className="modal-img" src={"https://ak6.picdn.net/shutterstock/videos/28831216/thumb/1.jpg"} alt="Recipe"></img>
           </div>
           { moodCount && getChart() }
         </div>
