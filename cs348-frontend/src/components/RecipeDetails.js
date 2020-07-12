@@ -123,7 +123,7 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId, favourites, setF
           <div className="modal-recipe-details"> Cuisine: {recipe.cuisine} </div>
           <div className="modal-recipe-details"> CookTime: {recipe.cookTime} mins</div>
           <div className="modal-recipe-details"> Serves: {recipe.servings} </div>
-          <a className="modal-recipe-url button" href={"https://" + recipe.instructionsLink} target="_blank" rel="noopener noreferrer">View Full Recipe</a>
+          <a className="modal-recipe-url button" href={recipe.instructionsLink} target="_blank" rel="noopener noreferrer">View Full Recipe</a>
           
           <div className="modal-recipe-subheader"> Tags </div>
           <ul>
