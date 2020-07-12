@@ -1,10 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import hearteyes from '../assets/hearteyes.png';
-import drooling from '../assets/drooling.png';
-import thumbsup from '../assets/thumbsup.png';
-import thumbsdown from '../assets/thumbsdown.png';
-import throwup from '../assets/throwup.png';
-import skull from '../assets/skull.png';
 
 import "./Chart.css"
 import Emoji from './Emoji';
@@ -18,16 +12,7 @@ const moodMap = Object.freeze({
   6: "skull-crossbones",
 })
 
-const emojiMap = Object.freeze({
-  1: <img className="modal-emoji" alt="" src={hearteyes}></img>,
-  2: <img className="modal-emoji" alt="" src={drooling}></img>,
-  3: <img className="modal-emoji" alt="" src={thumbsup}></img>,
-  4: <img className="modal-emoji" alt="" src={thumbsdown}></img>,
-  5: <img className="modal-emoji" alt="" src={throwup}></img>,
-  6: <img className="modal-emoji" alt="" src={skull}></img>,
-})
-
-const Chart = ({moodCount}) => {
+const Chart = ({moodCount, toggleMood}) => {
   const [maxHeight, setMaxHeight] = useState(0)
   useEffect(() => {
     setMaxHeight(moodCount.reduce((total, value) => {
@@ -42,7 +27,7 @@ const Chart = ({moodCount}) => {
           <div key={e["mood"]} className="chart-item">
             <div className={"chart-bar-"+ moodMap[e["mood"]]} 
               style={{height: "calc(" + e["count"] / maxHeight + " * 100%)"}}></div>
-            <Emoji index={e["mood"]}/>
+            <Emoji index={e["mood"]} toggleMood={toggleMood}/>
           </div> 
         )
       })

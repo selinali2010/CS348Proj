@@ -20,12 +20,14 @@ const emojiMap = Object.freeze({
 
 const Emoji = (props) => {
   return (
-    <img className="emoji-image" src={emojiMap[props.index]}></img>
+    <img className="emoji-image" src={emojiMap[props.index]} alt={emojiMap[props.index]} 
+      onClick={() => props.toggleMood(props.index)}></img>
   );
 }
 
 Emoji.propTypes = {
-  index: PropTypes.number
+  index: PropTypes.number,
+  toggleMood: PropTypes.func
 }
 
 export default Emoji;

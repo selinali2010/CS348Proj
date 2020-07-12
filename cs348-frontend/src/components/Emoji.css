@@ -1,6 +1,7 @@
 .emoji-image {
   width: 25px;
   height: 25px;
+  margin-top: 8px;
 }
 
 .emoji-image:hover {

@@ -52,8 +52,11 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId, favourites, setF
     fetchData();
   }, [recipe, userId]);
 
-  const setUserMood = async () => {
-    let mood = 1;
+  const setUserMood = async (newMood) => {
+    if(mood !== 0){
+      await removeUserMood(false);
+    }
+    
     await fetch(process.env.REACT_APP_API_URL + "api/react", {
       method: 'POST',
       headers: {
@@ -62,16 +65,27 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId, favourites, setF
       body: JSON.stringify({
         userId: userId,
         recipeId: recipe.recipeId,
-        mood: mood // DEFAULT - change this later
+        mood: newMood
       }),
     });
-    setMood(mood);
-    const temp = favourites;
-    temp.push(recipe);
-    setFavourites(temp);
+
+    setMoodCount(moodCount.map(e => {
+      if(e["mood"] === mood) e["count"]--
+      else if(e["mood"] === newMood) e["count"]++
+      return e
+    }))
+    setMood(newMood);
+
+    if(newMood === 1) {
+      const temp = favourites;
+      temp.push(recipe);
+      setFavourites(temp);
+    } else {
+      setFavourites(favourites.filter(item => item.recipeId !== recipe.recipeId));
+    }
   }
 
-  const removeUserMood = async () => {
+  const removeUserMood = async (setChanges = true) => {
     await fetch(process.env.REACT_APP_API_URL + "api/react", {
       method: 'DELETE',
       headers: {
@@ -82,24 +96,24 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId, favourites, setF
         recipeId: recipe.recipeId
       }),
     });
-    setMood(0);    
-    setFavourites(favourites.filter(item => item.recipeId !== recipe.recipeId));
+    if(setChanges){
+      setMoodCount(moodCount.map(e => { if(e["mood"] === mood) e["count"]--; return e}))
+      setMood(0);
+      setFavourites(favourites.filter(item => item.recipeId !== recipe.recipeId));
+    }
   }
 
-  const setFavouritesButton = () =>{
-    if (mood === 0 && userId) {
-      return <button className="fm-button" onClick={setUserMood}>
-        Add To Favourites!
-      </button>
-    } else if (userId && mood !== null) {
-      return <button className="fm-button" onClick={removeUserMood}>
-        Unfavorite Recipe
-      </button>
+  const toggleMood = (newMood) => {
+    if(!userId) return;
+    if (mood !== newMood) {
+      setUserMood(newMood);
+    } else {
+      removeUserMood();
     }
   }
 
   const getChart = () => {
-    return <Chart moodCount={moodCount}/>
+    return <Chart moodCount={moodCount} toggleMood={toggleMood}/>
   }
 
   return (
@@ -124,9 +138,9 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId, favourites, setF
           <div className="modal-recipe-header"> {recipe.recipeName} </div>
           <div className="modal-recipe-details"> Author: {recipe.authorName} </div>
           <div className="modal-recipe-details"> Cuisine: {recipe.cuisine} </div>
-          <div className="modal-recipe-details"> CookTime: {recipe.cookTime} mins</div>
+          <div className="modal-recipe-details"> Cook Time: {recipe.cookTime} mins</div>
           <div className="modal-recipe-details"> Serves: {recipe.servings} </div>
-          <a className="modal-recipe-url button" href={recipe.instructionsLink} target="_blank" rel="noopener noreferrer">View Full Recipe</a>
+          <div className="modal-recipe-details"> Difficulty: {recipe.difficulty} </div>
           
           <div className="modal-recipe-subheader"> Tags </div>
           <div className="chips">
@@ -140,7 +154,9 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId, favourites, setF
             {ingredients && ingredients.map(
               (ele, index) => <li key={index} className="modal-recipe-details">{ele.quantity} {ele.unit} {ele.foodName}</li>)}
           </ul>
-          {setFavouritesButton()}
+          <button className="fm-button">
+            <a className="modal-recipe-url" href={recipe.instructionsLink} target="_blank" rel="noopener noreferrer">View Full Recipe</a>
+          </button>
         </div>
       </div>
     </div>
