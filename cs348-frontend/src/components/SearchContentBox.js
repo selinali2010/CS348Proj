@@ -37,7 +37,7 @@ class SearchContentBox extends React.Component {
                         Search
                     </div>
                 </div>
-                <div className="section-body">
+                <div className="section-body search-section-body">
                     <form>
                         <div> Search By Recipe Name: </div>
                         <input type="text" className="fm-text-input" placeholder="Search by recipe name..."
@@ -59,7 +59,6 @@ class SearchContentBox extends React.Component {
                             Search!
                         </button>
                     </div>
-                    <div>{JSON.stringify(this.state)}</div>
                 </div>
             </div>
         );
