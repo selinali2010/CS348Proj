@@ -195,13 +195,13 @@ def deleteReact():
 def search():
     args = request.json
     recipe_dict = {}
-    sortBy = args["sortBy"]
+    orderBy = args["orderBy"]
     isAsc = args["isAsc"]
 
-    def getSort(sortBy, isAsc):
-        sortByMap = ["recipeId", "difficulty", "cookTime"]
+    def getSort(orderBy, isAsc):
+        orderByMap = ["recipeId", "difficulty", "cookTime"]
         sortOrder = ["DESC", "ASC"]
-        return " ORDER BY " + sortByMap[sortBy] + " " + sortOrder[isAsc]
+        return " ORDER BY " + orderByMap[orderBy] + " " + sortOrder[isAsc]
 
     # use recipe_dict to keep track of recipes from query results
     # add a score field to keep track of relevant recipes
@@ -221,7 +221,7 @@ def search():
         # Only make query if recipeName is not empty
         params = args["recipeName"]
         if(params != ""):
-            addToDict(query(queryText + getSort(sortBy, isAsc), params))
+            addToDict(query(queryText + getSort(orderBy, isAsc), params))
     
     if ("ingredients" in args):
         with open("sql_scripts/search/recipeByIngredientsQuery.sql") as file:
@@ -230,7 +230,7 @@ def search():
         # Only make query if ingredients are not empty
         if(len(args["ingredients"]) > 0):
             params = "|".join(args["ingredients"])
-            addToDict(query(queryText + getSort(sortBy, isAsc), params))
+            addToDict(query(queryText + getSort(orderBy, isAsc), params))
         
     if ("tags" in args):
         with open("sql_scripts/search/recipeByTagQuery.sql") as file:
@@ -239,7 +239,7 @@ def search():
         # Only make query if tags are not empty
         if(len(args["tags"]) > 0):
             params = "|".join(args["tags"])
-            addToDict(query(queryText + getSort(sortBy, isAsc), params))
+            addToDict(query(queryText + getSort(orderBy, isAsc), params))
 
     result = {}
     result["recipes"] = [v for i,v in recipe_dict.items()]
@@ -254,7 +254,7 @@ def search():
         print(result)
         with open("sql_scripts/search/recipeAll.sql") as file:
             queryText = file.read()
-        result["recipes"] = query(queryText + getSort(sortBy, isAsc))
+        result["recipes"] = query(queryText + getSort(orderBy, isAsc))
         for r in result["recipes"]:
             r["score"] = 0
 
