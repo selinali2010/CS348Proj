@@ -57,6 +57,10 @@ body {
   flex-grow: 1;
 }
 
+.search-section-body {
+  max-height: fit-content;
+}
+
 .section-title {
   background: var(--olive);
   height: 3.5rem;
@@ -160,11 +164,13 @@ body {
 }
 
 .recipe-card-top {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   position: absolute;
   width: 100%;
   height: 2rem;
   z-index: 1;
-  background: rgba(85, 85, 171, 0.8);
 }
 
 .recipe-card-top-text {
@@ -186,8 +192,7 @@ body {
   font-family: Raleway, sans-serif;
   font-style: normal;
   font-weight: bold;
-  font-size: 1.4rem;
-  line-height: 100%;
+  font-size: 1.3rem;
   color: var(--text);
   margin-top: 0.3rem;
   margin-left: 0.8rem;
@@ -375,13 +380,10 @@ body {
   background: #555;
 }
 
-.cuisine-Cake, .cuisine-Drink {
-  background: rgba(171,  85, 85, 0.8);
-}
-
-.cuisine-Pastry, .cuisine-Spanish {
-  background: rgba(171, 149, 85, 0.8);
-}
+.cuisine-0 { background: rgba(85, 85, 171, 0.8); }
+.cuisine-1 { background: rgba(171,  85, 85, 0.8); }
+.cuisine-2 { background: rgba(171, 149, 85, 0.8); }
+.cuisine-3 { background: rgba(101, 107, 21, 0.8)}
 
 /* INPUT ELEMENTS */
 

@@ -5,7 +5,7 @@ const RecipeCard = ({recipe, handleClick}) => {
     return Object.keys(recipe).length !== 0 && (
         <div onClick={() => handleClick(recipe)}>
             <Card className="recipe-card">
-                <div className={"recipe-card-top cuisine-"+recipe.cuisine}>
+                <div className={"recipe-card-top cuisine-"+(recipe.cuisine? recipe.cuisine.charCodeAt(0) % 4 : 0)}>
                     <div className="recipe-card-top-text">
                         {recipe.cuisine}
                     </div>
