@@ -1,0 +1,8 @@
+.emoji-image {
+  width: 25px;
+  height: 25px;
+}
+
+.emoji-image:hover {
+  transform: scale(1.5);
+}
