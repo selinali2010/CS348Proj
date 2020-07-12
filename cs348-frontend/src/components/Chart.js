@@ -7,6 +7,7 @@ import throwup from '../assets/throwup.png';
 import skull from '../assets/skull.png';
 
 import "./Chart.css"
+import Emoji from './Emoji';
 
 const moodMap = Object.freeze({
   1: "heart-eyes",
@@ -41,7 +42,7 @@ const Chart = ({moodCount}) => {
           <div key={e["mood"]} className="chart-item">
             <div className={"chart-bar-"+ moodMap[e["mood"]]} 
               style={{height: "calc(" + e["count"] / maxHeight + " * 100%)"}}></div>
-            { emojiMap[e["mood"]] }
+            <Emoji index={e["mood"]}/>
           </div> 
         )
       })

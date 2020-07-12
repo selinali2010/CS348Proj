@@ -13,13 +13,8 @@
 .modal-chart {
   width: 100%;
   height: 12rem;
-  padding: 5px;
+  padding: 10px;
   background: white;
-}
-
-.modal-emoji {
-  width: 25px;
-  height: 25px;
 }
 
 .modal-dialog {
