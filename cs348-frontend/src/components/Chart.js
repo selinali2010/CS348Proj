@@ -1,4 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import hearteyes from '../assets/hearteyes.png';
+import drooling from '../assets/drooling.png';
+import thumbsup from '../assets/thumbsup.png';
+import thumbsdown from '../assets/thumbsdown.png';
+import throwup from '../assets/throwup.png';
+import skull from '../assets/skull.png';
+
+import "./Chart.css"
 
 const moodMap = Object.freeze({
   1: "heart-eyes",
@@ -10,12 +18,12 @@ const moodMap = Object.freeze({
 })
 
 const emojiMap = Object.freeze({
-  1: <span role="img" aria-label="heart eyes">😍</span>,
-  2: <span role="img" aria-label="drooling face">🤤</span>,
-  3: <span role="img" aria-label="thumbs up">👍</span>,
-  4: <span role="img" aria-label="thumbs down">👎</span>,
-  5: <span role="img" aria-label="face vomiting">🤮</span>,
-  6: <span role="img" aria-label="skull and crossbones">☠️</span>,
+  1: <img className="modal-emoji" src={hearteyes}></img>,
+  2: <img className="modal-emoji" src={drooling}></img>,
+  3: <img className="modal-emoji" src={thumbsup}></img>,
+  4: <img className="modal-emoji" src={thumbsdown}></img>,
+  5: <img className="modal-emoji" src={throwup}></img>,
+  6: <img className="modal-emoji" src={skull}></img>,
 })
 
 const Chart = ({moodCount}) => {
@@ -41,7 +49,7 @@ const Chart = ({moodCount}) => {
   }
 
   return (
-      <div className="modal-img">
+      <div className="modal-chart">
         <div className="chart-container">
           { getBars() }
         </div>

@@ -1,6 +1,8 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 
+import "./RecipeCard.css";
+
 const RecipeCard = ({recipe, handleClick}) => {
     return Object.keys(recipe).length !== 0 && (
         <div onClick={() => handleClick(recipe)}>

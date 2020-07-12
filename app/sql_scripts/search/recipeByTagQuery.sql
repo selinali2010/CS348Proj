@@ -4,4 +4,4 @@ FROM recipe
 WHERE recipeId IN (
 	SELECT DISTINCT recipeId FROM tags
 	WHERE tagName REGEXP %s
-);
+)

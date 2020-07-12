@@ -1,0 +1,104 @@
+recipeId	recipeName	cookTime	difficulty	cuisine	servings	imageUrl	instructionsLink	authorName
+1	Apple Pie	30	4	Pastry	8	https://cdn-image.foodandwine.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/200411-xl-lattice-apple-pie.jpg	www.google.com	Rob Nadal
+2	Cheesecake	45	3	Cake	10	https://www.seriouseats.com/recipes/images/2017/06/20170526-no-bake-cheesecake-vicky-wasik-18-1500x1125.jpg	www.google.com	Hemit Shah
+3	Banana Bread	50	1	Bread	6	https://www.seriouseats.com/images/2016/09/20160826-banana-bread-vicky-wasik-15.jpg	www.google.com	Selina Li
+4	Bubble Tea	60	5	Drink	4	http://blog.lollicupstore.com/wp-content/uploads/2018/03/what-is-boba-main.jpeg	www.google.com	Linda Zheng
+5	Paella	45	3	Spanish	4	https://blog.fuertehoteles.com/wp-content/uploads/2014/03/paella-2-compressor.jpg	www.google.com	Ethan Guo
+5289	apple a day  milk shake	0	4	american	4	https://images.happycow.net/venues/1024/85/88/hcmp85882_365740.jpeg	https://www.food.com/recipe/apple-a-day-milk-shake-5289	Charlotte
+8559	chinese  chop suey	70	8	american	7	https://img.sndimg.com/food/image/upload/w_555,h_416,c_fit,fl_progressive,q_95/v1/img/recipes/39/40/0/piclgFXfs.jpg	https://www.food.com/recipe/chinese-chop-suey-8559	Roberta
+22123	i don t feel like cooking tonight  casserole	45	6	comfort-food	8	NULL	https://www.food.com/recipe/i-don-t-feel-like-cooking-tonight-casserole-22123	Ora
+23850	cream  of cauliflower soup  vegan	110	10	american	16	https://lovingitvegan.com/wp-content/uploads/2018/12/Vegan-Cauliflower-Soup-10.jpg	https://www.food.com/recipe/cream-of-cauliflower-soup-vegan-23850	Lorraine
+23933	chinese  candy	15	4	NULL	3	https://images.heb.com/is/image/HEBGrocery/000265992	https://www.food.com/recipe/chinese-candy-23933	Alberta
+recipeId	recipeName	cookTime	difficulty	cuisine	servings	imageUrl	instructionsLink	authorName
+24701	cream  of spinach soup  vegan	55	10	comfort-food	12	NULL	https://www.food.com/recipe/cream-of-spinach-soup-vegan-24701	Lorraine
+25775	how i got my family to eat spinach  spinach casserole	50	5	NULL	8	https://img.sndimg.com/food/image/upload/w_555,h_416,c_fit,fl_progressive,q_95/v1/img/recipes/25/77/5/j0mGiQIdRKaVC5nBL1q3_20191213_214944.jpg	https://www.food.com/recipe/how-i-got-my-family-to-eat-spinach-spinach-casserole-25775	Georgie
+27087	get the sensation  brownies	70	11	comfort-food	9	https://cms.qz.com/wp-content/uploads/2017/08/brownie.jpg?quality=75&strip=all&w=1400	https://www.food.com/recipe/get-the-sensation-brownies-27087	Georgie
+31490	a bit different  breakfast pizza	30	9	american	6	https://img.sndimg.com/food/image/upload/c_thumb,q_80,w_412,h_232/v1/img/recipes/31/49/0/pico11oUF.jpg	https://www.food.com/recipe/a-bit-different-breakfast-pizza-31490	Brody
+33606	italian sandwich  pasta salad	25	6	NULL	16	NULL	https://www.food.com/recipe/italian-sandwich-pasta-salad-33606	Brody
+38798	i can t believe it s spinach	30	5	NULL	8	https://sparkpeo.hs.llnwd.net/e1/resize/630m620/e4/nw/5/8/lI-Can't-Believe-It's-Spinach-Smoothie588417572.jpg	https://www.food.com/recipe/i-can-t-believe-it-s-spinach-38798	Charlotte
+42198	better than sex  strawberries	1460	8	comfort-food	7	https://pbs.twimg.com/profile_images/955857200496361472/l7u7cMWX_400x400.jpg	https://www.food.com/recipe/better-than-sex-strawberries-42198	Effie
+44061	amish  tomato ketchup  for canning	190	5	heirloom-historical	8	https://growagoodlife.com/wp-content/uploads/2015/10/seasoned-tomato-sauce-canning-square.jpg	https://www.food.com/recipe/amish-tomato-ketchup-for-canning-44061	Hettie
+47366	forgotten  minestrone	495	5	NULL	14	https://img.sndimg.com/food/image/upload/c_thumb,q_80,w_412,h_232/v1/img/recipes/47/36/6/picavcFJ0.jpg	https://www.food.com/recipe/forgotten-minestrone-47366	Sammie
+52804	jiffy  extra moist carrot cake	50	8	comfort-food	11	https://img.sndimg.com/food/image/upload/c_thumb,q_80,w_412,h_232/v1/img/recipes/52/80/4/picPfMHz1.jpg	https://www.food.com/recipe/jiffy-extra-moist-carrot-cake-52804	Emily
+recipeId	recipeName	cookTime	difficulty	cuisine	servings	imageUrl	instructionsLink	authorName
+23850	cream  of cauliflower soup  vegan	110	10	american	16	https://lovingitvegan.com/wp-content/uploads/2018/12/Vegan-Cauliflower-Soup-10.jpg	https://www.food.com/recipe/cream-of-cauliflower-soup-vegan-23850	Lorraine
+24701	cream  of spinach soup  vegan	55	10	comfort-food	12	NULL	https://www.food.com/recipe/cream-of-spinach-soup-vegan-24701	Lorraine
+44123	george s at the cove  black bean soup	90	11	american	18	https://www.georgesatthecove.com/sites/default/files/styles/blog_main_image/public/blog/georges-smoked-chicken-broccoli-black-bean-soup.jpg?itok=KkhxGdKE	https://www.food.com/recipe/george-s-at-the-cove-black-bean-soup-44123	Juanita
+76808	cream  of spinach soup	45	9	comfort-food	8	https://img.sndimg.com/food/image/upload/c_thumb,q_80,w_412,h_232/v1/img/recipes/44/58/48/picVh8Yx6.jpg	https://www.food.com/recipe/cream-of-spinach-soup-76808	Odis
+87098	homemade  vegetable soup from a can	12	6	NULL	8	https://www.inspiredtaste.net/wp-content/uploads/2018/10/Homemade-Vegetable-Soup-Recipe-2-1200.jpg	https://www.food.com/recipe/homemade-vegetable-soup-from-a-can-87098	Sally
+recipeId	recipeName	cookTime	difficulty	cuisine	servings	imageUrl	instructionsLink	authorName
+1	Apple Pie	30	4	Pastry	8	https://cdn-image.foodandwine.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/200411-xl-lattice-apple-pie.jpg	www.google.com	Rob Nadal
+23850	cream  of cauliflower soup  vegan	110	10	american	16	https://lovingitvegan.com/wp-content/uploads/2018/12/Vegan-Cauliflower-Soup-10.jpg	https://www.food.com/recipe/cream-of-cauliflower-soup-vegan-23850	Lorraine
+24701	cream  of spinach soup  vegan	55	10	comfort-food	12	NULL	https://www.food.com/recipe/cream-of-spinach-soup-vegan-24701	Lorraine
+25274	aww  marinated olives	15	4	north-american	9	https://img.sndimg.com/food/image/upload/c_thumb,q_80,w_412,h_232/v1/img/recipes/19/72/77/picUg53mB.jpg	https://www.food.com/recipe/aww-marinated-olives-25274	Luke
+25775	how i got my family to eat spinach  spinach casserole	50	5	NULL	8	https://img.sndimg.com/food/image/upload/w_555,h_416,c_fit,fl_progressive,q_95/v1/img/recipes/25/77/5/j0mGiQIdRKaVC5nBL1q3_20191213_214944.jpg	https://www.food.com/recipe/how-i-got-my-family-to-eat-spinach-spinach-casserole-25775	Georgie
+27087	get the sensation  brownies	70	11	comfort-food	9	https://cms.qz.com/wp-content/uploads/2017/08/brownie.jpg?quality=75&strip=all&w=1400	https://www.food.com/recipe/get-the-sensation-brownies-27087	Georgie
+43026	chile rellenos	45	9	american	5	https://www.isabeleats.com/wp-content/uploads/2020/03/chile-rellenos-small-13.jpg	https://www.food.com/recipe/chile-rellenos-43026	Anita
+44061	amish  tomato ketchup  for canning	190	5	heirloom-historical	8	https://growagoodlife.com/wp-content/uploads/2015/10/seasoned-tomato-sauce-canning-square.jpg	https://www.food.com/recipe/amish-tomato-ketchup-for-canning-44061	Hettie
+48156	emotional balance  spice mixture	10	2	asian	6	https://www.mapi.com/ayurvedic-recipes/images/EmotionalBalanceSpiceMix.jpg	https://www.food.com/recipe/emotional-balance-spice-mixture-48156	Kristy
+54272	fool the meat eaters  chili	40	9	comfort-food	12	https://img.sndimg.com/food/image/upload/q_92,fl_progressive,w_1200,c_scale/v1/gk-static/fdc-new/img/fdc-shareGraphic.png	https://www.food.com/recipe/fool-the-meat-eaters-chili-54272	Mona
+recipeId	recipeName	cookTime	difficulty	cuisine	servings	imageUrl	instructionsLink	authorName
+1	Apple Pie	30	4	Pastry	8	https://cdn-image.foodandwine.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/200411-xl-lattice-apple-pie.jpg	www.google.com	Rob Nadal
+2	Cheesecake	45	3	Cake	10	https://www.seriouseats.com/recipes/images/2017/06/20170526-no-bake-cheesecake-vicky-wasik-18-1500x1125.jpg	www.google.com	Hemit Shah
+3	Banana Bread	50	1	Bread	6	https://www.seriouseats.com/images/2016/09/20160826-banana-bread-vicky-wasik-15.jpg	www.google.com	Selina Li
+5	Paella	45	3	Spanish	4	https://blog.fuertehoteles.com/wp-content/uploads/2014/03/paella-2-compressor.jpg	www.google.com	Ethan Guo
+23933	chinese  candy	15	4	NULL	3	https://images.heb.com/is/image/HEBGrocery/000265992	https://www.food.com/recipe/chinese-candy-23933	Alberta
+27087	get the sensation  brownies	70	11	comfort-food	9	https://cms.qz.com/wp-content/uploads/2017/08/brownie.jpg?quality=75&strip=all&w=1400	https://www.food.com/recipe/get-the-sensation-brownies-27087	Georgie
+33165	i can t believe it s low fat  creamy potato salad	30	12	NULL	13	https://itdoesnttastelikechicken.com/wp-content/uploads/2020/03/easy-vegan-potato-salad-recipe-dressing-with-dill-with-vegan-mayonnaise-mayo.jpg	https://www.food.com/recipe/i-can-t-believe-it-s-low-fat-creamy-potato-salad-33165	Iris
+35173	italian  gut busters	45	7	NULL	9	https://149366112.v2.pressablecdn.com/wp-content/uploads/2016/11/italian-sausage-on-baguette.jpg	https://www.food.com/recipe/italian-gut-busters-35173	Chase
+42198	better than sex  strawberries	1460	8	comfort-food	7	https://pbs.twimg.com/profile_images/955857200496361472/l7u7cMWX_400x400.jpg	https://www.food.com/recipe/better-than-sex-strawberries-42198	Effie
+44061	amish  tomato ketchup  for canning	190	5	heirloom-historical	8	https://growagoodlife.com/wp-content/uploads/2015/10/seasoned-tomato-sauce-canning-square.jpg	https://www.food.com/recipe/amish-tomato-ketchup-for-canning-44061	Hettie
+recipeId	recipeName	cookTime	difficulty	cuisine	servings	imageUrl	instructionsLink	authorName
+1	Apple Pie	30	4	Pastry	8	https://cdn-image.foodandwine.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/200411-xl-lattice-apple-pie.jpg	www.google.com	Rob Nadal
+4	Bubble Tea	60	5	Drink	4	http://blog.lollicupstore.com/wp-content/uploads/2018/03/what-is-boba-main.jpeg	www.google.com	Linda Zheng
+25775	how i got my family to eat spinach  spinach casserole	50	5	NULL	8	https://img.sndimg.com/food/image/upload/w_555,h_416,c_fit,fl_progressive,q_95/v1/img/recipes/25/77/5/j0mGiQIdRKaVC5nBL1q3_20191213_214944.jpg	https://www.food.com/recipe/how-i-got-my-family-to-eat-spinach-spinach-casserole-25775	Georgie
+38798	i can t believe it s spinach	30	5	NULL	8	https://sparkpeo.hs.llnwd.net/e1/resize/630m620/e4/nw/5/8/lI-Can't-Believe-It's-Spinach-Smoothie588417572.jpg	https://www.food.com/recipe/i-can-t-believe-it-s-spinach-38798	Charlotte
+43026	chile rellenos	45	9	american	5	https://www.isabeleats.com/wp-content/uploads/2020/03/chile-rellenos-small-13.jpg	https://www.food.com/recipe/chile-rellenos-43026	Anita
+94710	italian  fries	15	4	NULL	7	https://img.sndimg.com/food/image/upload/c_thumb,q_80,w_412,h_232/v1/img/recipes/94/71/0/picKvrcn4.jpg	https://www.food.com/recipe/italian-fries-94710	Delilah
+userId
+11
+mood
+3
+foodName	quantity	unit
+black pepper	8	dL
+celery	5	quart
+chili powder	3	L
+diced tomatoes	6	mL
+garlic	6	tbsp
+green pepper	9	pint
+jalapenos	9	cup
+kidney beans	4	gallon
+onion	6	oz
+red pepper flakes	4	mg
+salt	7	lb
+vegetarian ground beef	8	tsp
+mood	count
+1	2
+2	2
+3	3
+4	1
+5	1
+foodName	quantity	unit
+margerine	0.33	cup
+brown sugar	0.75	cup
+white sugar	0.75	cup
+tagName
+60-minutes-or-less
+beans
+beginner-cook
+chili
+dietary
+easy
+fall
+inexpensive
+lunch
+one-dish-meal
+peppers
+seasonal
+served-cold
+spicy
+stove-top
+vegan
+vegetables
+vegetarian
+winter
