@@ -5,4 +5,4 @@ FROM recipe
 WHERE recipeId IN (
 	SELECT DISTINCT recipeId FROM ingredient
 	WHERE foodName REGEXP %s
-);
+)

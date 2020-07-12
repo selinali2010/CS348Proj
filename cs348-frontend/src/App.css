@@ -225,7 +225,7 @@ body {
 
 .close{
   position: absolute;
-  left: 95%;
+  right: 10px;
   outline: none;
 }
 

@@ -1,2 +1,2 @@
 -- Returns all recipes
-SELECT * FROM recipe;
+SELECT * FROM recipe

@@ -8,4 +8,4 @@ WHERE recipeId IN (
   UNION
   SELECT DISTINCT recipeId FROM substitutes
 	WHERE substituteName REGEXP %s
-);
+)
