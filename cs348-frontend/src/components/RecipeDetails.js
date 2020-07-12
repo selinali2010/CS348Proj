@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import Chart from './Chart';
 import Chip from './Chip';
 
+import "./RecipeDetails.css"
+
 const mapStateToProps = state => {
   const userId = getUserState(state);
   const favourites = getUserFavourites(state);

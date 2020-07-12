@@ -1,0 +1,64 @@
+.card-img-top {
+  object-fit: cover;
+  width: 100%;
+  height: 8rem;
+}
+
+.recipe-card {
+  position: relative;
+  width: 30%;
+  float: left;
+  margin: 0 3% 2% 0;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.recipe-card-top {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  position: absolute;
+  width: 100%;
+  height: 2rem;
+  z-index: 1;
+}
+
+.recipe-card-top-text {
+  font-family: Raleway, sans-serif;
+  margin-top: 0.3rem;
+  margin-left: 0.5rem;
+  color: white;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.4rem;
+  line-height: 100%;
+}
+
+.card-recipe-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 0.2rem;
+  font-family: Raleway, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: var(--text);
+  margin-top: 0.3rem;
+  margin-left: 0.8rem;
+}
+.card-recipe-author {
+  font-family: Raleway, sans-serif;
+  font-style: normal;
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-left: 0.8rem;
+  padding-bottom: 0.5rem;
+}
+.card-recipe-time {
+  font-family: Raleway, sans-serif;
+  font-style: normal;
+  font-size: 0.9rem;
+  position: absolute;
+  bottom: 0.4rem;
+  right: 0.5rem;
+}
