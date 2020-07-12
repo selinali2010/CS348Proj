@@ -37,7 +37,7 @@ const RightColLayout = ({ userId }) => {
             {SelectUserContentBox()}
             <ResultsContentBox handleClick={handleShow}/>
             <Modal open={show} onClose={handleClose} className="modal-recipe">
-                <DialogContent className="modal-dialog">
+                <DialogContent className="modal-dialog modal-dialog-centered">
                     <RecipeDetails recipe={displayRecipe} handleClose={handleClose}></RecipeDetails>
                 </DialogContent>
             </Modal>

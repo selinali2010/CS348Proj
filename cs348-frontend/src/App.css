@@ -237,10 +237,11 @@ body {
 
 .modal-dialog {
   outline: none;
+  max-width: 60%;
 }
 
 .modal-content {
-  height: 30rem;
+  height: 70vh;
   background: var(--paper);
 }
 

@@ -107,7 +107,7 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId, favourites, setF
         </button>
       </div>
       <div className="row modal-recipe" ref={ref}>
-        <div className="col-6 modal-recipe-left-col">
+        <div className="col-7 modal-recipe-left-col">
           <div className="modal-recipe-image">
             <span className="recipe-dot dot1"></span>
             <span className="recipe-dot dot2"></span>
@@ -117,7 +117,7 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId, favourites, setF
           </div>
           { moodCount && getChart() }
         </div>
-        <div className="col-6 modal-recipe-right-col">
+        <div className="col-5 modal-recipe-right-col">
           <div className="modal-recipe-header"> {recipe.recipeName} </div>
           <div className="modal-recipe-details"> Author: {recipe.authorName} </div>
           <div className="modal-recipe-details"> Cuisine: {recipe.cuisine} </div>
