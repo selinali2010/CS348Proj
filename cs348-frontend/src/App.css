@@ -88,6 +88,22 @@ body {
   height: 100%;
 }
 
+.results-order-control {
+  font-family: Raleway, sans-serif;
+  margin-top: -0.6rem;
+  height: 2.25rem;
+  float: right;
+  width: 9.5rem;
+  font-size: 0.9rem;
+}
+
+.results-order-control-tag {
+  font-family: Raleway, sans-serif;
+  float: right;
+  padding-right: 0.5rem;
+  font-size: 1rem;
+}
+
 .results-message {
   padding: 0 0 3% 3%;
   overflow-y: auto;

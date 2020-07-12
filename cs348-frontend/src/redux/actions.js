@@ -1,9 +1,17 @@
-import { ADD_RESULTS, LOGIN_USER, LOGOUT_USER, SET_FAVOURITES } from "./actionTypes";
+import { ADD_RESULTS, LOGIN_USER, LOGOUT_USER, SET_FAVOURITES, SET_RESULTS_ORDER } from "./actionTypes";
 
 export const addResults = content => ({
   type: ADD_RESULTS,
   payload: {
     results: content
+  }
+});
+
+export const setResultsOrder = (order, asc) => ({
+  type: SET_RESULTS_ORDER,
+  payload: {
+    order: order,
+    asc: asc
   }
 });
 

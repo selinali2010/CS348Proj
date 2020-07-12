@@ -1,7 +1,9 @@
-import { ADD_RESULTS } from "../actionTypes";
+import { ADD_RESULTS, SET_RESULTS_ORDER } from "../actionTypes";
 
 const initialState = {
-    results: []
+    results: [],
+    orderBy: "Closest Match",
+    asc: 1
 };
 
 export default function(state = initialState, action) {
@@ -11,6 +13,14 @@ export default function(state = initialState, action) {
         return {
           ...state,
           results: results
+        };
+      }
+      case SET_RESULTS_ORDER: {
+        const {order, asc}  = action.payload;
+        return {
+          ...state,
+          orderBy: order,
+          asc: asc
         };
       }
       default:
