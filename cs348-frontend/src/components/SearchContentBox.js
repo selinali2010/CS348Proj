@@ -48,18 +48,17 @@ const SearchContentBox = ({orderBy, asc, addResults, recipes}) => {
                 <form>
                     <div> Search By Recipe Name: </div>
                     <input type="text" className="fm-text-input" placeholder="Search by recipe name..."
-                        value={recipeName}
-                        onChange={ (e) => setRecipeName({recipeName: e.target.value}) } />
+                        onChange={ (e) => setRecipeName(e.target.value) } />
 
                     <div> Search By Ingredients: </div>
                     <ChipInput typeName="ingredient"
                         values={ingredients}
-                        setValues={ (values) => setIngredients({ingredients: values}) } />
+                        setValues={ (values) => setIngredients(values) } />
 
                     <div> Search By Tags: </div>
                     <ChipInput typeName="tag"
                         values={tags}
-                        setValues={ (values) => setTags({tags: values}) } />
+                        setValues={ (values) => setTags(values) } />
                 </form>
                 <div className="fm-centered-button">
                     <button className="fm-button" onClick={searchRecipes}>
