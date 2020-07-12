@@ -1,27 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { addResults } from "../redux/actions";
-import { getResultsOrder, getResultsState } from '../redux/selectors'
+import { getResultsOrder } from '../redux/selectors'
 import ChipInput from "./ChipInput";
 
 const mapStateToProps = state => {
     let orderBy, asc;
-    let recipes = getResultsState(state).recipes;
     ({orderBy, asc} = getResultsOrder(state));
     if (orderBy === "Closest Match") orderBy = 0;
     else if (orderBy === "Difficulty") orderBy = 1;
     else orderBy = 2;
-    return { orderBy, asc, recipes };
+    return { orderBy, asc };
 };
 
-const SearchContentBox = ({orderBy, asc, addResults, recipes}) => {
+const SearchContentBox = ({orderBy, asc, addResults}) => {
+    const [activeSearch, setActiveSearch] = useState(false);
     const [recipeName, setRecipeName] = useState("");
     const [ingredients, setIngredients] = useState([]);
     const [tags, setTags] = useState([]);
 
+    useEffect(() => {
+        if (activeSearch) {
+            searchRecipes();
+        }
+    }, [orderBy, asc])
+
     const searchRecipes = () => {
-        console.log(orderBy);
-        console.log(asc);
         const fetchData = async () => {
             // const response = await fetch(process.env.NODE_ENV == "production" ? process.env.REACT_APP_API_URL: "http://localhost:8080/"+ "api/search");
             const response = await fetch(process.env.REACT_APP_API_URL+"api/search", {
@@ -33,9 +37,10 @@ const SearchContentBox = ({orderBy, asc, addResults, recipes}) => {
             });
             const data = await response.json();
             addResults(data);
+            setActiveSearch(true);
         }
         fetchData();
-    }  
+    }
 
     return (
         <div className="section section-fill-height">

@@ -1,4 +1,4 @@
-import { ADD_RESULTS, SET_RESULTS_ORDER } from "../actionTypes";
+import { ADD_RESULTS, SET_RESULTS_ORDER, SET_RESULTS_ASC } from "../actionTypes";
 
 const initialState = {
     results: [],
@@ -16,10 +16,16 @@ export default function(state = initialState, action) {
         };
       }
       case SET_RESULTS_ORDER: {
-        const {order, asc}  = action.payload;
+        const { order }  = action.payload;
         return {
           ...state,
-          orderBy: order,
+          orderBy: order
+        };
+      }
+      case SET_RESULTS_ASC: {
+        const { asc }  = action.payload;
+        return {
+          ...state,
           asc: asc
         };
       }

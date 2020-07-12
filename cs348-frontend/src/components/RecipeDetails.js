@@ -54,7 +54,7 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId, favourites, setF
 
   const setUserMood = async () => {
     let mood = 1;
-    const res = await fetch(process.env.REACT_APP_API_URL + "api/react", {
+    await fetch(process.env.REACT_APP_API_URL + "api/react", {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",

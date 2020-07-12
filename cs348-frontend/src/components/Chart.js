@@ -18,12 +18,12 @@ const moodMap = Object.freeze({
 })
 
 const emojiMap = Object.freeze({
-  1: <img className="modal-emoji" src={hearteyes}></img>,
-  2: <img className="modal-emoji" src={drooling}></img>,
-  3: <img className="modal-emoji" src={thumbsup}></img>,
-  4: <img className="modal-emoji" src={thumbsdown}></img>,
-  5: <img className="modal-emoji" src={throwup}></img>,
-  6: <img className="modal-emoji" src={skull}></img>,
+  1: <img className="modal-emoji" alt="" src={hearteyes}></img>,
+  2: <img className="modal-emoji" alt="" src={drooling}></img>,
+  3: <img className="modal-emoji" alt="" src={thumbsup}></img>,
+  4: <img className="modal-emoji" alt="" src={thumbsdown}></img>,
+  5: <img className="modal-emoji" alt="" src={throwup}></img>,
+  6: <img className="modal-emoji" alt="" src={skull}></img>,
 })
 
 const Chart = ({moodCount}) => {

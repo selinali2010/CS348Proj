@@ -89,6 +89,8 @@ body {
 }
 
 .results-order-control {
+  border-top-right-radius: 0rem;
+  border-bottom-right-radius: 0rem;
   font-family: Raleway, sans-serif;
   margin-top: -0.6rem;
   height: 2.25rem;
@@ -97,11 +99,25 @@ body {
   font-size: 0.9rem;
 }
 
+.results-order-control-asc {
+  border-top-left-radius: 0rem;
+  border-bottom-left-radius: 0rem;
+  margin-top: -0.6rem;
+  height: 2.2rem;
+  float: right;
+  width: 2rem;
+}
+
+.asc-button-icon {
+  margin-left: -0.4rem;
+}
+
 .results-order-control-tag {
   font-family: Raleway, sans-serif;
   float: right;
   padding-right: 0.5rem;
   font-size: 1rem;
+  font-weight: normal;
 }
 
 .results-message {
