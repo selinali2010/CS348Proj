@@ -48,8 +48,9 @@ const UserContentBox = ({loginUser}) => {
         }
 
         const response = await fetch(process.env.REACT_APP_API_URL+"api/register", getAccountDetails());
+        const resdata = await response.json();
         if (response.status === 200) {
-            loginUser(response.json().userId, username)
+            loginUser(resdata.userId, username)
         } else if (response.status === 400) {
             setErr("The username " + username + " has already been taken! Please try again. ")
         } else {
