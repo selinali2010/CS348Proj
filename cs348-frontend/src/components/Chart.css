@@ -1,7 +1,8 @@
 .chart-container {
+  height: 100%;
+  background-color: white;
   display: flex;
   justify-content: space-evenly;
-  height: 100%;
 }
 
 .chart-item {

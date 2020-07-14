@@ -14,7 +14,7 @@ function App() {
     <Provider store={store}>
       <div className="App-background">
         <div className="App container-fluid">
-          <div className="row no-gutters">
+          <div className="row no-gutters full-height">
             <div className="col-md-3">
                 <LeftColLayout />
             </div>

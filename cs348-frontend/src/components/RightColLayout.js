@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { DialogContent, Modal } from '@material-ui/core';
 import { connect } from "react-redux";
 import FavoriteContentBox from './FavoriteContentBox';
-import RecipeDetails from './RecipeDetails';
+import RecipeDialog from './RecipeDialog';
 import ResultsContentBox from './ResultsContentBox';
 import UserContentBox from './UserContentBox';
 import { getUserState } from '../redux/selectors'
@@ -33,14 +32,10 @@ const RightColLayout = ({ userId }) => {
     }
 
     return (        
-        <div className="col-layout right-col">
+        <div className="col-layout full-height right-col">
             {SelectUserContentBox()}
             <ResultsContentBox handleClick={handleShow}/>
-            <Modal open={show} onClose={handleClose} className="modal-recipe">
-                <DialogContent className="modal-dialog modal-dialog-centered">
-                    <RecipeDetails recipe={displayRecipe} handleClose={handleClose}></RecipeDetails>
-                </DialogContent>
-            </Modal>
+            <RecipeDialog open={show} recipe={displayRecipe} handleClose={handleClose} />
         </div>
       );
 }

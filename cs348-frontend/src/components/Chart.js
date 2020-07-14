@@ -35,10 +35,8 @@ const Chart = ({moodCount, toggleMood}) => {
   }
 
   return (
-      <div className="modal-chart">
-        <div className="chart-container">
-          { getBars() }
-        </div>
+      <div className="chart-container">
+        { getBars() }
       </div>
   );
 }
