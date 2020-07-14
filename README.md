@@ -36,21 +36,21 @@ database='db_1',
 ```
 
 ## Features Implemented
-Basic Search: Users can view a list of recipes based on keywords
+**Basic Search:** Users can view a list of recipes based on keywords
 - Scripts with SQL queries: app/sql_scripts/search/*
 - Backend endpoint: app/main.py
 - Frontend: 
   - search parameters are collected and results queried from cs348-frontend/src/components/SearchContentBox.js
   - results displayed in cs348-frontend/src/components/ResultsContentBox.js
 
-Sort Results: Users can order/sort recipe results by one of the following
+**Sort Results:** Users can order/sort recipe results by one of the following
 - Adding order by to SQL query: app/main.py
 - Backend endpoint: app/main.py
 - Frontend:
   - User can modify orderBy parameters in the content header of cs348-frontend/src/components/ResultsContentBox.js, 
   - OrderBy parameters are combined combined with the recipe results fetch in  cs348-frontend/src/components/SearchContentBox.js
 
-User Account: Users can create an account (register) and log into the application
+**User Account:** Users can create an account (register) and log into the application
 - Scripts with SQL queries: 
   - app/sql_scripts/user/getUserIdQuery.sql, app/sql_scripts/user/insertUser.sql, app/sql_scripts/user/signInQuery.sql
 - Backend endpoint: app/main.py
@@ -58,14 +58,14 @@ User Account: Users can create an account (register) and log into the applicatio
   - User login information is collected, validated, and sent to the backend from cs348-frontend/src/components/UserContentBox.js
   - User account information is stored and displayed in cs348-frontend/src/components/AccountContentBox.js
 
-Add-a-Mood: Logged in users can submit reactions on new recipes that they view
+**Add-a-Mood:** Logged in users can submit reactions on new recipes that they view
 - Scripts with SQL queries: 
   - app/sql_scripts/user/deleteReact.sql, app/sql_scripts/user/insertReact.sql, app/sql_scripts/user/moodQuery.sql
 - Backend endpoint: app/main.py
 - Frontend: 
   - Users can react to a recipe by clicking on any of the emojis in the graph displayed on recipe modal, which is implemented in cs348-frontend/src/components/Chart.js, Emoji.js
 
-Recipe Mood Filter: Users can view recipes to which they’ve reacted with heart eyes
+**Recipe Mood Filter:** Users can view recipes to which they’ve reacted with heart eyes
 - Scripts with SQL queries: app/sql_scripts/user/favouritesQuery.sql
 - Backend endpoint: app/main.py
 - Frontend: 
