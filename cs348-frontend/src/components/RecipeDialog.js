@@ -1,12 +1,13 @@
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getUserState, getUserFavourites } from '../redux/selectors'
 import { setFavourites } from "../redux/actions";
 import { connect } from "react-redux";
+import { Dialog, DialogContent } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 import Chart from './Chart';
 import Chip from './Chip';
-import CloseIcon from '@material-ui/icons/Close';
 
-import "./RecipeDetails.css"
+import "./RecipeDialog.css"
 
 const mapStateToProps = state => {
   const userId = getUserState(state);
@@ -14,7 +15,7 @@ const mapStateToProps = state => {
   return { userId, favourites };
 };
 
-const RecipeDetails = forwardRef(({recipe, handleClose, userId, favourites, setFavourites}, ref) => {
+const RecipeDialog = ({open, recipe, handleClose, userId, favourites, setFavourites}) => {
   const [ingredients, setIngredients] = useState(null);
   const [tags, setTags] = useState(null);
   const [mood, setMood] = useState(null);
@@ -118,78 +119,84 @@ const RecipeDetails = forwardRef(({recipe, handleClose, userId, favourites, setF
   }
 
   return (
-    <div className="row no-gutters recipe-details" ref={ref}>
-      <button className="close" aria-label="Close" onClick={handleClose}>
-        <CloseIcon aria-hidden="true" />
-      </button>
-      <div className="col-md-6 recipe-details-col recipe-details-left-col">
-        <div className="recipe-details-image">
-          <span className="recipe-dot dot1"></span>
-          <span className="recipe-dot dot2"></span>
-          <span className="recipe-dot dot3"></span>
-          <span className="recipe-dot dot4"></span>
-          <img srcSet={recipe.imageUrl} src={"https://ak6.picdn.net/shutterstock/videos/28831216/thumb/1.jpg"} alt="Recipe" />
-        </div>
-        <div className="recipe-details-chart">
-          { moodCount && getChart() }
-        </div>
-      </div>
-      <div className="col-md-6 recipe-details-col recipe-details-right-col">
-        <div className="recipe-details-section">
-          <h1>{recipe.recipeName}</h1>
-        </div>
+    <Dialog open={open} onClose={handleClose}
+        fullWidth={true}
+        maxWidth="md">
+      <DialogContent className="fm-dialog-content">
+        <div className="row no-gutters recipe-details">
+          <button className="close" aria-label="Close" onClick={handleClose}>
+            <CloseIcon aria-hidden="true" />
+          </button>
+          <div className="col-md-6 recipe-details-col recipe-details-left-col">
+            <div className="recipe-details-image">
+              <span className="recipe-dot dot1"></span>
+              <span className="recipe-dot dot2"></span>
+              <span className="recipe-dot dot3"></span>
+              <span className="recipe-dot dot4"></span>
+              <img srcSet={recipe.imageUrl} src={"https://ak6.picdn.net/shutterstock/videos/28831216/thumb/1.jpg"} alt="Recipe" />
+            </div>
+            <div className="recipe-details-chart">
+              { moodCount && getChart() }
+            </div>
+          </div>
+          <div className="col-md-6 recipe-details-col recipe-details-right-col">
+            <div className="recipe-details-section">
+              <h1>{recipe.recipeName}</h1>
+            </div>
 
-        <div className="recipe-details-section">
-          <table><tbody>
-            <tr>
-              <th>Author:</th>
-              <td>{recipe.authorName} </td>
-            </tr>
-            <tr>
-              <th>Cuisine:</th>
-              <td>{recipe.cuisine} </td>
-            </tr>
-            <tr>
-              <th>Cook Time:</th>
-              <td>{recipe.cookTime} mins</td>
-            </tr>
-            <tr>
-              <th>Serves:</th>
-              <td>{recipe.servings} </td>
-            </tr>
-            <tr>
-              <th>Difficulty:</th>
-              <td>{recipe.difficulty} </td>
-            </tr>
-          </tbody></table>
-        </div>
+            <div className="recipe-details-section">
+              <table><tbody>
+                <tr>
+                  <th>Author:</th>
+                  <td>{recipe.authorName} </td>
+                </tr>
+                <tr>
+                  <th>Cuisine:</th>
+                  <td>{recipe.cuisine} </td>
+                </tr>
+                <tr>
+                  <th>Cook Time:</th>
+                  <td>{recipe.cookTime} mins</td>
+                </tr>
+                <tr>
+                  <th>Serves:</th>
+                  <td>{recipe.servings} </td>
+                </tr>
+                <tr>
+                  <th>Difficulty:</th>
+                  <td>{recipe.difficulty} </td>
+                </tr>
+              </tbody></table>
+            </div>
 
-        <div className="recipe-details-section">
-          <h2>Tags</h2>
-          <div className="chips">
-            { tags && tags.map((tag, index) => 
-                <Chip key={index} label={tag.tagName} />
-            )}
+            <div className="recipe-details-section">
+              <h2>Tags</h2>
+              <div className="chips">
+                { tags && tags.map((tag, index) => 
+                    <Chip key={index} label={tag.tagName} />
+                )}
+              </div>
+            </div>
+
+            <div className="recipe-details-section">
+              <h2>Ingredients</h2>
+              <ul>
+                {ingredients && ingredients.map(
+                  (ele, index) => <li key={index}>{ele.quantity} {ele.unit} {ele.foodName}</li>)}
+              </ul>
+            </div>
+
+            <div className="recipe-details-section">
+              <a className="fm-button" 
+                  href={recipe.instructionsLink} target="_blank" rel="noopener noreferrer">
+                View Full Recipe
+              </a>
+            </div>
           </div>
         </div>
-
-        <div className="recipe-details-section">
-          <h2>Ingredients</h2>
-          <ul>
-            {ingredients && ingredients.map(
-              (ele, index) => <li key={index}>{ele.quantity} {ele.unit} {ele.foodName}</li>)}
-          </ul>
-        </div>
-
-        <div className="recipe-details-section">
-          <a className="fm-button" 
-            href={recipe.instructionsLink} target="_blank" rel="noopener noreferrer">
-            View Full Recipe
-          </a>
-        </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
-});
+};
 
-export default connect(mapStateToProps, { setFavourites })(RecipeDetails)
+export default connect(mapStateToProps, { setFavourites })(RecipeDialog)
