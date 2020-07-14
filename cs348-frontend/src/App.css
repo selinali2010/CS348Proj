@@ -1,5 +1,5 @@
 :root {
-  /* DESIGN */
+  /* COLOURS */
   --brown: #703b16;
   --paper: #fcf6e8;
   --olive: #9ca537;
@@ -7,6 +7,10 @@
   --highlight: #30330a;
   --text: #30330a;
   /* 1rem == 16px by default */
+
+  /* FONTS */
+  --font-body: "Open Sans", sans-serif;
+  --font-heading: Raleway, sans-serif;
 }
 
 body {
@@ -19,7 +23,7 @@ body {
   background-attachment: fixed;
   height: 100vh;
 
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--font-body);
   color: var(--text);
 }
 
@@ -68,7 +72,7 @@ body {
 
 .section-title-text {
   padding: 1.25rem 1.25rem;
-  font-family: Raleway, sans-serif;
+  font-family: var(--font-heading);
   font-style: normal;
   font-weight: bold;
   font-size: 1.25rem;
@@ -91,7 +95,7 @@ body {
 .results-order-control {
   border-top-right-radius: 0rem;
   border-bottom-right-radius: 0rem;
-  font-family: Raleway, sans-serif;
+  font-family: var(--font-heading);
   margin-top: -0.6rem;
   height: 2.25rem;
   float: right;
@@ -113,7 +117,7 @@ body {
 }
 
 .results-order-control-tag {
-  font-family: Raleway, sans-serif;
+  font-family: var(--font-heading);
   float: right;
   padding-right: 0.5rem;
   font-size: 1rem;
@@ -140,7 +144,7 @@ body {
 }
 
 .title-text {
-  font-family: Raleway, sans-serif;
+  font-family: var(--font-heading);
   font-style: normal;
   font-weight: bold;
   font-size: 3rem;
