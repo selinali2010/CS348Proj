@@ -16,7 +16,7 @@ import numpy
 # In[2]:
 
 
-recipe_data = pandas.read_csv("RAW_recipes.csv")
+recipe_data = pandas.read_csv("RAW_recipes.csv").head(100)
 
 
 # In[3]:
