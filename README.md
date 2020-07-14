@@ -21,19 +21,21 @@ To populate tables with sample data, run the commands in ```sql_scripts/populate
 To drop sample tables, run the commands in ```sql_scripts/dropTables.sql```.
 
 ## Generating the Production Database
-Make sure you have run the above to create the sample tables, population with sample data is optional as none of the data from the dataset used to generate the production dataset conflicts with the sample data.
+Make sure you have run the above to create the sample tables and populate the tables with sample data.
 
 To get the raw data, download the CSV file at the link [https://www.kaggle.com/shuyangli94/food-com-recipes-and-user-interactions?select=RAW_recipes.csv]
+You will also need the following CSV file used for random recipe.authorName generation [https://www.kaggle.com/kaggle/us-baby-names?select=StateNames.csv]
 
-You can then run the ```extract_data.py``` script to extract and generate the production database. Modify lines 215 to 220 to ensure you have the proper parameters for a connection to your SQL database.
+You can then run the ```extract_data.py``` script to extract and generate the production database. Ensure the script is located in the same directory as the above CSV files. Modify lines 215 to 220 to ensure you have the proper parameters for a connection to your SQL database, and ensure you have a local connection to the server before running the script.
 ```python
 drivername="mysql+pymysql",
 username='root',
-password='cs348',
+password='',
 host='127.0.0.1',
 port='3306',
 database='db_1',
 ```
+For the sake of simplicity, the use of a custom google search module for finding image links online for the recipe.imageUrl attribute has been left out if you do wish to run the script. To see the code used to generate image URLs please see the ```extract_data.ipynb``` script.
 
 ## Features Implemented
 **Basic Search:** Users can view a list of recipes based on keywords
