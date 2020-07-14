@@ -141,7 +141,7 @@ def register():
 
     with open("sql_scripts/user/insertUser.sql") as file:
         try:
-            result = query(file.read(), [username, password, None])
+            result = query(file.read(), [username, password])
             print(result)
         except pymysql.err.IntegrityError:
             result["error"] = "The username " + username + " is already in use. Please choose a new one."

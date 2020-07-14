@@ -71,7 +71,7 @@ INSERT INTO reacts VALUES(11, 54272, 3);
 -- Delete user from database
 DELETE FROM user WHERE userName = "hemitshah";
 -- Insert a new user into the user table
-INSERT INTO user(userName, password, skillLevel) VALUES("hemitshah", "cs348s2020", "5");
+INSERT INTO user(userName, password) VALUES("hemitshah", "cs348s2020");
 
 -- Returns mood type that a user gave to a recipe
 SELECT mood

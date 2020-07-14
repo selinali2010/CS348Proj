@@ -11,12 +11,12 @@ INSERT INTO recipe (recipeName, cookTime, difficulty, cuisine, servings, imageUr
 VALUES("Paella", 45, 3, "Spanish", 4, "https://blog.fuertehoteles.com/wp-content/uploads/2014/03/paella-2-compressor.jpg", "www.google.com", "Ethan Guo");
 
 -- Populate user Table
-INSERT INTO user(userName, password, skillLevel) VALUES("user1", "password", 3);
-INSERT INTO user(userName, password, skillLevel) VALUES("user2", "password", 1);
-INSERT INTO user(userName, password, skillLevel) VALUES("user3", "password", 4);
-INSERT INTO user(userName, password, skillLevel) VALUES("user4", "password", 3);
-INSERT INTO user(userName, password, skillLevel) VALUES("user5", "password", 2);
-INSERT INTO user(userName, password, skillLevel) VALUES("user6", "password", 5);
+INSERT INTO user(userName, password) VALUES("user1", "password");
+INSERT INTO user(userName, password) VALUES("user2", "password");
+INSERT INTO user(userName, password) VALUES("user3", "password");
+INSERT INTO user(userName, password) VALUES("user4", "password");
+INSERT INTO user(userName, password) VALUES("user5", "password");
+INSERT INTO user(userName, password) VALUES("user6", "password");
 
 -- Populate ingredient Table
 INSERT INTO ingredient VALUES(3, "banana", 3, NULL);

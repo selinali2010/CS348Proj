@@ -13,8 +13,7 @@ CREATE TABLE user
 ( 
   userId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   userName VARCHAR(30) NOT NULL UNIQUE,
-  password VARCHAR(60) NOT NULL,
-  skillLevel SMALLINT
+  password VARCHAR(60) NOT NULL
 );
 CREATE TABLE ingredient (
   recipeId INT NOT NULL,
