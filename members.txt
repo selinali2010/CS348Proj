@@ -4,6 +4,9 @@ Selina Li (sk6li)
 - Participated in E/R diagram development and schema planning
 - Implemented backend API endpoints to run queries and return results as JSON
 - Wrote SQL scripts for neccessary queries
+- Implemented backend API endpoints for user login/register, react related queries
+- Added additional sorting/ordering to search queries
+- Added the modal to display recipe details and chart to display react information
 
 Ethan Guo (ehguo)
 - Participated in project brainstorm and preparation
@@ -11,7 +14,9 @@ Ethan Guo (ehguo)
 - Connected flask server to gcp mysql server
 - Participated in E/R diagram development and schema planning
 - Participated in designing the UI
-- Added chip functionality for multi input search bars
+- Added chip functionality for multi-input search bars
+- Organized and restructured front-end page layout and styles
+- Created high fidelity mockups for front end design
 
 Hemit Shah (h39shah)
 - Participated in project brainstorm and preparation
@@ -21,6 +26,10 @@ Hemit Shah (h39shah)
 - Participated in designing the UI
 - Wrote SQL scripts for neccessary queries
 - Wrote code to scrape data for the production database
+- Augmented datasets from scraped data to fill missing information
+- Wrote scripts to scrape recipe images from the web
+- Tested SQL scripts for production database
+- Exported local tables to cloud database
 
 Linda Zheng (ll2zheng)
 - Participated in project brainstorm and preparation
@@ -30,6 +39,9 @@ Linda Zheng (ll2zheng)
 - Participated in designing the UI
 - Wrote SQL scripts for neccessary queries
 - Added scoring to query results for better search results
+- Implemented backend API endpoints for user login/register
+- Wrote scripts to scrape recipe images from the web
+- Implemented user reaction interface (emojis)
 
 Robert Nadal (rmnadal)
 - Participated in project brainstorm and preparation
@@ -37,3 +49,6 @@ Robert Nadal (rmnadal)
 - Participated in E/R diagram development and schema planning
 - Participated in designing the UI
 - Set up components and Redux structure to front-end
+- Implemented user login/register interface with error handling
+- Implemented user display for favourite recipes
+- Added account details box and sort/order controls
