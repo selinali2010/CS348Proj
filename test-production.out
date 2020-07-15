@@ -2,7 +2,7 @@ recipeId	recipeName	cookTime	difficulty	cuisine	servings	imageUrl	instructionsLi
 1	Apple Pie	30	4	Pastry	8	https://cdn-image.foodandwine.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/200411-xl-lattice-apple-pie.jpg	www.google.com	Rob Nadal
 2	Cheesecake	45	3	Cake	10	https://www.seriouseats.com/recipes/images/2017/06/20170526-no-bake-cheesecake-vicky-wasik-18-1500x1125.jpg	www.google.com	Hemit Shah
 3	Banana Bread	50	1	Bread	6	https://www.seriouseats.com/images/2016/09/20160826-banana-bread-vicky-wasik-15.jpg	www.google.com	Selina Li
-4	Bubble Tea	60	5	Drink	4	http://blog.lollicupstore.com/wp-content/uploads/2018/03/what-is-boba-main.jpeg	www.google.com	Linda Zheng
+4	Bubble Tea	60	5	Drink	4	https://blog.lollicupstore.com/wp-content/uploads/2018/03/what-is-boba-main.jpeg	www.google.com	Linda Zheng
 5	Paella	45	3	Spanish	4	https://blog.fuertehoteles.com/wp-content/uploads/2014/03/paella-2-compressor.jpg	www.google.com	Ethan Guo
 5289	apple a day  milk shake	0	4	american	4	https://images.happycow.net/venues/1024/85/88/hcmp85882_365740.jpeg	https://www.food.com/recipe/apple-a-day-milk-shake-5289	Charlotte
 8559	chinese  chop suey	70	8	american	7	https://img.sndimg.com/food/image/upload/w_555,h_416,c_fit,fl_progressive,q_95/v1/img/recipes/39/40/0/piclgFXfs.jpg	https://www.food.com/recipe/chinese-chop-suey-8559	Roberta
@@ -50,7 +50,7 @@ recipeId	recipeName	cookTime	difficulty	cuisine	servings	imageUrl	instructionsLi
 44061	amish  tomato ketchup  for canning	190	5	heirloom-historical	8	https://growagoodlife.com/wp-content/uploads/2015/10/seasoned-tomato-sauce-canning-square.jpg	https://www.food.com/recipe/amish-tomato-ketchup-for-canning-44061	Hettie
 recipeId	recipeName	cookTime	difficulty	cuisine	servings	imageUrl	instructionsLink	authorName
 1	Apple Pie	30	4	Pastry	8	https://cdn-image.foodandwine.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/200411-xl-lattice-apple-pie.jpg	www.google.com	Rob Nadal
-4	Bubble Tea	60	5	Drink	4	http://blog.lollicupstore.com/wp-content/uploads/2018/03/what-is-boba-main.jpeg	www.google.com	Linda Zheng
+4	Bubble Tea	60	5	Drink	4	https://blog.lollicupstore.com/wp-content/uploads/2018/03/what-is-boba-main.jpeg	www.google.com	Linda Zheng
 25775	how i got my family to eat spinach  spinach casserole	50	5	NULL	8	https://img.sndimg.com/food/image/upload/w_555,h_416,c_fit,fl_progressive,q_95/v1/img/recipes/25/77/5/j0mGiQIdRKaVC5nBL1q3_20191213_214944.jpg	https://www.food.com/recipe/how-i-got-my-family-to-eat-spinach-spinach-casserole-25775	Georgie
 38798	i can t believe it s spinach	30	5	NULL	8	https://sparkpeo.hs.llnwd.net/e1/resize/630m620/e4/nw/5/8/lI-Can't-Believe-It's-Spinach-Smoothie588417572.jpg	https://www.food.com/recipe/i-can-t-believe-it-s-spinach-38798	Charlotte
 43026	chile rellenos	45	9	american	5	https://www.isabeleats.com/wp-content/uploads/2020/03/chile-rellenos-small-13.jpg	https://www.food.com/recipe/chile-rellenos-43026	Anita
