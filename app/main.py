@@ -195,8 +195,10 @@ def deleteReact():
 def search():
     args = request.json
     recipe_dict = {}
-    orderBy = args["orderBy"]
-    isAsc = args["isAsc"]
+    orderBy = args["orderBy"] if "orderBy" in args else 0
+    isAsc = args["isAsc"] if "isAsc" in args else 1
+    isStrict = args["isStrict"] if "isStrict" in args else False
+    isSubs = args["isSubs"] if "isSubs" in args else False
 
     def getSort(orderBy, isAsc):
         orderByMap = ["recipeId", "difficulty", "cookTime"]
@@ -224,13 +226,26 @@ def search():
             addToDict(query(queryText + getSort(orderBy, isAsc), params))
     
     if ("ingredients" in args):
-        with open("sql_scripts/search/recipeByIngredientsQuery.sql") as file:
-            queryText = file.read()
+        if(not isSubs):
+            fileName = "sql_scripts/search/recipeByIngredientsQuery" + ("Strict" if isStrict else "") + ".sql"
+            print(fileName)
+            with open(fileName) as file:
+                queryText = file.read()
 
-        # Only make query if ingredients are not empty
-        if(len(args["ingredients"]) > 0):
-            params = "|".join(args["ingredients"])
-            addToDict(query(queryText + getSort(orderBy, isAsc), params))
+            # Only make query if ingredients are not empty
+            if(len(args["ingredients"]) > 0):
+                params = ",".join(args["ingredients"]) if isStrict else "|".join(args["ingredients"])
+                addToDict(query(queryText + getSort(orderBy, isAsc), params))
+        else:
+            fileName = "sql_scripts/search/recipeWithSubsQuery" + ("Strict" if isStrict else "") + ".sql"
+            print(fileName)
+            with open(fileName) as file:
+                queryText = file.read()
+
+            # Only make query if ingredients are not empty
+            if(len(args["ingredients"]) > 0):
+                params = ",".join(args["ingredients"]) if isStrict else "|".join(args["ingredients"])
+                addToDict(query(queryText + getSort(orderBy, isAsc), [params, params]))
         
     if ("tags" in args):
         with open("sql_scripts/search/recipeByTagQuery.sql") as file:
