@@ -6,6 +6,6 @@ WHERE recipeId IN (
   SELECT DISTINCT recipeId FROM ingredient
   WHERE recipeId NOT IN (
     SELECT recipeId FROM ingredient 
-    WHERE 0 = FIND_IN_SET(foodName, %s)
+    WHERE NOT foodName REGEXP %s
   )
 )

@@ -234,7 +234,7 @@ def search():
 
             # Only make query if ingredients are not empty
             if(len(args["ingredients"]) > 0):
-                params = ",".join(args["ingredients"]) if isStrict else "|".join(args["ingredients"])
+                params = "|".join(args["ingredients"])
                 addToDict(query(queryText + getSort(orderBy, isAsc), params))
         else:
             fileName = "sql_scripts/search/recipeWithSubsQuery" + ("Strict" if isStrict else "") + ".sql"
@@ -244,7 +244,7 @@ def search():
 
             # Only make query if ingredients are not empty
             if(len(args["ingredients"]) > 0):
-                params = ",".join(args["ingredients"]) if isStrict else "|".join(args["ingredients"])
+                params = "|".join(args["ingredients"])
                 addToDict(query(queryText + getSort(orderBy, isAsc), [params, params]))
         
     if ("tags" in args):
