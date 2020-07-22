@@ -30,7 +30,7 @@ app = Flask(__name__)
 CORS(app)
 
 # sql = sql query as string
-def query(sql : str, data : List[str] = []) -> List[List[str]]:
+def query(sql : str, data : List[str] = [], multi: bool = False) -> List[List[str]]:
     result = None
     try:
         # When deployed to App Engine, the `GAE_ENV` environment variable will be
@@ -48,10 +48,18 @@ def query(sql : str, data : List[str] = []) -> List[List[str]]:
             host = '127.0.0.1'
             connection = pymysql.connect(user='root', password='cs348', host=host, db='db_1')
 
-        with connection.cursor(pymysql.cursors.DictCursor) as cursor:
-            # Create a new record
-            cursor.execute(sql, data)
-            result = cursor.fetchall()
+        if(multi):
+            for stmt in sql.split(";"):
+              with connection.cursor(pymysql.cursors.DictCursor) as cursor:
+                # TODO: Pass corresponding data to correct query instead of to all queries
+                cursor.execute(stmt, data)
+                result = cursor.fetchall()
+
+        else:
+            with connection.cursor(pymysql.cursors.DictCursor) as cursor:
+              # Execute the query
+              cursor.execute(sql, data)
+              result = cursor.fetchall()
 
         # connection is not autocommit by default. So you must commit to save
         # your changes.
@@ -199,6 +207,7 @@ def search():
     isAsc = args["isAsc"] if "isAsc" in args else 1
     isStrict = args["isStrict"] if "isStrict" in args else False
     isSubs = args["isSubs"] if "isSubs" in args else False
+    ignore = args["ignore"] if "ignore" in args else []
 
     def getSort(orderBy, isAsc):
         orderByMap = ["recipeId", "difficulty", "cookTime"]
@@ -228,24 +237,29 @@ def search():
     if ("ingredients" in args):
         if(not isSubs):
             fileName = "sql_scripts/search/recipeByIngredientsQuery" + ("Strict" if isStrict else "") + ".sql"
-            print(fileName)
             with open(fileName) as file:
                 queryText = file.read()
 
             # Only make query if ingredients are not empty
             if(len(args["ingredients"]) > 0):
                 params = "|".join(args["ingredients"])
-                addToDict(query(queryText + getSort(orderBy, isAsc), params))
+                # If ignored ingredients are provided add additional query text and parameters
+                if(len(ignore) > 0):
+                  params2 = "|".join(ignore)
+                  with open("sql_scripts/search/recipeExcludeIngredients.sql") as file:
+                    queryText2 = file.read()
+                  addToDict(query(queryText + queryText2 + getSort(orderBy, isAsc), [params, params2]))
+                else:
+                  addToDict(query(queryText + getSort(orderBy, isAsc), params))
         else:
             fileName = "sql_scripts/search/recipeWithSubsQuery" + ("Strict" if isStrict else "") + ".sql"
-            print(fileName)
             with open(fileName) as file:
                 queryText = file.read()
 
             # Only make query if ingredients are not empty
             if(len(args["ingredients"]) > 0):
                 params = "|".join(args["ingredients"])
-                addToDict(query(queryText + getSort(orderBy, isAsc), [params, params]))
+                addToDict(query(queryText + getSort(orderBy, isAsc), params, True))
         
     if ("tags" in args):
         with open("sql_scripts/search/recipeByTagQuery.sql") as file:
