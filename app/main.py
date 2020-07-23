@@ -264,7 +264,8 @@ def search():
               # If excluded ingredients are provided add additional query text and parameters
               if(len(exclude) > 0):
                 params2 = "|".join(exclude)
-                with open("sql_scripts/search/recipeExcludeIngredientsWithSubs.sql") as file:
+                filename = "sql_scripts/search/recipeExcludeWithSubs" + ("Strict" if isStrict else "") + ".sql"
+                with open(filename) as file:
                   queryText = file.read()
                 addToDict(query(queryText + getSort(orderBy, isAsc), [params, params2], True))
               else:
