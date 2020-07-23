@@ -199,6 +199,8 @@ def deleteReact():
 
     return make_response(jsonify(result), 200)
 
+# TODO: For non-strict mode, union all query types together, exlude happens after the union (need to query for all recipeIds that need to be excluded)
+# TODO: For strict mode, intersect all query types together, exclude is done as a part of the ingredient search (need to handle empty ingredients list)
 @app.route("/api/search", methods=["POST"])
 def search():
     args = request.json
