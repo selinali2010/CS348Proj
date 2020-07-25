@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from "react-redux";
 import { loginUser } from '../redux/actions';
+import {ArrowForward, PersonAdd} from '@material-ui/icons';
 
 const UserContentBox = ({loginUser}) => {
     const [username, setUser] = useState('');
@@ -100,10 +101,10 @@ const UserContentBox = ({loginUser}) => {
                     <div className="col-4">
                         <div className="user-content-buttons">
                             <button className="fm-button" onClick={login}>
-                                Login!
+                                <ArrowForward className="asc-button-icon" fontSize="small"/> Login
                             </button>
                             <button className="fm-button" onClick={register}>
-                                Register
+                                <PersonAdd className="asc-button-icon" fontSize="small"/> Register
                             </button>
                         </div>
                     </div>

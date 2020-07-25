@@ -1,4 +1,4 @@
-import { ADD_RESULTS, LOGIN_USER, LOGOUT_USER, SET_FAVOURITES, SET_RESULTS_ORDER, SET_RESULTS_ASC } from "./actionTypes";
+import { ADD_RESULTS, LOGIN_USER, LOGOUT_USER, SET_FAVOURITES, SET_FAVOURITES_FILTER, SET_RESULTS_ORDER, SET_RESULTS_ASC } from "./actionTypes";
 
 export const addResults = content => ({
   type: ADD_RESULTS,
@@ -25,6 +25,13 @@ export const setFavourites = content => ({
   type: SET_FAVOURITES,
   payload: {
     favourites: content
+  }
+});
+
+export const setFavouritesFilter = react => ({
+  type: SET_FAVOURITES_FILTER,
+  payload: {
+    filter: react
   }
 });
 

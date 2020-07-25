@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import { getUserName } from '../redux/selectors'
 import { logoutUser } from '../redux/actions';
+import { ExitToApp } from '@material-ui/icons';
 
 const mapStateToProps = state => {
     const userName = getUserName(state);
@@ -22,7 +23,7 @@ const AccountContentBox = ({userName, logoutUser}) => {
                 </div>
                 <div className="fm-centered-button">
                     <button className="fm-button" onClick={logoutUser}>
-                        Log out
+                        <ExitToApp className="asc-button-icon" fontSize="small"/> Log out
                     </button>
                 </div>
                 

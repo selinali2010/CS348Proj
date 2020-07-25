@@ -11,32 +11,27 @@
   justify-content: flex-end;
 }
 
-.chart-bar-heart-eyes {
-  background-color: #DD2E44;
-  width: 25px;
+.chart-bar { width: 25px; }
+.heart-eyes-bar { background-color: #DD2E44; }
+.drooling-bar { background-color: #88C9F9; }
+.thumbs-up-bar { background-color: #FFDB5E; }
+.thumbs-down-bar { background-color: #EF9948;}
+.throw-up-bar { background-color: #77AF57; }
+.skull-crossbones-bar { background-color: #AAB8C2; }
+
+.heart-eyes-selected { color: #DD2E44; }
+.drooling-selected { color: #88C9F9; }
+.thumbs-up-selected { color: #FFDB5E; }
+.thumbs-down-selected { color: #EF9948;}
+.throw-up-selected { color: #77AF57; }
+.skull-crossbones-selected { color: #AAB8C2; }
+
+.react-selected-circle {
+  position: absolute;
 }
 
-.chart-bar-drooling {
-  background-color: #88C9F9;
-  width: 25px;
-}
-
-.chart-bar-thumbs-up {
-  background-color: #FFDB5E;
-  width: 25px;
-}
-
-.chart-bar-thumbs-down {
-  background-color: #EF9948;
-  width: 25px;
-}
-
-.chart-bar-throw-up {
-  background-color: #77AF57;
-  width: 25px;
-}
-
-.chart-bar-skull-crossbones {
-  background-color: #AAB8C2;
-  width: 25px;
+.react-selected-circle {
+  font-size: 51px !important;
+  margin-left: -13px;
+  margin-bottom: -2px;
 }

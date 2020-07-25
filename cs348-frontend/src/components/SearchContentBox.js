@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { addResults } from "../redux/actions";
 import { getResultsOrder } from '../redux/selectors'
 import ChipInput from "./ChipInput";
+import { Search } from '@material-ui/icons';
 
 const mapStateToProps = state => {
     let orderBy, asc;
@@ -68,7 +69,7 @@ const SearchContentBox = ({orderBy, asc, addResults}) => {
                 </form>
                 <div className="fm-centered-button">
                     <button className="fm-button" onClick={searchRecipes}>
-                        Search!
+                    <Search className="asc-button-icon" fontSize="small"/> Search
                     </button>
                 </div>
             </div>

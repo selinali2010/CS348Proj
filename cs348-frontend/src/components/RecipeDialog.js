@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getUserState, getUserFavourites } from '../redux/selectors'
+import { getUserState, getUserFavourites, getFavouritesFilter } from '../redux/selectors'
 import { setFavourites } from "../redux/actions";
 import { connect } from "react-redux";
 import { Dialog, DialogContent } from '@material-ui/core';
@@ -12,10 +12,11 @@ import "./RecipeDialog.css"
 const mapStateToProps = state => {
   const userId = getUserState(state);
   const favourites = getUserFavourites(state);
-  return { userId, favourites };
+  const favouritesFilter = getFavouritesFilter(state);
+  return { userId, favourites, favouritesFilter };
 };
 
-const RecipeDialog = ({open, recipe, handleClose, userId, favourites, setFavourites}) => {
+const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favouritesFilter , setFavourites}) => {
   const [ingredients, setIngredients] = useState(null);
   const [tags, setTags] = useState(null);
   const [mood, setMood] = useState(null);
@@ -78,12 +79,14 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, setFavouri
     }))
     setMood(newMood);
 
-    if(newMood === 1) {
+    if(newMood === favouritesFilter) {
       const temp = favourites;
       temp.push(recipe);
       setFavourites(temp);
     } else {
-      setFavourites(favourites.filter(item => item.recipeId !== recipe.recipeId));
+      if (favourites.filter(item => item.recipeId === recipe.recipeId).length > 0) {
+        setFavourites(favourites.filter(item => item.recipeId !== recipe.recipeId));
+      }
     }
   }
 
@@ -100,8 +103,10 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, setFavouri
     });
     if(setChanges){
       setMoodCount(moodCount.map(e => { if(e["mood"] === mood) e["count"]--; return e}))
+      if(mood === favouritesFilter && favourites.filter(item => item.recipeId !== recipe.recipeId).length > 0) {
+        setFavourites(favourites.filter(item => item.recipeId !== recipe.recipeId));
+      }
       setMood(0);
-      setFavourites(favourites.filter(item => item.recipeId !== recipe.recipeId));
     }
   }
 
@@ -115,7 +120,7 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, setFavouri
   }
 
   const getChart = () => {
-    return <Chart moodCount={moodCount} toggleMood={toggleMood}/>
+    return <Chart moodCount={moodCount} toggleMood={toggleMood} userMood={mood}/>
   }
 
   return (
