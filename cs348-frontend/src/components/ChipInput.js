@@ -30,6 +30,19 @@ const ChipInput = (props) => {
         }
     }
 
+    const autoEnter = (e) => {
+        let newChip = e.target.value;
+        if (newChip === "")
+            return;
+        for (const c of props.values)
+        {
+            if (c.toUpperCase() === newChip.toUpperCase())
+                return;
+        }
+        e.target.value = "";
+        props.setValues(props.values.concat(newChip))
+    }
+
     let placeholderText = "Add " + props.typeName + "...";
 
     return (
@@ -39,7 +52,7 @@ const ChipInput = (props) => {
                     onDelete={handleDelete(chip)}
                 />
             )}
-            <input className="fm-chip-input-add-chip" type="text" placeholder={placeholderText} size={placeholderText.length} onKeyDown={tryAddChip} />
+            <input className="fm-chip-input-add-chip" type="text" placeholder={placeholderText} size={placeholderText.length} onKeyDown={tryAddChip} onBlur={autoEnter}/>
         </div>
     );
 }

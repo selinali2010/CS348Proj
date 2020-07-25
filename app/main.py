@@ -206,11 +206,11 @@ def search():
     recipeName = args["recipeName"] if "recipeName" in args else ""
     ingredients = args["ingredients"] if "ingredients" in args else []
     tags = args["tags"] if "tags" in args else []
-    exclude = args["exclude"] if "exclude" in args else []
     orderBy = args["orderBy"] if "orderBy" in args else 0
     isAsc = args["isAsc"] if "isAsc" in args else 1
     isStrict = args["isStrict"] if "isStrict" in args else False
-    isSubs = args["isSubs"] if "isSubs" in args else Fals
+    isSubs = args["isSubs"] if "isSubs" in args else False
+    exclude = args["exclude"] if "exclude" in args else []
     result = {}
 
     def getSort(orderBy, isAsc):
