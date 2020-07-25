@@ -3,5 +3,5 @@ SELECT recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageUrl, 
 FROM recipe
 WHERE recipeId IN (
 	SELECT DISTINCT recipeId FROM reacts
-	WHERE userId = %s AND mood = 1
+	WHERE userId = %s AND mood = %s
 )

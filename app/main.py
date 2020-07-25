@@ -113,11 +113,11 @@ def mood(userId, recipeId):
     result = query(queryText, [userId, recipeId])
     return jsonify(result)
 
-@app.route("/api/favourites/<int:id>", methods=["GET"])
-def favourites(id):
+@app.route("/api/favourites/userId=<int:userId>&mood=<int:mood>", methods=["GET"])
+def favourites(userId, mood):
     with open("sql_scripts/user/favouritesQuery.sql") as file:
         queryText = file.read()
-    result = query(queryText, id)
+    result = query(queryText, userId, mood)
     return jsonify(result)
 
 @app.route("/api/login", methods=["POST"])
