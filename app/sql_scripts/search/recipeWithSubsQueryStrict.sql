@@ -1,7 +1,6 @@
 -- Returns all recipes with the provided ingredients and allows for substitutions
 -- Strict mode
-SET @params := %s;
-SELECT recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName
+SELECT recipeId
 FROM recipe 
 WHERE recipeId NOT IN (
   -- Returns all recipeIds for which both the ingredient and its substitutes do not match
