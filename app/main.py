@@ -117,7 +117,7 @@ def mood(userId, recipeId):
 def favourites(userId, mood):
     with open("sql_scripts/user/favouritesQuery.sql") as file:
         queryText = file.read()
-    result = query(queryText, userId, mood)
+    result = query(queryText, [userId, mood])
     return jsonify(result)
 
 @app.route("/api/login", methods=["POST"])
