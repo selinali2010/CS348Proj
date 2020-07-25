@@ -229,16 +229,11 @@ def search():
                     recipe_dict[r["recipeId"]] = r
                     recipe_dict[r["recipeId"]]["score"] = 1
 
-    if(recipeName = "" and len(ingredients) < 0 && len(tags) < 0):
-        with open("sql_scripts/search/recipeAll.sql") as file:
-            queryText = file.read()
-        result["recipes"] = query(queryText + getSort(orderBy, isAsc))
-
     if(isStrict):
         queries = []
         paramList = [recipeName, "|".join(ingredients), "|".join(exclude), "|".join(tags)]
 
-        if(recipeName == "" and len(ingredients) == 0 && len(tags) == 0):
+        if(recipeName == "" and len(ingredients) == 0 and len(tags) == 0):
             with open("sql_scripts/search/recipeAll.sql") as file:
                 queryText = file.read()
             queries.append(queryText)
@@ -291,7 +286,7 @@ def search():
         result["recipes"] = query(sqlQuery, paramList, True)
 
     else:
-        if(recipeName == "" and len(ingredients) == 0 && len(tags) == 0):
+        if(recipeName == "" and len(ingredients) == 0 and len(tags) == 0):
             with open("sql_scripts/search/recipeAll.sql") as file:
                 queryText = file.read()
             addToDict(query(queryText + getSort(orderBy, isAsc)))
