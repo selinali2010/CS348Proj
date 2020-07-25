@@ -294,3 +294,6 @@ a.fm-button:hover {
 .login-button {
   margin-bottom: 0.5rem;
 }
+.fm-checkbox-label {
+  font-family: Open Sans, sans-serif;
+}

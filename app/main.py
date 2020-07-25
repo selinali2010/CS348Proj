@@ -206,7 +206,6 @@ def search():
     recipeName = args["recipeName"] if "recipeName" in args else ""
     ingredients = args["ingredients"] if "ingredients" in args else []
     tags = args["tags"] if "tags" in args else []
-    exclude = args["exclude"] if "exclude" in args else []
     orderBy = args["orderBy"] if "orderBy" in args else 0
     isAsc = args["isAsc"] if "isAsc" in args else 1
     isStrict = args["isStrict"] if "isStrict" in args else False
@@ -230,11 +229,15 @@ def search():
                     recipe_dict[r["recipeId"]] = r
                     recipe_dict[r["recipeId"]]["score"] = 1
 
-
-
-    if (isStrict):
+    if(isStrict):
         queries = []
         paramList = [recipeName, "|".join(ingredients), "|".join(exclude), "|".join(tags)]
+
+        if(recipeName == "" and len(ingredients) == 0 and len(tags) == 0):
+            with open("sql_scripts/search/recipeAll.sql") as file:
+                queryText = file.read()
+            queries.append(queryText)
+
         # Only make query if recipeName is not empty
         if (recipeName != ""):
             with open("sql_scripts/search/recipeByNameQueryStrict.sql") as file:
@@ -273,7 +276,6 @@ def search():
         if (len(tags) > 0):
             with open("sql_scripts/search/recipeByTagQueryStrict.sql") as file:
                 queryText = file.read()
-            # addToDict(query(queryText + getSort(orderBy, isAsc), params))
             queries.append(queryText)
         
         # First set all parameters
@@ -284,6 +286,11 @@ def search():
         result["recipes"] = query(sqlQuery, paramList, True)
 
     else:
+        if(recipeName == "" and len(ingredients) == 0 and len(tags) == 0):
+            with open("sql_scripts/search/recipeAll.sql") as file:
+                queryText = file.read()
+            addToDict(query(queryText + getSort(orderBy, isAsc)))
+
         if (recipeName != ""):
             # Only make query if recipeName is not empty
             with open("sql_scripts/search/recipeByNameQuery.sql") as file:

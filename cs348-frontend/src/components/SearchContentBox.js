@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { addResults } from "../redux/actions";
-import { getResultsOrder } from '../redux/selectors'
 import ChipInput from "./ChipInput";
-import { Search } from '@material-ui/icons';
+import { Checkbox, Collapse, FormControlLabel } from "@material-ui/core";
+import { AddSharp, RemoveSharp, Search } from '@material-ui/icons';
+import { addResults } from "../redux/actions";
+import { getResultsOrder } from '../redux/selectors';
+
 
 const mapStateToProps = state => {
     let orderBy, asc;
@@ -19,6 +21,10 @@ const SearchContentBox = ({orderBy, asc, addResults}) => {
     const [recipeName, setRecipeName] = useState("");
     const [ingredients, setIngredients] = useState([]);
     const [tags, setTags] = useState([]);
+    const [isExclude, setIsExclude] = useState(false);
+    const [exclude, setExclude] = useState([]);
+    const [isStrict, setIsStrict] = useState(false);
+    const [isSubs, setIsSubs] = useState(false);
 
     useEffect(() => {
         if (activeSearch) {
@@ -35,7 +41,16 @@ const SearchContentBox = ({orderBy, asc, addResults}) => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({recipeName: recipeName, ingredients: ingredients, tags: tags, orderBy: orderBy, isAsc: asc}),
+                body: JSON.stringify({
+                  recipeName: recipeName, 
+                  ingredients: ingredients, 
+                  tags: tags, 
+                  orderBy: orderBy, 
+                  isAsc: asc,
+                  isStrict: isStrict, 
+                  isSubs: isSubs,
+                  exclude: exclude
+                }),
             });
             const data = await response.json();
             addResults(data);
@@ -66,6 +81,47 @@ const SearchContentBox = ({orderBy, asc, addResults}) => {
                     <ChipInput typeName="tag"
                         values={tags}
                         setValues={ (values) => setTags(values) } />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          color="default"
+                          size="small"
+                          checked={isStrict}
+                          onChange={(event) => setIsStrict(event.target.checked)}
+                        />
+                      }
+                      label={<div className="fm-checkbox-label">Strict Mode</div>}
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          color="default"
+                          size="small"
+                          checked={isSubs}
+                          onChange={(event) => setIsSubs(event.target.checked)}
+                        />
+                      }
+                      label={<div className="fm-checkbox-label">Allow Substitutions</div>}
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          color="default"
+                          size="small"
+                          checked={isExclude}
+                          icon={<AddSharp/>}
+                          checkedIcon={<RemoveSharp/>}
+                          onChange={(event) => setIsExclude(event.target.checked)}
+                        />
+                      }
+                      label={<div className="fm-checkbox-label">{isExclude ? "See Less" : "See More"}</div>}
+                    />
+                    <Collapse in={isExclude}>
+                      <div> Ingredients to Exclude: </div>
+                      <ChipInput typeName="ingredient"
+                          values={exclude}
+                          setValues={ (values) => setExclude(values) } />
+                    </Collapse>
                 </form>
                 <div className="fm-centered-button">
                     <button className="fm-button" onClick={searchRecipes}>
