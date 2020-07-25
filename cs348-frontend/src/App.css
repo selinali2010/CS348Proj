@@ -290,3 +290,7 @@ a.fm-button:hover {
   padding-top: 1rem;
   padding-bottom: 0.5rem;
 }
+
+.fm-checkbox-label {
+  font-family: Open Sans, sans-serif;
+}
