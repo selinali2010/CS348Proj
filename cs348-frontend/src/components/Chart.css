@@ -11,7 +11,10 @@
   justify-content: flex-end;
 }
 
-.chart-bar { width: 25px; }
+.chart-bar { 
+  width: 25px;
+  margin-top: 0.5rem;
+}
 .heart-eyes-bar { background-color: #DD2E44; }
 .drooling-bar { background-color: #88C9F9; }
 .thumbs-up-bar { background-color: #FFDB5E; }

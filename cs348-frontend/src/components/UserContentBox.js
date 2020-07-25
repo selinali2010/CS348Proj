@@ -100,7 +100,7 @@ const UserContentBox = ({loginUser}) => {
                     </div>
                     <div className="col-4">
                         <div className="user-content-buttons">
-                            <button className="fm-button" onClick={login}>
+                            <button className="fm-button login-button" onClick={login}>
                                 <ArrowForward className="asc-button-icon" fontSize="small"/> Login
                             </button>
                             <button className="fm-button" onClick={register}>

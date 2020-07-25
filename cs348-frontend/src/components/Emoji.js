@@ -21,7 +21,7 @@ const emojiMap = Object.freeze({
 const Emoji = (props) => {
   return (
     <div>
-      <img className="emoji-image" src={emojiMap[props.index]} alt={emojiMap[props.index]} 
+      <img className={(props.userId)? 'emoji-image emi-interactive' : 'emoji-image'} src={emojiMap[props.index]} alt={emojiMap[props.index]} 
             onClick={() => props.toggleMood(props.index)}></img>
     </div>
   );

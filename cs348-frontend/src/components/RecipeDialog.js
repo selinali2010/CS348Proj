@@ -120,7 +120,7 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
   }
 
   const getChart = () => {
-    return <Chart moodCount={moodCount} toggleMood={toggleMood} userMood={mood}/>
+    return <Chart moodCount={moodCount} toggleMood={toggleMood} userMood={mood} userId={userId}/>
   }
 
   return (

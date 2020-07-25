@@ -139,7 +139,7 @@ body {
   float: right;
   width: 1.7rem;
   border: none;
-  box-shadow: none;
+  box-shadow: none !important;
   background: #7B8223 !important;
 }
 
@@ -289,4 +289,8 @@ a.fm-button:hover {
   justify-content: center;
   padding-top: 1rem;
   padding-bottom: 0.5rem;
+}
+
+.login-button {
+  margin-bottom: 0.5rem;
 }

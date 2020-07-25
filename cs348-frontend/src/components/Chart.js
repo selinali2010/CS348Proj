@@ -13,7 +13,7 @@ const moodMap = Object.freeze({
   6: "skull-crossbones",
 })
 
-const Chart = ({moodCount, toggleMood, userMood}) => {
+const Chart = ({moodCount, toggleMood, userMood, userId}) => {
   const [maxHeight, setMaxHeight] = useState(0)
   useEffect(() => {
     setMaxHeight(moodCount.reduce((total, value) => {
@@ -28,7 +28,7 @@ const Chart = ({moodCount, toggleMood, userMood}) => {
           <div key={e["mood"]} className="chart-item">
             <div className={"chart-bar "+ moodMap[e["mood"]] + "-bar"} 
               style={{height: "calc(" + e["count"] / maxHeight + " * 100%)"}}></div>
-            <Emoji index={e["mood"]} toggleMood={toggleMood}/>
+            <Emoji index={e["mood"]} toggleMood={toggleMood} userId = {userId}/>
             <RadioButtonUnchecked className={"react-selected-circle " + moodMap[e["mood"]] + "-selected"} hidden={e["mood"] !== userMood}/>
           </div> 
         )
