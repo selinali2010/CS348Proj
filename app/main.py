@@ -203,11 +203,16 @@ def deleteReact():
 def search():
     args = request.json
     recipe_dict = {}
+    recipeName = args["recipeName"] if "recipeName" in args else ""
+    ingredients = args["ingredients"] if "ingredients" in args else []
+    tags = args["tags"] if "tags" in args else []
+    exclude = args["exclude"] if "exclude" in args else []
     orderBy = args["orderBy"] if "orderBy" in args else 0
     isAsc = args["isAsc"] if "isAsc" in args else 1
     isStrict = args["isStrict"] if "isStrict" in args else False
     isSubs = args["isSubs"] if "isSubs" in args else False
     exclude = args["exclude"] if "exclude" in args else []
+    result = {}
 
     def getSort(orderBy, isAsc):
         orderByMap = ["recipeId", "difficulty", "cookTime"]
@@ -225,77 +230,117 @@ def search():
                     recipe_dict[r["recipeId"]] = r
                     recipe_dict[r["recipeId"]]["score"] = 1
 
-    if ("recipeName" in args):
-        with open("sql_scripts/search/recipeByNameQuery.sql") as file:
-            queryText = file.read()
-        
+
+
+    if (isStrict):
+        queries = []
+        paramList = [recipeName, "|".join(ingredients), "|".join(exclude), "|".join(tags)]
         # Only make query if recipeName is not empty
-        params = args["recipeName"]
-        if(params != ""):
-            addToDict(query(queryText + getSort(orderBy, isAsc), params))
-    
-    if ("ingredients" in args):
-        if(not isSubs):
-            fileName = "sql_scripts/search/recipeByIngredientsQuery" + ("Strict" if isStrict else "") + ".sql"
+        if (recipeName != ""):
+            with open("sql_scripts/search/recipeByNameQueryStrict.sql") as file:
+                queryText = file.read()
+            queries.append(queryText)
+        
+        if (len(ingredients) > 0 and len(exclude) > 0):
+            if(not isSubs):
+                # Add strict ingredient query
+                with open("sql_scripts/search/recipeByIngredientsQueryStrict.sql") as file:
+                    queryText = file.read()
+                queries.append(queryText)
+
+                # Add exclude ingredient query
+                with open("sql_scripts/search/recipeExcludeIngredientsStrict.sql") as file:
+                    queryText = file.read()
+                queries.append(queryText)
+            else:
+                # Add exclude ingredient with subs query
+                with open("sql_scripts/search/recipeExcludeWithSubsStrict.sql") as file:
+                    queryText = file.read()
+                queries.append(queryText)
+        elif (len(ingredients) > 0):
+            # Choose correct file depending on if subs is enabled
+            fileName = "sql_scripts/search/recipeWithSubsQueryStrict.sql" if isSubs else "sql_scripts/search/recipeByIngredientsQueryStrict.sql"
             with open(fileName) as file:
                 queryText = file.read()
+            queries.append(queryText)
+        elif (len(exclude) > 0):
+            # Add exclusion ingredient query
+            with open("sql_scripts/search/recipeExcludeIngredientsStrict.sql") as file:
+                queryText = file.read()
+            queries.append(queryText)
+            
+        # Only make query if tags are not empty
+        if (len(tags) > 0):
+            with open("sql_scripts/search/recipeByTagQueryStrict.sql") as file:
+                queryText = file.read()
+            # addToDict(query(queryText + getSort(orderBy, isAsc), params))
+            queries.append(queryText)
+        
+        # First set all parameters
+        sqlQuery = "SET @name := %s;\nSET @params := %s;\nSET @exclude := %s;\nSET @tags := %s;\n"
+        # Then piece together all the queries and add the order by
+        sqlQuery += "SELECT * FROM recipe WHERE recipeId IN (\n" + "\n) AND recipeId IN (\n".join(queries) + "\n)" + getSort(orderBy, isAsc)
+        
+        result["recipes"] = query(sqlQuery, paramList, True)
 
+    else:
+        if (recipeName != ""):
+            # Only make query if recipeName is not empty
+            with open("sql_scripts/search/recipeByNameQuery.sql") as file:
+                queryText = file.read()
+            addToDict(query(queryText + getSort(orderBy, isAsc), recipeName))
+        
+        if(len(args["ingredients"]) > 0):
             # Only make query if ingredients are not empty
-            if(len(args["ingredients"]) > 0):
-                params = "|".join(args["ingredients"])
+            params = "|".join(args["ingredients"])
+            if(not isSubs):
+                with open("sql_scripts/search/recipeByIngredientsQuery.sql") as file:
+                    queryText = file.read()
 
+                addToDict(query(queryText + getSort(orderBy, isAsc), params))
+            else:
+                with open("sql_scripts/search/recipeWithSubsQuery.sql") as file:
+                    queryText = file.read()
+                  
                 # If excluded ingredients are provided add additional query text and parameters
                 if(len(exclude) > 0):
-                  params2 = "|".join(exclude)
-                  with open("sql_scripts/search/recipeExcludeIngredients.sql") as file:
-                    queryText2 = file.read()
-                  addToDict(query(queryText + queryText2 + getSort(orderBy, isAsc), [params, params2]))
+                    excludes = "|".join(exclude)
+                    with open("sql_scripts/search/recipeExcludeWithSubs.sql") as file:
+                        queryText = file.read()
+                    addToDict(query(queryText + getSort(orderBy, isAsc), [params, excludes], True))
                 else:
-                  addToDict(query(queryText + getSort(orderBy, isAsc), params))
-        else:
-            fileName = "sql_scripts/search/recipeWithSubsQuery" + ("Strict" if isStrict else "") + ".sql"
-            with open(fileName) as file:
+                    addToDict(query(queryText + getSort(orderBy, isAsc), [params], True))
+            
+        if ("tags" in args):
+            with open("sql_scripts/search/recipeByTagQuery.sql") as file:
                 queryText = file.read()
-
-            # Only make query if ingredients are not empty
-            if(len(args["ingredients"]) > 0):
-              params = "|".join(args["ingredients"])
-
-              # If excluded ingredients are provided add additional query text and parameters
-              if(len(exclude) > 0):
-                params2 = "|".join(exclude)
-                filename = "sql_scripts/search/recipeExcludeWithSubs" + ("Strict" if isStrict else "") + ".sql"
-                with open(filename) as file:
-                  queryText = file.read()
-                addToDict(query(queryText + getSort(orderBy, isAsc), [params, params2], True))
-              else:
-                addToDict(query(queryText + getSort(orderBy, isAsc), [params], True))
+            
+            # Only make query if tags are not empty
+            if(len(args["tags"]) > 0):
+                params = "|".join(args["tags"])
+                addToDict(query(queryText + getSort(orderBy, isAsc), params))
         
-    if ("tags" in args):
-        with open("sql_scripts/search/recipeByTagQuery.sql") as file:
-            queryText = file.read()
-        
-        # Only make query if tags are not empty
-        if(len(args["tags"]) > 0):
-            params = "|".join(args["tags"])
-            addToDict(query(queryText + getSort(orderBy, isAsc), params))
+        if(len(exclude) > 0):
+            excludes = "|".join(exclude)
+            with open("sql_scripts/search/recipeExcludeIngredients.sql") as file:
+                queryText = file.read()
+            filtered = query(queryText + getSort(orderBy, isAsc), excludes)
+            filteredIds = list(map(lambda x: x["recipeId"], filtered))
 
-    result = {}
-    result["recipes"] = [v for i,v in recipe_dict.items()]
-    # sort recipes by their scores
-    result["recipes"].sort(key=lambda x: x["score"], reverse=True)
+        result["recipes"] = [v for i,v in recipe_dict.items()]
+        if(len(exclude) > 0):
+            result["recipes"] = list(filter(lambda x: x["recipeId"] in filteredIds, result["recipes"]))
+        # sort recipes by their scores
+        result["recipes"].sort(key=lambda x: x["score"], reverse=True)
 
     isEmpty = len(result["recipes"]) == 0
     result["isEmpty"] = isEmpty 
 
     # if there are no results, backfill query for all recipes
     if (isEmpty):
-        print(result)
         with open("sql_scripts/search/recipeAll.sql") as file:
             queryText = file.read()
         result["recipes"] = query(queryText + getSort(orderBy, isAsc))
-        for r in result["recipes"]:
-            r["score"] = 0
 
     return make_response(jsonify(result), 200)
 
