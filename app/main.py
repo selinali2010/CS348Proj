@@ -50,7 +50,7 @@ def query(sql : str, data : List[str] = [], multi: bool = False) -> List[List[st
 
         if(multi):
             queries = sql.split(";")
-            for x in range(0, len(queries)):
+            for x in range(len(queries)-1):
               with connection.cursor(pymysql.cursors.DictCursor) as cursor:
                 cursor.execute(queries[x], data[x] if (x < len(data)) else None)
                 result = cursor.fetchall()
@@ -69,7 +69,6 @@ def query(sql : str, data : List[str] = [], multi: bool = False) -> List[List[st
         connection.close()
 
     return result
-
 
 @app.route("/api/recipes", methods=["GET"])
 def recipes():
@@ -199,6 +198,108 @@ def deleteReact():
 
     return make_response(jsonify(result), 200)
 
+@app.route("/api/newRecipe", methods=["POST"])
+def addRecipe():
+    args = request.json
+    result = {}
+
+    fields_for_recipe = ["recipeName", "servings", "cookTime", "difficulty", "cuisine", "imageURL", "instructionsLink", "authorName"]
+    fields_for_ingredient = ["foodName","quantity","unit"]
+    fields_for_substitutes = ["foodName","substituteName"]
+
+    # check that there data for each table
+    if "recipe" not in args or "ingredient" not in args or "tags" not in args:
+        result["error"] = "Missing recipe/ingredient/tags information."
+        return make_response(jsonify(result), 400)
+
+    # check not null fields
+    if "recipeName" not in args["recipe"]: 
+        result["error"] = "New recipe must have recipeName."
+        return make_response(jsonify(result), 400)
+    if "servings" not in args["recipe"]:
+        result["error"] = "New recipe must have servings."
+        return make_response(jsonify(result), 400)
+
+    # set recipe fields
+    values_for_recipe = [None, None, None, None, None, None, None, None]
+    for i,f in enumerate(fields_for_recipe):
+        if f in args["recipe"]:
+            values_for_recipe[i] = args["recipe"][f]
+
+    ingredients = []
+    substitutes = []
+    for ing in args["ingredient"]:
+        # if there is no ingredient name, skip to next ingredient
+        if "foodName" not in ing:
+            continue
+
+        ingredient = [None, None, None]
+        # check if ingredient has substitutes
+        if "substitutes" in ing:
+            for s in ing["substitutes"]:
+                substitutes.append([ing["foodName"],s])
+
+        # set ingredient fields
+        for i,f in enumerate(fields_for_ingredient):
+            if f in ing:
+                ingredient[i] = ing[f]
+        ingredients.append(ingredient)
+
+    # set tags
+    tags = args["tags"]
+        
+    queries = []
+    params = []
+    # insert recipe into recipe table
+    with open("sql_scripts/newRecipe/insertRecipeQuery.sql") as file:
+        queries.append(file.read())
+        params.append(values_for_recipe)
+    params.append([])
+    if len(ingredients) > 0:
+        with open("sql_scripts/newRecipe/insertIngredientQuery.sql") as file:
+            q = file.read()
+            p = []
+            for i in range(len(ingredients)):
+                q += "(@last_recipe_id, %s, %s, %s),"
+                p.extend(ingredients[i])
+            # remove last comma and add semi-colon
+            q = q[:-1]
+            q += ";"
+            queries.append(q)
+            params.append(p)
+    
+    if len(substitutes) > 0:
+        with open("sql_scripts/newRecipe/insertSubstitutesQuery.sql") as file:
+            q = file.read()
+            p = []
+            for i in range(len(substitutes)):
+                q += "(@last_recipe_id, %s, %s),"
+                p.extend(substitutes[i])
+            q = q[:-1]
+            q += ";"
+            queries.append(q)
+            params.append(p)
+    
+    if len(tags) > 0:
+        with open("sql_scripts/newRecipe/insertTagsQuery.sql") as file:
+            q = file.read()
+            p = tags
+            for i in range(len(tags)):
+                q += "(@last_recipe_id, %s),"
+            q = q[:-1]
+            q += ";"
+            queries.append(q)
+            params.append(p)
+    try:
+        query(" ".join(queries), params, multi=True)
+    except Exception as e:
+        # some error when executing the query
+        result["error"] = "Error when inserting new recipe into the database."
+        return make_response(jsonify(result), 400)
+
+    return make_response(jsonify(result), 200)
+            
+    
 @app.route("/api/search", methods=["POST"])
 def search():
     args = request.json
