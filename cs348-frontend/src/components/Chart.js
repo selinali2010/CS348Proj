@@ -33,7 +33,7 @@ const Chart = ({moodCount, toggleMood, userMood, userId}) => {
               style={{height: "calc(" + e["count"] / maxHeight + " * 100%)"}}></div>
             <Emoji index={e["mood"]} toggleMood={toggleMood} toggleHover={handleHover} userId={userId} selected={e["mood"] === userMood}/>
             <RadioButtonUnchecked 
-              className={(hover == e["mood"]) ? "react-selected-circle " + moodMap[e["mood"]] + "-selected react-selected-circle-hover" : 
+              className={(hover === e["mood"]) ? "react-selected-circle " + moodMap[e["mood"]] + "-selected react-selected-circle-hover" : 
                 "react-selected-circle " + moodMap[e["mood"]] + "-selected" } 
               hidden={e["mood"] !== userMood}/>
           </div> 

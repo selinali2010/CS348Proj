@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from "react-redux";
 import { getUserName } from '../redux/selectors'
 import { logoutUser } from '../redux/actions';
-import { ExitToApp } from '@material-ui/icons';
+import { ExitToApp, Add } from '@material-ui/icons';
+import CreateDialog from './CreateDialog';
 
 const mapStateToProps = state => {
     const userName = getUserName(state);
@@ -10,29 +11,42 @@ const mapStateToProps = state => {
 };
 
 const AccountContentBox = ({userName, logoutUser}) => {
+    const [show, setShow] = useState(false);
+
     const handleLogout = () => {
       localStorage.removeItem("userId")
       localStorage.removeItem("username")
       logoutUser()
     }
 
-    return (        
-        <div className="section">
-            <div className="section-title">
-                <div className="section-title-text">
-                    My Account
+    const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false);
+
+    return (   
+        <div>
+            <CreateDialog open={show} userName={userName} handleClose={handleClose} />
+            <div className="section">
+                <div className="section-title">
+                    <div className="section-title-text">
+                        My Account
+                    </div>
                 </div>
-            </div>
-            <div className="section-body">
-                <div className="welcome-text">
-                    Welcome, {userName}!
+                <div className="section-body">
+                    <div className="welcome-text">
+                        Welcome, {userName}!
+                    </div>
+                    <div className="fm-centered-button">
+                        <button className="fm-button" onClick={handleShow}>
+                            <Add className="asc-button-icon" fontSize="small"/> Add Recipe
+                        </button>
+                    </div>
+                    <div className="fm-centered-button">
+                        <button className="fm-button" onClick={handleLogout}>
+                            <ExitToApp className="asc-button-icon" fontSize="small"/> Log out
+                        </button>
+                    </div>
+                    
                 </div>
-                <div className="fm-centered-button">
-                    <button className="fm-button" onClick={handleLogout}>
-                        <ExitToApp className="asc-button-icon" fontSize="small"/> Log out
-                    </button>
-                </div>
-                
             </div>
         </div>
       );
