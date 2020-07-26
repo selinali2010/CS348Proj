@@ -3,7 +3,7 @@ import { getUserState, getUserFavourites, getFavouritesFilter } from '../redux/s
 import { setFavourites } from "../redux/actions";
 import { connect } from "react-redux";
 import { Dialog, DialogContent } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
+import { Close, Launch } from '@material-ui/icons';
 import Chart from './Chart';
 import Chip from './Chip';
 
@@ -130,7 +130,7 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
       <DialogContent className="fm-dialog-content">
         <div className="row no-gutters recipe-details">
           <button className="close" aria-label="Close" onClick={handleClose}>
-            <CloseIcon aria-hidden="true" />
+            <Close aria-hidden="true" />
           </button>
           <div className="col-md-6 recipe-details-col recipe-details-left-col">
             <div className="recipe-details-image">
@@ -194,7 +194,7 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
             <div className="recipe-details-section">
               <a className="fm-button" 
                   href={recipe.instructionsLink} target="_blank" rel="noopener noreferrer">
-                View Full Recipe
+                <Launch className="asc-button-icon" fontSize="small"/> View Full Recipe
               </a>
             </div>
           </div>

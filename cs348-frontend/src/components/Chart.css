@@ -31,10 +31,11 @@
 
 .react-selected-circle {
   position: absolute;
-}
-
-.react-selected-circle {
   font-size: 51px !important;
   margin-left: -13px;
   margin-bottom: -2px;
+}
+
+.react-selected-circle-hover {
+  opacity: 50%;
 }

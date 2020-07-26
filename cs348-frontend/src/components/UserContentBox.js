@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from "react-redux";
 import { loginUser } from '../redux/actions';
 import {ArrowForward, PersonAdd} from '@material-ui/icons';
@@ -7,6 +7,15 @@ const UserContentBox = ({loginUser}) => {
     const [username, setUser] = useState('');
     const [password, setPass] = useState('');
     const [errorState, setErr] = useState('');
+
+    useEffect(() => {
+      const uId = localStorage.getItem("userId")
+      const uName = localStorage.getItem("username")
+
+      if(uId && uName){
+        loginUser(uId, uName)
+      }
+    }, [loginUser])
 
     const getAccountDetails = () => {
         return {
@@ -27,6 +36,8 @@ const UserContentBox = ({loginUser}) => {
         if (response.status === 200) {
             const data = await response.json(); 
             loginUser(data.userId, username)
+            localStorage.setItem("userId", data.userId)
+            localStorage.setItem("username", username)
         } else if (response.status === 401) {
             setErr("Invalid username or password.")
         } else {
@@ -49,9 +60,11 @@ const UserContentBox = ({loginUser}) => {
         }
 
         const response = await fetch(process.env.REACT_APP_API_URL+"api/register", getAccountDetails());
-        const resdata = await response.json();
+        const data = await response.json();
         if (response.status === 200) {
-            loginUser(resdata.userId, username)
+            loginUser(data.userId, username)
+            localStorage.setItem("userId", data.userId)
+            localStorage.setItem("username", username)
         } else if (response.status === 400) {
             setErr("The username " + username + " has already been taken! Please try again. ")
         } else {

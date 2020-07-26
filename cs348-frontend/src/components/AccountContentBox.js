@@ -10,6 +10,12 @@ const mapStateToProps = state => {
 };
 
 const AccountContentBox = ({userName, logoutUser}) => {
+    const handleLogout = () => {
+      localStorage.removeItem("userId")
+      localStorage.removeItem("username")
+      logoutUser()
+    }
+
     return (        
         <div className="section">
             <div className="section-title">
@@ -22,7 +28,7 @@ const AccountContentBox = ({userName, logoutUser}) => {
                     Welcome, {userName}!
                 </div>
                 <div className="fm-centered-button">
-                    <button className="fm-button" onClick={logoutUser}>
+                    <button className="fm-button" onClick={handleLogout}>
                         <ExitToApp className="asc-button-icon" fontSize="small"/> Log out
                     </button>
                 </div>

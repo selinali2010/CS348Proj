@@ -21,15 +21,17 @@ const emojiMap = Object.freeze({
 const Emoji = (props) => {
   return (
     <div>
-      <img className={(props.userId)? 'emoji-image emi-interactive' : 'emoji-image'} src={emojiMap[props.index]} alt={emojiMap[props.index]} 
-            onClick={() => props.toggleMood(props.index)}></img>
+      <img className={(props.userId && !props.selected)? 'emoji-image emi-interactive' : 'emoji-image'} src={emojiMap[props.index]} alt={emojiMap[props.index]} 
+            onClick={() => props.toggleMood(props.index)} onMouseOver={() => props.toggleHover(props.index)} onMouseOut={() => props.toggleHover(0)}></img>
     </div>
   );
 }
 
 Emoji.propTypes = {
   index: PropTypes.number,
-  toggleMood: PropTypes.func
+  toggleMood: PropTypes.func,
+  toggleHover: PropTypes.func,
+  selected: PropTypes.bool,
 }
 
 export default Emoji;

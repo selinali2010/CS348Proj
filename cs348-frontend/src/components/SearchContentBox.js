@@ -21,7 +21,7 @@ const SearchContentBox = ({orderBy, asc, addResults}) => {
     const [recipeName, setRecipeName] = useState("");
     const [ingredients, setIngredients] = useState([]);
     const [tags, setTags] = useState([]);
-    const [isExclude, setIsExclude] = useState(false);
+    const [isCollapse, setIsCollapse] = useState(false);
     const [exclude, setExclude] = useState([]);
     const [isStrict, setIsStrict] = useState(false);
     const [isSubs, setIsSubs] = useState(false);
@@ -59,6 +59,15 @@ const SearchContentBox = ({orderBy, asc, addResults}) => {
         fetchData();
     }
 
+    const handleCollapseChange = (e) => {
+      if (!e.target.checked){
+        setExclude([]);
+        setIsStrict(false);
+        setIsSubs(false);
+      }
+      setIsCollapse(e.target.checked)
+    }
+
     return (
         <div className="section section-fill-height">
             <div className="section-title">
@@ -86,41 +95,41 @@ const SearchContentBox = ({orderBy, asc, addResults}) => {
                         <Checkbox
                           color="default"
                           size="small"
-                          checked={isStrict}
-                          onChange={(event) => setIsStrict(event.target.checked)}
-                        />
-                      }
-                      label={<div className="fm-checkbox-label">Strict Mode</div>}
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          color="default"
-                          size="small"
-                          checked={isSubs}
-                          onChange={(event) => setIsSubs(event.target.checked)}
-                        />
-                      }
-                      label={<div className="fm-checkbox-label">Allow Substitutions</div>}
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          color="default"
-                          size="small"
-                          checked={isExclude}
+                          checked={isCollapse}
                           icon={<AddSharp/>}
                           checkedIcon={<RemoveSharp/>}
-                          onChange={(event) => setIsExclude(event.target.checked)}
+                          onChange={handleCollapseChange}
                         />
                       }
-                      label={<div className="fm-checkbox-label">{isExclude ? "See Less" : "See More"}</div>}
+                      label={<div className="fm-checkbox-label">{isCollapse ? "Close Advanced Search" : "See Advanced Search"}</div>}
                     />
-                    <Collapse in={isExclude}>
+                    <Collapse in={isCollapse}>
                       <div> Ingredients to Exclude: </div>
                       <ChipInput typeName="ingredient"
                           values={exclude}
-                          setValues={ (values) => setExclude(values) } />
+                          setValues={(values) => setExclude(values)} />
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            color="default"
+                            size="small"
+                            checked={isStrict}
+                            onChange={(event) => setIsStrict(event.target.checked)}
+                          />
+                        }
+                        label={<div className="fm-checkbox-label">Strict Mode</div>}
+                      />
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            color="default"
+                            size="small"
+                            checked={isSubs}
+                            onChange={(event) => setIsSubs(event.target.checked)}
+                          />
+                        }
+                        label={<div className="fm-checkbox-label">Allow Substitutions</div>}
+                      />
                     </Collapse>
                 </form>
                 <div className="fm-centered-button">

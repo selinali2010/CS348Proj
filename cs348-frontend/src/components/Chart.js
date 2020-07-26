@@ -15,11 +15,14 @@ const moodMap = Object.freeze({
 
 const Chart = ({moodCount, toggleMood, userMood, userId}) => {
   const [maxHeight, setMaxHeight] = useState(0)
+  const [hover, setHover] = useState(0)
   useEffect(() => {
     setMaxHeight(moodCount.reduce((total, value) => {
       return value["count"] >  total ? value["count"] : total
     }, 0))
   }, [moodCount])
+
+  const handleHover = (isHover) => { setHover(isHover); }
 
   const getBars = () => {
     if(moodCount.length > 0) {
@@ -28,8 +31,11 @@ const Chart = ({moodCount, toggleMood, userMood, userId}) => {
           <div key={e["mood"]} className="chart-item">
             <div className={"chart-bar "+ moodMap[e["mood"]] + "-bar"} 
               style={{height: "calc(" + e["count"] / maxHeight + " * 100%)"}}></div>
-            <Emoji index={e["mood"]} toggleMood={toggleMood} userId = {userId}/>
-            <RadioButtonUnchecked className={"react-selected-circle " + moodMap[e["mood"]] + "-selected"} hidden={e["mood"] !== userMood}/>
+            <Emoji index={e["mood"]} toggleMood={toggleMood} toggleHover={handleHover} userId={userId} selected={e["mood"] === userMood}/>
+            <RadioButtonUnchecked 
+              className={(hover == e["mood"]) ? "react-selected-circle " + moodMap[e["mood"]] + "-selected react-selected-circle-hover" : 
+                "react-selected-circle " + moodMap[e["mood"]] + "-selected" } 
+              hidden={e["mood"] !== userMood}/>
           </div> 
         )
       })
