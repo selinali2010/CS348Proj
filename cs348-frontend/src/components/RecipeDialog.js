@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { getUserState, getUserFavourites, getFavouritesFilter } from '../redux/selectors'
 import { setFavourites } from "../redux/actions";
 import { connect } from "react-redux";
-import { Dialog, DialogContent } from '@material-ui/core';
-import { Close, Launch } from '@material-ui/icons';
+import { Dialog, DialogContent, Popover } from '@material-ui/core';
+import { Close, Launch, Info } from '@material-ui/icons';
 import Chart from './Chart';
 import Chip from './Chip';
 
@@ -21,13 +21,24 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
   const [tags, setTags] = useState(null);
   const [mood, setMood] = useState(null);
   const [moodCount, setMoodCount] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [popOverText, setPopOverText] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       if(Object.keys(recipe).length !== 0){
-        // Fetch recipe ingredients
-        fetch(process.env.REACT_APP_API_URL + "api/ingredients/" + recipe.recipeId, {method: 'GET'}).then(res => {
-          res.json().then(ingredients => setIngredients(ingredients))
+        // Fetch recipe ingredients and merge substition results
+        fetch(process.env.REACT_APP_API_URL + "api/ingredients/" + recipe.recipeId, {method: 'GET'}).then(res1 => {
+          res1.json().then(ingredients => {
+            fetch(process.env.REACT_APP_API_URL + "api/substitutions/" + recipe.recipeId, {method: 'GET'}).then(res2 => {
+              res2.json().then(substitutions => {
+                for (let ing of ingredients) {
+                  ing.subs = substitutions.filter((sub) => sub.foodName === ing.foodName).map((sub) => sub.substituteName);
+                }
+                setIngredients(ingredients);          
+              })
+            });
+          })
         });
         // Fetch recipe tags
         fetch(process.env.REACT_APP_API_URL + "api/tags/" + recipe.recipeId, {method: 'GET'}).then(res => {
@@ -123,6 +134,15 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
     return <Chart moodCount={moodCount} toggleMood={toggleMood} userMood={mood} userId={userId}/>
   }
 
+  const handlePopoverOpen = (event) => {
+    setPopOverText(event.currentTarget.value);
+    setAnchorEl(event.currentTarget);
+
+  };
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Dialog open={open} onClose={handleClose}
         fullWidth={true}
@@ -187,7 +207,33 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
               <h2>Ingredients</h2>
               <ul>
                 {ingredients && ingredients.map(
-                  (ele, index) => <li key={index}>{ele.quantity} {ele.unit} {ele.foodName}</li>)}
+                  (ele, index) => <li key={index} id="">
+                    {ele.quantity} {ele.unit} {ele.foodName}
+                    {(ele.subs.length > 0)? <button value={JSON.stringify(ele.subs)} 
+                        onMouseEnter={handlePopoverOpen}
+                        onMouseLeave={handlePopoverClose}
+                        className="ingredients-more-info">
+                      <Info aria-hidden="true" />
+                    </button> : ""}
+                  </li>)}
+                  <Popover
+                    id="mouse-over-popover"
+                    open={anchorEl !== null}
+                    style={{'pointerEvents': 'none'}}
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'left',
+                    }}
+                    onClose={handlePopoverClose}
+                    disableRestoreFocus
+                  >
+                    {popOverText}
+                  </Popover>
               </ul>
             </div>
 

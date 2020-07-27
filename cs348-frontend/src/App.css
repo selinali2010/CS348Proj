@@ -313,3 +313,12 @@ a.fm-button:hover {
 .fm-checkbox-label {
   font-family: Open Sans, sans-serif;
 }
+
+.ingredients-more-info, 
+.ingredients-more-info:hover, 
+.ingredients-more-info:focus{
+  color: var(--olive-dark);
+  border: none;
+  background: var(--paper);
+  width: 20px;
+}

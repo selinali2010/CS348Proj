@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dialog, DialogContent, useRadioGroup } from '@material-ui/core';
+import { Dialog, DialogContent } from '@material-ui/core';
 import { Close, Add } from '@material-ui/icons';
 import ChipInput from "./ChipInput";
 import IngredientInput from "./IngredientInput";
