@@ -51,15 +51,15 @@ def query(sql : str, data : List[str] = [], multi: bool = False) -> List[List[st
         if(multi):
             queries = sql.split(";")
             for x in range(len(queries)-1):
-              with connection.cursor(pymysql.cursors.DictCursor) as cursor:
-                cursor.execute(queries[x], data[x] if (x < len(data)) else None)
-                result = cursor.fetchall()
+                with connection.cursor(pymysql.cursors.DictCursor) as cursor:
+                    cursor.execute(queries[x], data[x] if (x < len(data)) else None)
+                    result = cursor.fetchall()
 
         else:
             with connection.cursor(pymysql.cursors.DictCursor) as cursor:
-              # Execute the query
-              cursor.execute(sql, data)
-              result = cursor.fetchall()
+                # Execute the query
+                cursor.execute(sql, data)
+                result = cursor.fetchall()
 
         # connection is not autocommit by default. So you must commit to save
         # your changes.
@@ -149,7 +149,6 @@ def register():
     with open("sql_scripts/user/insertUser.sql") as file:
         try:
             result = query(file.read(), [username, password])
-            print(result)
         except pymysql.err.IntegrityError:
             result["error"] = "The username " + username + " is already in use. Please choose a new one."
             return make_response(jsonify(result), 400)
@@ -317,7 +316,7 @@ def search():
     def getSort(orderBy, isAsc):
         orderByMap = ["recipeId", "difficulty", "cookTime"]
         sortOrder = ["DESC", "ASC"]
-        return " ORDER BY " + orderByMap[orderBy] + " " + sortOrder[isAsc]
+        return " ORDER BY " + orderByMap[orderBy] + " " + sortOrder[isAsc] + ";"
 
     # use recipe_dict to keep track of recipes from query results
     # add a score field to keep track of relevant recipes
@@ -392,15 +391,15 @@ def search():
                 queryText = file.read()
             addToDict(query(queryText + getSort(orderBy, isAsc)))
 
+        # Only make query if recipeName is not empty
         if (recipeName != ""):
-            # Only make query if recipeName is not empty
             with open("sql_scripts/search/recipeByNameQuery.sql") as file:
                 queryText = file.read()
             addToDict(query(queryText + getSort(orderBy, isAsc), recipeName))
         
-        if(len(args["ingredients"]) > 0):
-            # Only make query if ingredients are not empty
-            params = "|".join(args["ingredients"])
+        # Only make query if ingredients are not empty
+        if(len(ingredients) > 0):
+            params = "|".join(ingredients)
             if(not isSubs):
                 with open("sql_scripts/search/recipeByIngredientsQuery.sql") as file:
                     queryText = file.read()
@@ -419,15 +418,14 @@ def search():
                 else:
                     addToDict(query(queryText + getSort(orderBy, isAsc), [params], True))
             
-        if ("tags" in args):
+        # Only make query if tags are not empty
+        if(len(tags) > 0):
+            params = "|".join(tags)
             with open("sql_scripts/search/recipeByTagQuery.sql") as file:
                 queryText = file.read()
-            
-            # Only make query if tags are not empty
-            if(len(args["tags"]) > 0):
-                params = "|".join(args["tags"])
-                addToDict(query(queryText + getSort(orderBy, isAsc), params))
+            addToDict(query(queryText + getSort(orderBy, isAsc), params))
         
+        # Only make query if exclude is not empty
         if(len(exclude) > 0):
             excludes = "|".join(exclude)
             with open("sql_scripts/search/recipeExcludeIngredients.sql") as file:
@@ -436,6 +434,7 @@ def search():
             filteredIds = list(map(lambda x: x["recipeId"], filtered))
 
         result["recipes"] = [v for i,v in recipe_dict.items()]
+        # Filter out excluded recipes if exclude is not empty
         if(len(exclude) > 0):
             result["recipes"] = list(filter(lambda x: x["recipeId"] in filteredIds, result["recipes"]))
         # sort recipes by their scores
