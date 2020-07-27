@@ -15,9 +15,10 @@ const CreateDialog = ({open, handleClose, userName}) => {
     const [servings, setServings] = useState(0);
     const [imageUrl, setImageUrl] = useState("");
     const [instructionsLink, setInstructionsLink] = useState("");
-    const [ingredients, setIngredients] = useState([emptyIngredient]);
-    const [numIngredients, setNumIngredients] = useState(1);
+    const [ingredients, setIngredients] = useState([{...emptyIngredient}]);
+    const [ingredientsKey, setIngredientsKey] = useState(0);
     const [tags, setTags] = useState([]);
+    const [forceUpdate, setForceUpdate] = useState(false);
 
     const validateInput = () => {
         let errors = "";
@@ -44,40 +45,29 @@ const CreateDialog = ({open, handleClose, userName}) => {
     }
 
     const updateIngredient = (index, ingredientData) => {
-        let temp = ingredients;
-        console.log(index);
+        const temp = ingredients;
         temp[index] = ingredientData;
-        console.log(temp[0].foodName)
         setIngredients(temp);
+        setForceUpdate(!forceUpdate);
     }
     const addIngredient = () => {
-        let temp = ingredients;
-        temp.push(emptyIngredient);
+        const temp = ingredients;
+        let tempIng = {...emptyIngredient, ingredientsKey: ingredientsKey};
+        setIngredientsKey(ingredientsKey+1);
+        temp.push(tempIng);
         setIngredients(temp);
-        setNumIngredients(numIngredients+1);
     }
     const removeIngredient = (index) => {
         let temp = ingredients;
         temp.splice(index, 1);
-        setIngredients(temp);  
-        console.log(temp[0].foodName);  
-        setNumIngredients(numIngredients-1);
-    }
-    const getIngredientsRow = () => {
-        return <div> 
-            {ingredients.map((item, index) => 
-                <div key={item.foodName}>
-                    <IngredientInput index={index} updateIngredient={updateIngredient} foodNameProp={item.foodName}/>
-                    <button onClick={()=>{removeIngredient(index)}}> - </button>
-                </div>
-            )}
-        </div>
+        setIngredients(temp);
+        setForceUpdate(!forceUpdate);
     }
 
 return (
     <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth="md">
         <DialogContent className="fm-dialog-content">
-        <div className="no-gutters recipe-details">
+        <div className="no-gutters recipe-details" style={{'overflow-y': 'auto'}} >
             <button className="close" aria-label="Close" onClick={handleClose}>
                 <Close aria-hidden="true" />
             </button>
@@ -118,7 +108,12 @@ return (
                     <div className="col-2"> Unit </div>
                     <div className="col-5"> Substitute Ingredients</div>
                 </div>
-                { getIngredientsRow() }
+                {ingredients.map((item, index) =>
+                    <div key={item.ingredientsKey}>
+                        <IngredientInput key={item.ingredientsKey} index={index} updateIngredient={updateIngredient} ingredient={item}/>
+                        <button onClick={()=>{removeIngredient(index)}}> - </button>
+                    </div>
+                )}
                 <button onClick={addIngredient}>
                     +
                 </button>
