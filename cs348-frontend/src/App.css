@@ -274,6 +274,22 @@ body {
   color: white;
 }
 
+.no-padding {padding: 0}
+
+.delete-ing-button {
+  display: inline-block;
+  margin-top: 0.3rem;
+  height: 2rem;
+  width: 1.4rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  line-height: 1rem;
+  text-align: center;
+  background-color: var(--olive-dark);
+  border: none;
+  color: white;
+}
+
 a.fm-button:hover {
   color: white;
   text-decoration: none;

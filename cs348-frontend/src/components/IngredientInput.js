@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ChipInput from "./ChipInput";
 
 import "./RecipeDialog.css"
@@ -13,18 +13,18 @@ const IngredientInput = ({index, updateIngredient, ingredient}) => {
     <div className="row">
         <div className="col-3">
             <input type="text" id={"name"+index} className="fm-text-input" placeholder="Ingredient Name"
-                onChange={ (e) => updateVal('foodName', e.target.value) } />
+                value={ingredient.foodName} onChange={ (e) => updateVal('foodName', e.target.value) } />
         </div>
-        <div className="col-1">
+        <div className="col-1 no-padding">
             <input type="number" className="fm-text-input" placeholder="#"
-                onChange={ (e) => updateVal('quantity', e.target.value) } />
+                value={ingredient.quantity} onChange={ (e) => updateVal('quantity', e.target.value) } />
         </div>
         <div className="col-2">
             <input type="text" className="fm-text-input" placeholder="Unit"
-                onChange={ (e) => updateVal('unit', e.target.value)} />
+                value={ingredient.unit} onChange={ (e) => updateVal('unit', e.target.value)} />
         </div>
-        <div className="col-5">
-            <ChipInput typeName="tag" values={ingredient.substitutions} 
+        <div className="col-6 no-padding">
+            <ChipInput typeName="substitute" values={ingredient.substitutions} 
                 setValues={ (values) => updateVal('substitutions', values)} />
         </div>
     </div>
