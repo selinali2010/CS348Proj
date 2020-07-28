@@ -322,3 +322,9 @@ a.fm-button:hover {
   background: var(--paper);
   width: 20px;
 }
+
+.MuiPopover-paper {
+  padding: 7px;
+  width: 250px;
+  border-radius: 0;
+}

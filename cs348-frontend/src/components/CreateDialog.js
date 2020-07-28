@@ -3,6 +3,7 @@ import { Dialog, DialogContent } from '@material-ui/core';
 import { Close, Add } from '@material-ui/icons';
 import ChipInput from "./ChipInput";
 import IngredientInput from "./IngredientInput";
+import { multiStringListify } from "./stringhelpers"
 
 import "./RecipeDialog.css"
 
@@ -34,13 +35,9 @@ const CreateDialog = ({open, handleClose, userName}) => {
             if (ing.quantity <= 0 && !requiredFields.includes("Ingredient Quantity")) requiredFields.push("Ingredient Quantity");
             if (ing.unit === "" && !requiredFields.includes("Ingredient Unit")) requiredFields.push("Ingredient Unit");
         })
-        if (requiredFields.length === 1) errors += requiredFields[0] + " is a required field"
-        if (requiredFields.length === 2) errors += requiredFields[0] + " and " + requiredFields[1] +  " are required fields"
-        else if (requiredFields.length > 2) {
-            for (let i = 0; i < requiredFields.length -1; i++) {
-                errors += requiredFields[i] + ', ';
-            }
-            errors += "and " + requiredFields[requiredFields.length-1] +  " are required fields"
+        if (requiredFields.length === 1) errors += requiredFields[0] + " is a required field."
+        else if (requiredFields.length > 1) {
+            errors = multiStringListify(requiredFields, 'and') + " are required fields."
         }
         
         if (errors === "") {
