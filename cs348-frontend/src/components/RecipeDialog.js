@@ -234,11 +234,11 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
                     style={{'pointerEvents': 'none'}}
                     anchorEl={anchorEl}
                     anchorOrigin={{
-                      vertical: 'bottom',
+                      vertical: 'top',
                       horizontal: 'left',
                     }}
                     transformOrigin={{
-                      vertical: 'top',
+                      vertical: 'bottom',
                       horizontal: 'left',
                     }}
                     onClose={handlePopoverClose}
