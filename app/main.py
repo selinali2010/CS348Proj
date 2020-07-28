@@ -443,12 +443,14 @@ def search():
             result["recipes"] = list(filter(lambda x: x["recipeId"] in filteredIds, result["recipes"]))
         
         # sort recipes by the correct sort property
+        print(result["recipes"])
         if orderBy == 0:
             result["recipes"].sort(key=lambda x: x["score"], reverse=(isAsc==1))
         elif orderBy == 1:
-            result["recipes"].sort(key=lambda x: x["difficulty"], reverse=(isAsc==0))
+            result["recipes"].sort(key=lambda x: x["difficulty"] if x["difficulty"] != None else 0, reverse=(isAsc==0))
         elif orderBy == 2:
-            result["recipes"].sort(key=lambda x: x["cookTime"], reverse=(isAsc==0))
+            print(result["recipes"][0])
+            result["recipes"].sort(key=lambda x: x["cookTime"] if x["cookTime"] != None else 0, reverse=(isAsc==0))
         elif orderBy == 3:
             result["recipes"].sort(key=lambda x: (x["count"] / x["total"]), reverse=(isAsc==1))
 
