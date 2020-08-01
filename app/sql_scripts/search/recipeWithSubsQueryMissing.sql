@@ -1,8 +1,6 @@
 -- Returns all recipes with the provided ingredients and allows for substitutions
 -- Not strict mode
 -- Sort by ingredient match
-SET @params := %s;
-
 SELECT r.recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName, count, total
 FROM (
   SELECT recipe.recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName, COUNT(foodName) as count

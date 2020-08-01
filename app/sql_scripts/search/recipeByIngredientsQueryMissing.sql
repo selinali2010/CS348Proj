@@ -4,7 +4,7 @@ SELECT r.recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageUrl
 FROM (
   SELECT recipe.recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName, COUNT(foodName) as count
   FROM recipe JOIN ingredient ON recipe.recipeId = ingredient.recipeId
-  WHERE foodName REGEXP %s
+  WHERE foodName REGEXP @params
   -- Add a count attribute to each result that indicates number of matched ingredients
   GROUP BY recipe.recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName
 ) as r JOIN (

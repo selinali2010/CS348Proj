@@ -1,8 +1,5 @@
 -- Returns all recipes with the provided ingredients, allows for substitutions and eliminates excluded ingredients (not subs)
 -- Not strict mode
-SET @params := %s;
-SET @exclude := %s;
-
 SELECT recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName
 FROM recipe 
 WHERE recipeId IN (

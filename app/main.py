@@ -318,30 +318,19 @@ def search():
         orderBy = 0
 
     def getSort(orderBy, isAsc):
-        orderByMap = ["recipeId", "difficulty", "cookTime", "1 - IFNULL(count,0)/total"]
+        orderByMap = ["recipeId", "difficulty", "cookTime", "1 - IFNULL(count,0)/total", "COUNT(recipeId)"]
         sortOrder = ["DESC", "ASC"]
         return " ORDER BY " + orderByMap[orderBy] + " " + sortOrder[isAsc] + ";"
 
-    # use recipe_dict to keep track of recipes from query results
-    # add a score field to keep track of relevant recipes
-    def addToDict(res: dict) -> None:
-        for r in res:
-            if "recipeId" in r:
-                if r["recipeId"] in recipe_dict:
-                    recipe_dict[r["recipeId"]]["score"] += 1
-                else:
-                    recipe_dict[r["recipeId"]] = r
-                    recipe_dict[r["recipeId"]]["score"] = 1
+    queries = []
+    paramList = [recipeName, "|".join(ingredients), "|".join(exclude), "|".join(tags)]
 
-    if(isStrict):
-        queries = []
-        paramList = [recipeName, "|".join(ingredients), "|".join(exclude), "|".join(tags)]
-
-        if(recipeName == "" and len(ingredients) == 0 and len(tags) == 0):
+    if(recipeName == "" and len(ingredients) == 0 and len(tags) == 0):
             with open("sql_scripts/search/recipeAll.sql") as file:
                 queryText = file.read()
             queries.append(queryText)
 
+    if(isStrict):
         # Only make query if recipeName is not empty
         if (recipeName != ""):
             with open("sql_scripts/search/recipeByNameQueryStrict.sql") as file:
@@ -386,21 +375,15 @@ def search():
         sqlQuery = "SET @name := %s;\nSET @params := %s;\nSET @exclude := %s;\nSET @tags := %s;\n"
         # Then piece together all the queries and add the order by
         sqlQuery += "SELECT * FROM recipe WHERE recipeId IN (\n" + "\n) AND recipeId IN (\n".join(queries) + "\n)" + getSort(orderBy, isAsc)
-        
-        result["recipes"] = query(sqlQuery, paramList, True)
 
     else:
-        if(recipeName == "" and len(ingredients) == 0 and len(tags) == 0):
-            with open("sql_scripts/search/recipeAll.sql") as file:
-                queryText = file.read()
-            addToDict(query(queryText + getSort(orderBy, isAsc)))
+        filterQuery = ""
 
         # Only make query if recipeName is not empty
         if (recipeName != ""):
             with open("sql_scripts/search/recipeByNameQuery" + ("Missing" if (orderBy == 3) else "") + ".sql") as file:
                 queryText = file.read()
-            params = [recipeName, "|".join(ingredients)] if orderBy == 3 else recipeName
-            addToDict(query(queryText + getSort(orderBy, isAsc), params))
+            queries.append(queryText)
         
         # Only make query if ingredients are not empty
         if(len(ingredients) > 0):
@@ -408,59 +391,56 @@ def search():
             if(not isSubs):
                 with open("sql_scripts/search/recipeByIngredientsQuery" + ("Missing" if (orderBy == 3) else "") + ".sql") as file:
                     queryText = file.read()
-                addToDict(query(queryText + getSort(orderBy, isAsc), params))
+                queries.append(queryText)
             else:
-                with open("sql_scripts/search/recipeWithSubsQuery" + ("Missing" if (orderBy == 3) else "") + ".sql") as file:
-                    queryText = file.read()
-                  
                 # If excluded ingredients are provided add additional query text and parameters
                 if(len(exclude) > 0):
                     excludes = "|".join(exclude)
                     with open("sql_scripts/search/recipeExcludeWithSubs" + ("Missing" if (orderBy == 3) else "") + ".sql") as file:
                         queryText = file.read()
-                    addToDict(query(queryText + getSort(orderBy, isAsc), [params, excludes], True))
+                    queries.append(queryText)
                 else:
-                    addToDict(query(queryText + getSort(orderBy, isAsc), [params], True))
+                    with open("sql_scripts/search/recipeWithSubsQuery" + ("Missing" if (orderBy == 3) else "") + ".sql") as file:
+                        queryText = file.read()
+                    queries.append(queryText)
             
         # Only make query if tags are not empty
         if(len(tags) > 0):
             with open("sql_scripts/search/recipeByTagQuery" + ("Missing" if (orderBy == 3) else "") + ".sql") as file:
                 queryText = file.read()
-            params = [tags, "|".join(ingredients)] if orderBy == 3 else tags
-            addToDict(query(queryText + getSort(orderBy, isAsc), params))
+            queries.append(queryText)
         
         # Only make query if exclude is not empty
         if(len(exclude) > 0):
             excludes = "|".join(exclude)
             with open("sql_scripts/search/recipeExcludeIngredients.sql") as file:
                 queryText = file.read()
-            filtered = query(queryText + ";", excludes)
-            filteredIds = list(map(lambda x: x["recipeId"], filtered))
+            filterQuery = " WHERE recipeId IN (\n" + queryText + "\n)"
 
-        result["recipes"] = [v for i,v in recipe_dict.items()]
-        # Filter out excluded recipes if exclude is not empty
-        if(len(exclude) > 0):
-            result["recipes"] = list(filter(lambda x: x["recipeId"] in filteredIds, result["recipes"]))
-        
-        # sort recipes by the correct sort property
-        print(result["recipes"])
-        if orderBy == 0:
-            result["recipes"].sort(key=lambda x: x["score"], reverse=(isAsc==1))
-        elif orderBy == 1:
-            result["recipes"].sort(key=lambda x: x["difficulty"] if x["difficulty"] != None else 0, reverse=(isAsc==0))
-        elif orderBy == 2:
-            print(result["recipes"][0])
-            result["recipes"].sort(key=lambda x: x["cookTime"] if x["cookTime"] != None else 0, reverse=(isAsc==0))
-        elif orderBy == 3:
-            result["recipes"].sort(key=lambda x: (x["count"] / x["total"]), reverse=(isAsc==1))
+        # If best match sort and multiple queries needed, switch to scoring sort and reverse isAsc
+        if(orderBy == 0 and len(queries) > 1):
+            orderBy = 4
+            isAsc = not isAsc
+
+        # First set all parameters
+        sqlQuery = "SET @name := %s;\nSET @params := %s;\nSET @exclude := %s;\nSET @tags := %s;\n"
+
+        # If scoring sort, apply UNION ALL and GROUP BY to sort by number of times a recipe occurs in each separate query
+        if (orderBy == 4):
+            sqlQuery += "SELECT * FROM (\n" + "\n UNION ALL \n".join(queries) + "\n) AS result" + filterQuery + " GROUP BY recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName" + (", count, total" if orderBy == 3 else "") + "\n" + getSort(orderBy, isAsc)
+        # Otherwise, piece together all the queries and add the order by
+        else:
+            sqlQuery += "SELECT * FROM (\n" + "\n UNION \n".join(queries) + "\n) AS result" + filterQuery + getSort(orderBy, isAsc)
+
+    result["recipes"] = query(sqlQuery, paramList, True)
 
     isEmpty = len(result["recipes"]) == 0
     result["isEmpty"] = isEmpty 
 
     # if there are no results, backfill query for all recipes
     if (isEmpty):
-        # if sorting by missing ingredients, switch to recipeId sort
-        if orderBy == 3: 
+        # if sorting by missing ingredients or scoring, switch to recipeId sort
+        if orderBy == 3 or orderBy == 4: 
             orderBy = 0
         with open("sql_scripts/search/recipeAll.sql") as file:
             queryText = file.read()

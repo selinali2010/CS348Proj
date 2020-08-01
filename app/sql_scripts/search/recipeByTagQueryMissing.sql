@@ -7,13 +7,13 @@ FROM (
   FROM recipe
   WHERE recipeId IN (
 		SELECT DISTINCT recipeId FROM tags
-		WHERE tagName REGEXP %s
+		WHERE tagName REGEXP @tags
 	)
 ) as r LEFT OUTER JOIN (
   -- Add a count attribute to each result that indicates number of matched ingredients
   SELECT recipe.recipeId, COUNT(foodName) as count
   FROM recipe JOIN ingredient ON recipe.recipeId = ingredient.recipeId
-  WHERE foodName REGEXP %s
+  WHERE foodName REGEXP @params
   GROUP BY recipe.recipeId
 ) as c ON r.recipeId = c.recipeId JOIN (
   -- Add a total attribute to each result that indicates total number of ingredients

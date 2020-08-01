@@ -3,5 +3,5 @@ SELECT recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageUrl, 
 FROM recipe 
 WHERE recipeId IN (
 	SELECT DISTINCT recipeId FROM tags
-	WHERE tagName REGEXP %s
+	WHERE tagName REGEXP @tags
 )

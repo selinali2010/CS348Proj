@@ -4,5 +4,5 @@ SELECT recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageUrl, 
 FROM recipe 
 WHERE recipeId IN (
 	SELECT DISTINCT recipeId FROM ingredient
-	WHERE foodName REGEXP %s
+	WHERE foodName REGEXP @params
 )
