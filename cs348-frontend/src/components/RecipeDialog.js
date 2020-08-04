@@ -4,7 +4,7 @@ import { setFavourites } from "../redux/actions";
 import { connect } from "react-redux";
 import { Dialog, DialogContent, Popover } from '@material-ui/core';
 import { Close, Launch, Info } from '@material-ui/icons';
-import { multiStringListify, capitalizeFirstLetter } from "./stringhelpers"
+import { capitalizeFirstLetter } from "./stringhelpers"
 import Chart from './Chart';
 import Chip from './Chip';
 import "./RecipeDialog.css"
@@ -22,7 +22,6 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
   const [mood, setMood] = useState(null);
   const [moodCount, setMoodCount] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [popOverText, setPopOverText] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +31,6 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
         setMood(null);
         setMoodCount(null);
         setAnchorEl(null);
-        setPopOverText("");
       }
       if(Object.keys(recipe).length !== 0){
         // Fetch recipe ingredients and merge substition results
@@ -43,6 +41,10 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
                 for (let ing of ingredients) {
                   ing.subs = substitutions.filter((sub) => sub.foodName === ing.foodName).map((sub) => sub.substituteName);
                 }
+                ingredients[0].subs.push("paprika");
+                ingredients[0].subs.push("pork");
+                ingredients[0].subs.push("salt");
+                ingredients[0].subs.push("garlic");
                 setIngredients(ingredients);          
               })
             });
@@ -143,7 +145,6 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
   }
 
   const handlePopoverOpen = (event) => {
-    setPopOverText(event.currentTarget.value);
     setAnchorEl(event.currentTarget);
 
   };
@@ -151,8 +152,27 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
     setAnchorEl(null);
   };
 
-  const listifySubstitutions = (foodName, subs) => {
-    return capitalizeFirstLetter(foodName) + " can be substituted for " + multiStringListify(subs, 'or') + " in this recipe.";
+  const getPopOverText = () => {
+    if (anchorEl == null) {
+      return "";
+    }
+    else {
+      let ing = ingredients[anchorEl.value];
+      let subSpan;
+      if (ing.subs.length === 1) subSpan = <span className="sub"> {ing.subs[0]}</span>;
+      else if (ing.subs.length === 2) subSpan = <span>
+          <span className="sub">{ing.subs[0]}</span> or <span className="sub">{ing.subs[1]}</span>
+        </span>;
+      else {
+        subSpan = <span>
+            {ing.subs.slice(0, ing.subs.length-1).map((ele, index) => <span> <span key={index} className="sub"> {ele}</span>, </span>)}
+            or<span className="sub"> {ing.subs[ing.subs.length-1]}</span>
+        </span>
+      }
+      return <div>
+        <span className="foodname">{capitalizeFirstLetter(ing.foodName)}</span> can be substituted in this recipe for {subSpan}.
+      </div>
+    }
   }
 
   return (
@@ -178,7 +198,7 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
           </div>
           <div className="col-md-6 recipe-details-col recipe-details-right-col">
             <div className="recipe-details-section">
-              <h1>{recipe.recipeName}</h1>
+              <h1>{(recipe.recipeName)? capitalizeFirstLetter(recipe.recipeName) : recipe.recipeName}</h1>
             </div>
 
             <div className="recipe-details-section">
@@ -221,7 +241,7 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
                 {ingredients && ingredients.map(
                   (ele, index) => <li key={index} id="">
                     {ele.quantity} {ele.unit} {ele.foodName}
-                    {(ele.subs.length > 0)? <button value={listifySubstitutions(ele.foodName, ele.subs)} 
+                    {(ele.subs.length > 0)? <button value={index} 
                         onMouseEnter={handlePopoverOpen}
                         onMouseLeave={handlePopoverClose}
                         className="ingredients-more-info">
@@ -244,10 +264,7 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
                     onClose={handlePopoverClose}
                     disableRestoreFocus
                   >
-                    <div>
-                      {popOverText}
-                    </div>
-                    
+                    {getPopOverText()}
                   </Popover>
               </ul>
             </div>

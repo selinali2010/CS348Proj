@@ -328,3 +328,12 @@ a.fm-button:hover {
   width: 250px;
   border-radius: 0;
 }
+
+.sub {
+  color: var(--olive-dark);
+  font-weight: bold;
+}
+.foodname {
+  color: var(--olive);
+  font-weight: bold;
+}
