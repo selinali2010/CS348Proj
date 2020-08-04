@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { getUserState, getUserFavourites, getFavouritesFilter } from '../redux/selectors'
 import { setFavourites } from "../redux/actions";
@@ -41,10 +42,6 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
                 for (let ing of ingredients) {
                   ing.subs = substitutions.filter((sub) => sub.foodName === ing.foodName).map((sub) => sub.substituteName);
                 }
-                ingredients[0].subs.push("paprika");
-                ingredients[0].subs.push("pork");
-                ingredients[0].subs.push("salt");
-                ingredients[0].subs.push("garlic");
                 setIngredients(ingredients);          
               })
             });

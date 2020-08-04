@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
+  // Remove React.StrictMode in production to get rid of Material UI errors
   <React.StrictMode>
     <App />
   </React.StrictMode>,

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import ChipInput from "./ChipInput";
@@ -30,7 +31,6 @@ const SearchContentBox = ({orderBy, asc, addResults}) => {
         if (activeSearch) {
             searchRecipes();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [orderBy, asc])
 
     const searchRecipes = () => {
