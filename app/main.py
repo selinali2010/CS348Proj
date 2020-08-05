@@ -77,11 +77,24 @@ def recipes():
     result = query(queryText)
     return jsonify(result)
 
-@app.route("/api/ingredients/<int:id>", methods=["GET"])
-def ingredients(id):
+@app.route("/api/ingredients", methods=["GET"])
+def ingredients():
+    recipeId = request.args["id"]
+    ingredients = request.args.getlist("ing")
+
+    # Set params to reject all strings
+    params = "|".join(ingredients) if len(ingredients) > 0 else "$^"
+
     with open("sql_scripts/recipeDetails/ingredientsQuery.sql") as file:
         queryText = file.read()
-    result = query(queryText, id)
+    result = query(queryText, [recipeId, params], True)
+
+    # Convert subs string into an array
+    for r in result:
+        if r["subs"] == None:
+            r["subs"] = []
+        else:
+            r["subs"] = r["subs"].split(",")
     return jsonify(result)
 
 @app.route("/api/tags/<int:id>", methods=["GET"])
