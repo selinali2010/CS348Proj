@@ -6,22 +6,26 @@
   border-radius: 0.75rem;
   margin-left: 0.125rem;
   margin-right: 0.125rem;
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
   background-color: var(--olive-dark);
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .fm-chip-label {
   color: white;
-  margin: 0 0.625rem;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size: 1rem;
 }
 
 .fm-chip-delete-icon {
   font-size: 1rem !important;
   color: white;
-  margin-left: -0.3125rem;
-  margin-right: 0.3125rem;
+  margin-right: -0.25rem;
+  margin-left: 0.125rem;
 }

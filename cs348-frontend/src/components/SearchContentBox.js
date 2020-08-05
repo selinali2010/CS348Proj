@@ -1,22 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import ChipInput from "./ChipInput";
 import { Checkbox, Collapse, FormControlLabel } from "@material-ui/core";
 import { AddSharp, RemoveSharp, Search } from '@material-ui/icons';
-import { addResults } from "../redux/actions";
+import { addResults, setStrict, setIngredientsState } from "../redux/actions";
 import { getResultsOrder } from '../redux/selectors';
 
 
 const mapStateToProps = state => {
     let orderBy, asc;
     ({orderBy, asc} = getResultsOrder(state));
-    if (orderBy === "Closest Match") orderBy = 0;
-    else if (orderBy === "Difficulty") orderBy = 1;
-    else orderBy = 2;
     return { orderBy, asc };
 };
 
-const SearchContentBox = ({orderBy, asc, addResults}) => {
+const SearchContentBox = ({orderBy, asc, addResults, setStrict, setIngredientsState }) => {
     const [activeSearch, setActiveSearch] = useState(false);
     const [recipeName, setRecipeName] = useState("");
     const [ingredients, setIngredients] = useState([]);
@@ -30,7 +28,6 @@ const SearchContentBox = ({orderBy, asc, addResults}) => {
         if (activeSearch) {
             searchRecipes();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [orderBy, asc])
 
     const searchRecipes = () => {
@@ -63,6 +60,7 @@ const SearchContentBox = ({orderBy, asc, addResults}) => {
       if (!e.target.checked){
         setExclude([]);
         setIsStrict(false);
+        setStrict(false);
         setIsSubs(false);
       }
       setIsCollapse(e.target.checked)
@@ -84,7 +82,7 @@ const SearchContentBox = ({orderBy, asc, addResults}) => {
                     <div> Search By Ingredients: </div>
                     <ChipInput typeName="ingredient"
                         values={ingredients}
-                        setValues={ (values) => setIngredients(values) } />
+                        setValues={ (values) => {setIngredients(values); setIngredientsState(values)} } />
 
                     <div> Search By Tags: </div>
                     <ChipInput typeName="tag"
@@ -114,7 +112,7 @@ const SearchContentBox = ({orderBy, asc, addResults}) => {
                             color="default"
                             size="small"
                             checked={isStrict}
-                            onChange={(event) => setIsStrict(event.target.checked)}
+                            onChange={(event) => {setIsStrict(event.target.checked); setStrict(event.target.checked)}}
                           />
                         }
                         label={<div className="fm-checkbox-label">Strict Mode</div>}
@@ -144,5 +142,5 @@ const SearchContentBox = ({orderBy, asc, addResults}) => {
 
 export default connect(
     mapStateToProps,
-    { addResults }
+    { addResults, setStrict, setIngredientsState}
 )(SearchContentBox);

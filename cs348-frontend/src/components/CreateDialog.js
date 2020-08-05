@@ -8,7 +8,7 @@ import { multiStringListify } from "./stringhelpers"
 import "./RecipeDialog.css"
 
 const CreateDialog = ({open, handleClose, userName}) => {
-    const emptyIngredient = {foodName: "", quantity: 0, unit: "", substitutions: []};
+    const emptyIngredient = {foodName: "", quantity: 0, unit: "", substitutes: []};
     const [recipeName, setRecipeName] = useState("");
     const [cookTime, setCookTime] = useState(0);
     const [difficulty, setDifficulty] = useState(0);

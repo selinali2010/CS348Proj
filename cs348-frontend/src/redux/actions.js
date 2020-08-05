@@ -1,4 +1,5 @@
-import { ADD_RESULTS, LOGIN_USER, LOGOUT_USER, SET_FAVOURITES, SET_FAVOURITES_FILTER, SET_RESULTS_ORDER, SET_RESULTS_ASC } from "./actionTypes";
+import { ADD_RESULTS, LOGIN_USER, LOGOUT_USER, SET_FAVOURITES, 
+  SET_FAVOURITES_FILTER, SET_RESULTS_ORDER, SET_RESULTS_ASC, SET_STRICT, SET_ING } from "./actionTypes";
 
 export const addResults = content => ({
   type: ADD_RESULTS,
@@ -46,4 +47,18 @@ export const loginUser = (userId, userName) => ({
 export const logoutUser = () => ({ 
     type: LOGOUT_USER, 
     payload: {} 
+});
+
+export const setStrict = (strict) => ({ 
+  type: SET_STRICT, 
+  payload: {
+    strict: strict
+  } 
+});
+
+export const setIngredientsState = (ingredients) => ({ 
+  type: SET_ING, 
+  payload: {
+    ingredients: ingredients
+  } 
 });

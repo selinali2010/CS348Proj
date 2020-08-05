@@ -24,8 +24,8 @@ const IngredientInput = ({index, updateIngredient, ingredient}) => {
                 value={ingredient.unit} onChange={ (e) => updateVal('unit', e.target.value)} />
         </div>
         <div className="col-6 no-padding">
-            <ChipInput typeName="substitute" values={ingredient.substitutions} 
-                setValues={ (values) => updateVal('substitutions', values)} />
+            <ChipInput typeName="substitute" values={ingredient.substitutes} 
+                setValues={ (values) => updateVal('substitutes', values)} />
         </div>
     </div>
   );
