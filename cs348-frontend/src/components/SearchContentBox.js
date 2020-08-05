@@ -4,20 +4,17 @@ import { connect } from "react-redux";
 import ChipInput from "./ChipInput";
 import { Checkbox, Collapse, FormControlLabel } from "@material-ui/core";
 import { AddSharp, RemoveSharp, Search } from '@material-ui/icons';
-import { addResults } from "../redux/actions";
+import { addResults, setStrict } from "../redux/actions";
 import { getResultsOrder } from '../redux/selectors';
 
 
 const mapStateToProps = state => {
     let orderBy, asc;
     ({orderBy, asc} = getResultsOrder(state));
-    if (orderBy === "Closest Match") orderBy = 0;
-    else if (orderBy === "Difficulty") orderBy = 1;
-    else orderBy = 2;
     return { orderBy, asc };
 };
 
-const SearchContentBox = ({orderBy, asc, addResults}) => {
+const SearchContentBox = ({orderBy, asc, addResults, setStrict }) => {
     const [activeSearch, setActiveSearch] = useState(false);
     const [recipeName, setRecipeName] = useState("");
     const [ingredients, setIngredients] = useState([]);
@@ -63,6 +60,7 @@ const SearchContentBox = ({orderBy, asc, addResults}) => {
       if (!e.target.checked){
         setExclude([]);
         setIsStrict(false);
+        setStrict(false);
         setIsSubs(false);
       }
       setIsCollapse(e.target.checked)
@@ -114,7 +112,7 @@ const SearchContentBox = ({orderBy, asc, addResults}) => {
                             color="default"
                             size="small"
                             checked={isStrict}
-                            onChange={(event) => setIsStrict(event.target.checked)}
+                            onChange={(event) => {setIsStrict(event.target.checked); setStrict(event.target.checked)}}
                           />
                         }
                         label={<div className="fm-checkbox-label">Strict Mode</div>}
@@ -144,5 +142,5 @@ const SearchContentBox = ({orderBy, asc, addResults}) => {
 
 export default connect(
     mapStateToProps,
-    { addResults }
+    { addResults, setStrict }
 )(SearchContentBox);
