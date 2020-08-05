@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { getUserState, getUserFavourites, getFavouritesFilter } from '../redux/selectors'
+import { getUserState, getUserFavourites, getFavouritesFilter, getIngredientsState } from '../redux/selectors'
 import { setFavourites } from "../redux/actions";
 import { connect } from "react-redux";
 import { Dialog, DialogContent, Popover } from '@material-ui/core';
@@ -14,10 +14,11 @@ const mapStateToProps = state => {
   const userId = getUserState(state);
   const favourites = getUserFavourites(state);
   const favouritesFilter = getFavouritesFilter(state);
-  return { userId, favourites, favouritesFilter };
+  const searchIngredients = getIngredientsState(state);
+  return { userId, favourites, favouritesFilter, searchIngredients };
 };
 
-const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favouritesFilter , setFavourites}) => {
+const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favouritesFilter , setFavourites, searchIngredients}) => {
   const [ingredients, setIngredients] = useState(null);
   const [tags, setTags] = useState(null);
   const [mood, setMood] = useState(null);

@@ -6,3 +6,4 @@ export const LOGOUT_USER = "LOGOUT_USER";
 export const SET_FAVOURITES = "SET_FAVOURITES";
 export const SET_FAVOURITES_FILTER = "SET_FAVOURITES_FILTER";
 export const SET_STRICT = "SET_STRICT";
+export const SET_ING = "SET_ING";

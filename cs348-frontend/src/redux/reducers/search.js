@@ -1,7 +1,8 @@
-import { ADD_RESULTS, SET_RESULTS_ORDER, SET_RESULTS_ASC, SET_STRICT } from "../actionTypes";
+import { ADD_RESULTS, SET_RESULTS_ORDER, SET_RESULTS_ASC, SET_STRICT, SET_ING } from "../actionTypes";
 
 const initialState = {
     results: [],
+    ingredients: [],
     orderBy: 0,
     asc: 1,
     strict: false
@@ -35,6 +36,13 @@ export default function(state = initialState, action) {
         return {
           ...state,
           strict: strict
+        };
+      }
+      case SET_ING: {
+        const { ingredients }  = action.payload;
+        return {
+          ...state,
+          ingredients: ingredients
         };
       }
       default:

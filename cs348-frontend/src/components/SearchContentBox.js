@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import ChipInput from "./ChipInput";
 import { Checkbox, Collapse, FormControlLabel } from "@material-ui/core";
 import { AddSharp, RemoveSharp, Search } from '@material-ui/icons';
-import { addResults, setStrict } from "../redux/actions";
+import { addResults, setStrict, setIngredientsState } from "../redux/actions";
 import { getResultsOrder } from '../redux/selectors';
 
 
@@ -14,7 +14,7 @@ const mapStateToProps = state => {
     return { orderBy, asc };
 };
 
-const SearchContentBox = ({orderBy, asc, addResults, setStrict }) => {
+const SearchContentBox = ({orderBy, asc, addResults, setStrict, setIngredientsState }) => {
     const [activeSearch, setActiveSearch] = useState(false);
     const [recipeName, setRecipeName] = useState("");
     const [ingredients, setIngredients] = useState([]);
@@ -82,7 +82,7 @@ const SearchContentBox = ({orderBy, asc, addResults, setStrict }) => {
                     <div> Search By Ingredients: </div>
                     <ChipInput typeName="ingredient"
                         values={ingredients}
-                        setValues={ (values) => setIngredients(values) } />
+                        setValues={ (values) => {setIngredients(values); setIngredientsState(values)} } />
 
                     <div> Search By Tags: </div>
                     <ChipInput typeName="tag"
@@ -142,5 +142,5 @@ const SearchContentBox = ({orderBy, asc, addResults, setStrict }) => {
 
 export default connect(
     mapStateToProps,
-    { addResults, setStrict }
+    { addResults, setStrict, setIngredientsState}
 )(SearchContentBox);
