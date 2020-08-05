@@ -337,3 +337,8 @@ a.fm-button:hover {
   color: var(--olive);
   font-weight: bold;
 }
+
+.matched-ingredient {
+  font-weight: bold;
+  color: var(--olive-dark);
+}

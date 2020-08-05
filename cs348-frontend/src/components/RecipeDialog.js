@@ -36,16 +36,10 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
       }
       if(Object.keys(recipe).length !== 0){
         // Fetch recipe ingredients and merge substition results
-        fetch(process.env.REACT_APP_API_URL + "api/ingredients/" + recipe.recipeId, {method: 'GET'}).then(res1 => {
+        let ingredientArgs = (searchIngredients.length === 0)? "" : '&ing=' + searchIngredients.join('&ing=');
+        fetch(process.env.REACT_APP_API_URL + "api/ingredients?id=" + recipe.recipeId + ingredientArgs, {method: 'GET'}).then(res1 => {
           res1.json().then(ingredients => {
-            fetch(process.env.REACT_APP_API_URL + "api/substitutions/" + recipe.recipeId, {method: 'GET'}).then(res2 => {
-              res2.json().then(substitutions => {
-                for (let ing of ingredients) {
-                  ing.subs = substitutions.filter((sub) => sub.foodName === ing.foodName).map((sub) => sub.substituteName);
-                }
-                setIngredients(ingredients);          
-              })
-            });
+            setIngredients(ingredients); 
           })
         });
         // Fetch recipe tags
@@ -72,7 +66,7 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
       }
     }
     fetchData();
-  }, [recipe, userId]);
+  }, [recipe, userId, searchIngredients]);
 
   const setUserMood = async (newMood) => {
     if(mood !== 0){
@@ -238,7 +232,9 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
               <ul>
                 {ingredients && ingredients.map(
                   (ele, index) => <li key={index} id="">
-                    {ele.quantity} {ele.unit} {ele.foodName}
+                    <span className={ele.isMatched? "matched-ingredient" : ""}>
+                      {ele.quantity} {ele.unit} {ele.foodName}
+                    </span>
                     {(ele.subs.length > 0)? <button value={index} 
                         onMouseEnter={handlePopoverOpen}
                         onMouseLeave={handlePopoverClose}

@@ -12,7 +12,7 @@ const mapStateToProps = state => {
 };
 
 const getIsEmpty = (results) => {
-    return results && results.isEmpty ? <div className="results-message"> No search results, showing all results </div> : null;
+    return results && results.isEmpty ? <div className="results-message"> No results matched your search criteria. Displaying all recipes instead. </div> : null;
 }   
 
 const ResultsContentBox = ({results, handleClick, setResultsOrder, setResultsAsc, strictMode}) => {
