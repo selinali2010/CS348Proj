@@ -24,6 +24,7 @@ const SearchContentBox = ({orderBy, asc, page, pageCount, addResults, setStrict,
     const [exclude, setExclude] = useState([]);
     const [isStrict, setIsStrict] = useState(false);
     const [isSubs, setIsSubs] = useState(false);
+    const [lastSearch, setLastSearch] = useState([]);
 
     useEffect(() => {
         if (activeSearch) {
@@ -39,21 +40,28 @@ const SearchContentBox = ({orderBy, asc, page, pageCount, addResults, setStrict,
     }, [page])
 
     const searchRecipes = (isNewSearch) => () => {
-        const fetchData = async () => {
+        let searchParams = lastSearch;
+        if (isNewSearch) {
+            searchParams = {
+                recipeName: recipeName, 
+                ingredients: ingredients, 
+                tags: tags,
+                isStrict: isStrict, 
+                isSubs: isSubs,
+                exclude: exclude
+            };
+            setLastSearch(searchParams)
+        }
+        (async () => {
             const response = await fetch(process.env.REACT_APP_API_URL+"api/search", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    recipeName: recipeName, 
-                    ingredients: ingredients, 
-                    tags: tags, 
-                    orderBy: orderBy, 
+                    ...searchParams,
+                    orderBy: orderBy,
                     isAsc: asc,
-                    isStrict: isStrict, 
-                    isSubs: isSubs,
-                    exclude: exclude,
                     page: isNewSearch ? 1 : page,
                     getCount: isNewSearch
                 }),
@@ -64,8 +72,7 @@ const SearchContentBox = ({orderBy, asc, page, pageCount, addResults, setStrict,
             if (isNewSearch) {
                 setPageCount(data.pageCount);
             }
-        }
-        fetchData();
+        })();
     }
 
     const handleCollapseChange = (e) => {
