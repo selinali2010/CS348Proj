@@ -22,20 +22,11 @@ const getIsEmpty = (results) => {
 const ResultsContentBox = ({handleClick, results, strictMode, page, pageCount, setResultsOrder, setResultsAsc, setPage}) => {
     const [asc, setAsc] = useState(1);
     const [order, setOrder] = useState(0);
-    const [currentPage, setCurrentPage] = useState(0);
 
     const updateOrder = (e) => {
         let orderBy = parseInt(e.target.options[e.target.selectedIndex].value)
         setResultsOrder(orderBy);
         setOrder(orderBy);
-    }
-
-    // TODO: PAGINATION CONTROLS
-    const incrementPage = () => {
-        // If (currentPage === highestPage && highestPage < pageCount)
-        //   setPaginationState(pageCount, highestPage++) // This will trigger searchContentBox to add more results
-        // if (pageCount < highestPage)
-        //   setCurrentPage(currentPage++)
     }
 
     useEffect(() => {
