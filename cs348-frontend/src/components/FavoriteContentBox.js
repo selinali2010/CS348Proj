@@ -35,7 +35,12 @@ const FavoriteContentBox = ({handleClick, userId, favourites, setFavourites, set
             <div className="section-title">
                 <div className="section-title-text">
                     My Saved Recipes
-                    <select onChange={handleMoodFilterChange} className="form-control form-control-lg reacts-order-control">
+                </div>
+                <div className="section-title-controls">
+                    <div className="section-title-controls-label">
+                        Filter by:
+                    </div> 
+                    <select onChange={handleMoodFilterChange} className="form-control form-control-lg section-title-dropdown reacts-control">
                         <option value={1}> 😍 </option>
                         <option value={2}> 🤤 </option>
                         <option value={3}> 👍 </option>
@@ -43,9 +48,6 @@ const FavoriteContentBox = ({handleClick, userId, favourites, setFavourites, set
                         <option value={5}> 🤮 </option>
                         <option value={6}> ☠️ </option>
                     </select>
-                    <div className="results-order-control-tag">
-                        Filter by:
-                    </div> 
                 </div>
             </div>
             <div className="section-body favourites-content-body">
