@@ -47,7 +47,7 @@ def query(sql : str, data : List[str] = [], multi: bool = False) -> List[List[st
             # so that your application can use 127.0.0.1:3306 to connect to your
             # Cloud SQL instance
             host = '127.0.0.1'
-            connection = pymysql.connect(user='root', password='cs348', host=host, db='db_1')
+            connection = pymysql.connect(user='root', password='cs348', host=host, db='foodmood')
 
         if(multi):
             queries = sql.split(";")

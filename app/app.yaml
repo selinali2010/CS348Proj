@@ -5,6 +5,6 @@ service: corsbackend
 env_variables:
   CLOUD_SQL_USERNAME: root
   CLOUD_SQL_PASSWORD: cs348
-  CLOUD_SQL_DATABASE_NAME: db_1
+  CLOUD_SQL_DATABASE_NAME: foodmood
   CLOUD_SQL_CONNECTION_NAME: cs348s2020:us-central1:cs348-1
 # [END gae_python37_cloudsql_config]
