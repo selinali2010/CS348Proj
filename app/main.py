@@ -360,7 +360,7 @@ def search():
                 queries.append(queryText)
 
                 # Add exclude ingredient query
-                with open("sql_scripts/search/recipeExcludeIngredientsStrict.sql") as file:
+                with open("sql_scripts/search/recipeExcludeIngredients.sql") as file:
                     queryText = file.read()
                 queries.append(queryText)
             else:
@@ -376,7 +376,7 @@ def search():
             queries.append(queryText)
         elif (len(exclude) > 0):
             # Add exclusion ingredient query
-            with open("sql_scripts/search/recipeExcludeIngredientsStrict.sql") as file:
+            with open("sql_scripts/search/recipeExcludeIngredients.sql") as file:
                 queryText = file.read()
             queries.append(queryText)
             
