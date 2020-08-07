@@ -4,18 +4,18 @@ import { connect } from "react-redux";
 import ChipInput from "./ChipInput";
 import { Checkbox, Collapse, FormControlLabel } from "@material-ui/core";
 import { AddSharp, RemoveSharp, Search } from '@material-ui/icons';
-import { addResults, setStrict, setIngredientsState, setPaginationState } from "../redux/actions";
+import { addResults, setStrict, setIngredientsState, setPageCount } from "../redux/actions";
 import { getResultsOrder, getPaginationState } from '../redux/selectors';
 
 const mapStateToProps = state => {
-    let highestPage, pageCount, orderBy, asc;
-    ({orderBy, asc} = getResultsOrder(state));
-    ({ highestPage, pageCount } = getPaginationState(state));
+    let page, pageCount, orderBy, asc;
+    ({ orderBy, asc } = getResultsOrder(state));
+    ({ page, pageCount } = getPaginationState(state));
 
-    return { orderBy, asc, highestPage };
+    return { orderBy, asc, page, pageCount };
 };
 
-const SearchContentBox = ({orderBy, asc, addResults, setStrict, setIngredientsState, highestPage, pageCount }) => {
+const SearchContentBox = ({orderBy, asc, page, pageCount, addResults, setStrict, setIngredientsState, setPageCount }) => {
     const [activeSearch, setActiveSearch] = useState(false);
     const [recipeName, setRecipeName] = useState("");
     const [ingredients, setIngredients] = useState([]);
@@ -24,65 +24,65 @@ const SearchContentBox = ({orderBy, asc, addResults, setStrict, setIngredientsSt
     const [exclude, setExclude] = useState([]);
     const [isStrict, setIsStrict] = useState(false);
     const [isSubs, setIsSubs] = useState(false);
+    const [lastSearch, setLastSearch] = useState([]);
 
     useEffect(() => {
         if (activeSearch) {
-            searchRecipes();
+            searchRecipes(false)();
         }
     }, [orderBy, asc])
 
     useEffect(() => {
-      // If highest page changes, it is because the user has requested the next page of results
-      console.log(highestPage);
-      // TODO : REQUERY FOR THE NEXT PAGE
-      // then, add the next page to the results list using searchRecipes() / addResults
-    }, [highestPage])
+        console.log(page);
+        if (activeSearch) {
+            searchRecipes(false)();
+        }
+    }, [page])
 
-    const searchRecipes = () => {
-        // TODO: If this function is being called directly from search button, set getCount = true
-        // otherwise (page updates) then getCount should be false
-
-        const fetchData = async () => {
+    const searchRecipes = (isNewSearch) => () => {
+        let searchParams = lastSearch;
+        if (isNewSearch) {
+            searchParams = {
+                recipeName: recipeName, 
+                ingredients: ingredients, 
+                tags: tags,
+                isStrict: isStrict, 
+                isSubs: isSubs,
+                exclude: exclude
+            };
+            setLastSearch(searchParams)
+        }
+        (async () => {
             const response = await fetch(process.env.REACT_APP_API_URL+"api/search", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  recipeName: recipeName, 
-                  ingredients: ingredients, 
-                  tags: tags, 
-                  orderBy: orderBy, 
-                  isAsc: asc,
-                  isStrict: isStrict, 
-                  isSubs: isSubs,
-                  exclude: exclude,
-                  resultsPerPage: 15,
-                  // page: highestPage
-                  // getCount: true or false :)
+                    ...searchParams,
+                    orderBy: orderBy,
+                    isAsc: asc,
+                    page: isNewSearch ? 1 : page,
+                    getCount: isNewSearch
                 }),
             });
             const data = await response.json();
             addResults(data);
             setActiveSearch(true);
-        }
-        fetchData();
-
-        // TODO: add the total number of pages to the state such that the results page knows when to requery
-        // if (getCount = true && highestPage === 0)
-        //   setPaginationState(pageCount, 1);
-        // else 
-        //   setPaginationState(pageCount, highestPage);
+            if (isNewSearch) {
+                setPageCount(data.pageCount);
+            }
+        })();
     }
 
     const handleCollapseChange = (e) => {
-      if (!e.target.checked){
-        setExclude([]);
-        setIsStrict(false);
-        setStrict(false);
-        setIsSubs(false);
-      }
-      setIsCollapse(e.target.checked)
+        if (!e.target.checked){
+            setExclude([]);
+            setIsStrict(false);
+            setStrict(false);
+            setIsSubs(false);
+        }
+        setIsCollapse(e.target.checked)
     }
 
     return (
@@ -150,7 +150,7 @@ const SearchContentBox = ({orderBy, asc, addResults, setStrict, setIngredientsSt
                     </Collapse>
                 </form>
                 <div className="fm-centered-button">
-                    <button className="fm-button" onClick={searchRecipes}>
+                    <button className="fm-button" onClick={searchRecipes(true)}>
                     <Search className="asc-button-icon" fontSize="small"/> Search
                     </button>
                 </div>
@@ -161,5 +161,5 @@ const SearchContentBox = ({orderBy, asc, addResults, setStrict, setIngredientsSt
 
 export default connect(
     mapStateToProps,
-    { addResults, setStrict, setIngredientsState, setPaginationState}
+    { addResults, setStrict, setIngredientsState, setPageCount }
 )(SearchContentBox);

@@ -1,4 +1,4 @@
-import { ADD_RESULTS, SET_RESULTS_ORDER, SET_RESULTS_ASC, SET_STRICT, SET_ING, PAGINATION } from "../actionTypes";
+import { ADD_RESULTS, SET_RESULTS_ORDER, SET_RESULTS_ASC, SET_STRICT, SET_ING, SET_PAGE, SET_PAGE_COUNT } from "../actionTypes";
 
 const initialState = {
     results: [],
@@ -6,14 +6,14 @@ const initialState = {
     orderBy: 0,
     asc: 1,
     strict: false,
-    pageCount: 0,
-    highestPage: 0
+    page: 0,
+    pageCount: 0
 };
 
 export default function(state = initialState, action) {
     switch (action.type) {
       case ADD_RESULTS: {
-        const { results} = action.payload;
+        const { results } = action.payload;
         return {
           ...state,
           results: results
@@ -47,12 +47,19 @@ export default function(state = initialState, action) {
           ingredients: ingredients
         };
       }
-      case PAGINATION: {
-        const { highestPage, pageCount }  = action.payload;
+      case SET_PAGE: {
+        const { page }  = action.payload;
         return {
           ...state,
-          pageCount: highestPage,
-          highestPage: pageCount
+          page: page
+        };
+      }
+      case SET_PAGE_COUNT: {
+        const { pageCount }  = action.payload;
+        return {
+          ...state,
+          page: 1,
+          pageCount: pageCount
         };
       }
       default:

@@ -6,4 +6,4 @@ export const getUserName = store => store.user.userName;
 export const getResultsOrder = store => { return {'orderBy': store.search.orderBy, 'asc': store.search.asc}; }
 export const getStrict = store => store.search.strict;
 export const getIngredientsState = store => store.search.ingredients;
-export const getPaginationState = store => { return {'pageCount': store.search.pageCount, 'highestPage': store.search.highestPage}; }
+export const getPaginationState = store => { return {'page': store.search.page, 'pageCount': store.search.pageCount}; }

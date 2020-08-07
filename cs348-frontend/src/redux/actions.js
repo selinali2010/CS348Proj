@@ -1,5 +1,5 @@
-import { ADD_RESULTS, LOGIN_USER, LOGOUT_USER, SET_FAVOURITES, PAGINATION,
-  SET_FAVOURITES_FILTER, SET_RESULTS_ORDER, SET_RESULTS_ASC, SET_STRICT, SET_ING } from "./actionTypes";
+import { ADD_RESULTS, LOGIN_USER, LOGOUT_USER, SET_FAVOURITES, SET_FAVOURITES_FILTER, 
+  SET_RESULTS_ORDER, SET_RESULTS_ASC, SET_STRICT, SET_ING, SET_PAGE, SET_PAGE_COUNT } from "./actionTypes";
 
 export const addResults = content => ({
   type: ADD_RESULTS,
@@ -63,10 +63,16 @@ export const setIngredientsState = (ingredients) => ({
   } 
 });
 
-export const setPaginationState = (pageCount, highestPage) => ({ 
-  type: PAGINATION, 
+export const setPage = (page) => ({ 
+  type: SET_PAGE, 
   payload: {
-    pageCount: pageCount,
-    highestPage: highestPage
+    page: page
+  } 
+});
+
+export const setPageCount = (pageCount) => ({ 
+  type: SET_PAGE_COUNT, 
+  payload: {
+    pageCount: pageCount
   } 
 });
