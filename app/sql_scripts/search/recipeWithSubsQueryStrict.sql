@@ -1,7 +1,6 @@
 -- Returns all recipes with the provided ingredients and allows for substitutions
 -- Strict mode
-SELECT recipeId
-FROM recipe 
+SELECT recipeId FROM recipe 
 WHERE recipeId NOT IN (
   -- Returns all recipeIds for which both the ingredient and its substitutes do not match
   SELECT DISTINCT i.recipeId FROM ingredient as i

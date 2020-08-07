@@ -1,4 +1,4 @@
 -- Returns all recipes based on the recipe's name
-SELECT recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName
-FROM recipe 
+-- Not strict mode
+SELECT * FROM recipe 
 WHERE recipeName REGEXP @name
