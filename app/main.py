@@ -310,8 +310,7 @@ def addRecipe():
         return make_response(jsonify(result), 400)
 
     return make_response(jsonify(result), 200)
-            
-    
+             
 @app.route("/api/search", methods=["POST"])
 def search():
     args = request.json
@@ -324,6 +323,7 @@ def search():
     isStrict = args["isStrict"] if "isStrict" in args else False
     isSubs = args["isSubs"] if "isSubs" in args else False
     exclude = args["exclude"] if "exclude" in args else []
+    getCount = args["getCount"] if "getCount" in args else False
     result = {}
 
     # if sorting by missing ingredients but no ingredients supplied, switch to recipeId sort
@@ -386,9 +386,14 @@ def search():
         
         # First set all parameters
         sqlQuery = "SET @name := %s;\nSET @params := %s;\nSET @exclude := %s;\nSET @tags := %s;\n"
+        
+        if (getCount):
+            countQuery = sqlQuery
+            countQuery += "SELECT count(*) FROM recipe WHERE recipeId IN (\n" + "\n) AND recipeId IN (\n".join(queries) + "\n)" + getSort(orderBy, isAsc)
+        
         # Then piece together all the queries and add the order by
         sqlQuery += "SELECT * FROM recipe WHERE recipeId IN (\n" + "\n) AND recipeId IN (\n".join(queries) + "\n)" + getSort(orderBy, isAsc)
-
+        
     else:
         filterQuery = ""
 
@@ -437,13 +442,27 @@ def search():
 
         # First set all parameters
         sqlQuery = "SET @name := %s;\nSET @params := %s;\nSET @exclude := %s;\nSET @tags := %s;\n"
+        
+        # create query to get total count of all results
+        if (getCount):
+            countQuery = sqlQuery
+            countQuery += "SELECT count(*) FROM (\n" + "\n UNION \n".join(queries) + "\n) AS result" + filterQuery + getSort(orderBy, isAsc)
 
         # If scoring sort, apply UNION ALL and GROUP BY to sort by number of times a recipe occurs in each separate query
         if (orderBy == 4):
-            sqlQuery += "SELECT * FROM (\n" + "\n UNION ALL \n".join(queries) + "\n) AS result" + filterQuery + " GROUP BY recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName" + (", count, total" if orderBy == 3 else "") + "\n" + getSort(orderBy, isAsc)
+            sqlQuery += "SELECT * FROM (\n" + "\n UNION ALL \n".join(queries) + "\n) AS result" + filterQuery + " GROUP BY recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName" + "\n" + getSort(orderBy, isAsc)
         # Otherwise, piece together all the queries and add the order by
-        else:
+        else:  
             sqlQuery += "SELECT * FROM (\n" + "\n UNION \n".join(queries) + "\n) AS result" + filterQuery + getSort(orderBy, isAsc)
+
+    # get total count of all results
+    if (getCount):
+        # set dummy value in case sql query goes wrong
+        result["count"] = 0
+        # run sql query for count
+        count_result = query(countQuery, paramList, True)
+        if len(count_result) > 0 and "count(*)" in count_result[0]:
+            result["count"] = count_result[0]["count(*)"]
 
     result["recipes"] = query(sqlQuery, paramList, True)
 
