@@ -20,6 +20,7 @@ from typing import *
 from flask import Flask, request, make_response
 from flask_cors import CORS
 import pymysql
+import math
 
 db_user = os.environ.get('CLOUD_SQL_USERNAME')
 db_password = os.environ.get('CLOUD_SQL_PASSWORD')
@@ -335,7 +336,6 @@ def search():
     # get sql string for pagination
     def getPagination():
         # for front end, page is indexed starting from 1
-        print(" LIMIT " + str(resultsPerPage) + " OFFSET " + str((page-1)*resultsPerPage) + ";")
         return " LIMIT " + str(resultsPerPage) + " OFFSET " + str((page-1)*resultsPerPage) + ";"
 
     # get sql string for sorting
@@ -464,14 +464,17 @@ def search():
         else:  
             sqlQuery += "SELECT * FROM (\n" + "\n UNION \n".join(queries) + "\n) AS result" + filterQuery + getSort(orderBy, isAsc) + getPagination()
 
-    # get total count of all results
+    # get total count and numbers of pages of all results
     if (getCount):
         # set dummy value in case sql query goes wrong
         result["count"] = 0
+        result["pageCount"] = 0
         # run sql query for count
         countResult = query(countQuery, paramList, True)
         if len(countResult) > 0 and "count(*)" in countResult[0]:
             result["count"] = countResult[0]["count(*)"]
+            result["pageCount"] = math.ceil(result["count"]/resultsPerPage)
+            
 
     result["recipes"] = query(sqlQuery, paramList, True)
 
@@ -485,7 +488,14 @@ def search():
             orderBy = 0
         with open("sql_scripts/search/recipeAll.sql") as file:
             queryText = file.read()
-        result["recipes"] = query(queryText + getSort(orderBy, isAsc))
+        result["recipes"] = query(queryText + getSort(orderBy, isAsc) + getPagination())
+
+        # get total count and number of pages of all results
+        if (getCount):
+            countResult = query("SELECT count(*) FROM recipe;")
+            if len(countResult) > 0 and "count(*)" in countResult[0]:
+                result["count"] = countResult[0]["count(*)"]
+                result["pageCount"] = math.ceil(result["count"]/resultsPerPage)
 
     return make_response(jsonify(result), 200)
 
