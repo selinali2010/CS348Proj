@@ -7,4 +7,5 @@ export const SET_FAVOURITES = "SET_FAVOURITES";
 export const SET_FAVOURITES_FILTER = "SET_FAVOURITES_FILTER";
 export const SET_STRICT = "SET_STRICT";
 export const SET_ING = "SET_ING";
-export const PAGINATION = "PAGINATION";
+export const SET_PAGE = "SET_PAGE";
+export const SET_PAGE_COUNT = "SET_PAGE_COUNT";

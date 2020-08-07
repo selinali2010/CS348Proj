@@ -2,23 +2,24 @@ import React, {useState, useEffect} from 'react';
 import { connect } from "react-redux";
 import RecipeCard from './RecipeCard';
 import { getResultsState, getStrict, getPaginationState } from '../redux/selectors'
-import { setResultsOrder, setResultsAsc, setPaginationState } from "../redux/actions";
+import { setResultsOrder, setResultsAsc, setPage } from "../redux/actions";
 import { ArrowDownward, ArrowUpward } from '@material-ui/icons';
+import Pagination from '@material-ui/lab/Pagination';
 
 const mapStateToProps = state => {
-    let pageCount, highestPage;
+    let page, pageCount;
     const results = getResultsState(state);
     const strictMode = getStrict(state);
-    ({ pageCount, highestPage } = getPaginationState(state));
+    ({ page, pageCount } = getPaginationState(state));
 
-    return { results, strictMode, pageCount, highestPage };
+    return { results, strictMode, page, pageCount };
 };
 
 const getIsEmpty = (results) => {
     return results && results.isEmpty ? <div className="results-message"> No results matched your search criteria. Displaying all recipes instead. </div> : null;
 }   
 
-const ResultsContentBox = ({results, handleClick, setResultsOrder, setResultsAsc, strictMode, pageCount, highestPage}) => {
+const ResultsContentBox = ({handleClick, results, strictMode, page, pageCount, setResultsOrder, setResultsAsc, setPage}) => {
     const [asc, setAsc] = useState(1);
     const [order, setOrder] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
@@ -44,6 +45,10 @@ const ResultsContentBox = ({results, handleClick, setResultsOrder, setResultsAsc
         }
     }, [strictMode, setResultsOrder, order])
 
+    const handlePageChange = (e, newPage) => {
+        setPage(newPage);
+    }
+
     const getAscButton = () => {
         if (asc === 1) {
             return <button onClick={() => {setResultsAsc(0); setAsc(0)}} className='btn btn-light results-order-control-asc'>
@@ -62,9 +67,9 @@ const ResultsContentBox = ({results, handleClick, setResultsOrder, setResultsAsc
                     Search Results
                 </div>
                 <div>
-                    {/* TODO */}
-                    {currentPage}
-                    {pageCount}
+                    {(page) ?
+                        <Pagination count={pageCount} page={page} onChange={handlePageChange} />
+                    : null }
                 </div>
                 <div className="section-title-controls">
                     <span className="section-title-controls-label">Order by:</span>
@@ -87,4 +92,7 @@ const ResultsContentBox = ({results, handleClick, setResultsOrder, setResultsAsc
       );
 }
 
-export default connect(mapStateToProps, {setResultsOrder, setResultsAsc})(ResultsContentBox);
+export default connect(
+    mapStateToProps,
+    { setResultsOrder, setResultsAsc, setPage }
+)(ResultsContentBox);
