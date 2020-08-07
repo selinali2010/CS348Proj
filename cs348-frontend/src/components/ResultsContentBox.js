@@ -67,9 +67,9 @@ const ResultsContentBox = ({handleClick, results, strictMode, page, pageCount, s
                     Search Results
                 </div>
                 <div>
-                    {(page) ?
+                    { (pageCount === 0 || page === 0) ? null :
                         <Pagination count={pageCount} page={page} onChange={handlePageChange} />
-                    : null }
+                    }
                 </div>
                 <div className="section-title-controls">
                     <span className="section-title-controls-label">Order by:</span>

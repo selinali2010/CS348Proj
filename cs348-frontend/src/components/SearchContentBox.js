@@ -62,7 +62,7 @@ const SearchContentBox = ({orderBy, asc, page, pageCount, addResults, setStrict,
             addResults(data);
             setActiveSearch(true);
             if (isNewSearch) {
-                setPageCount(data.count);
+                setPageCount(data.pageCount);
             }
         }
         fetchData();
