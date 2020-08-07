@@ -153,17 +153,20 @@ def register():
         result["error"] = "Invalid request, cannot have empty parameters"
         return make_response(jsonify(result), 400)
 
-    with open("sql_scripts/user/insertUser.sql") as file:
-        try:
-            result = query(file.read(), [username, password])
-        except pymysql.err.IntegrityError:
-            result["error"] = "The username " + username + " is already in use. Please choose a new one."
-            return make_response(jsonify(result), 400)
+    with open("sql_scripts/user/insertUser.sql") as file1:
+        with open("sql_scripts/user/getUserIdQuery.sql") as file2:
+            querytxt = file1.read() + file2.read()
+            try:
+                result = query(querytxt, [[username, password]], True)
+            except pymysql.err.IntegrityError:
+                result["error"] = "The username " + username + " is already in use. Please choose a new one."
+                return make_response(jsonify(result), 400)
+    
+    postResult = {"userId":""}
+    if len(result) > 0 and "LAST_INSERT_ID()" in result[0]:
+        postResult["userId"] = result[0]["LAST_INSERT_ID()"]
 
-    with open("sql_scripts/user/getUserIdQuery.sql") as file:
-        result = query(file.read(), username)[0]
-
-    return make_response(jsonify(result), 200)
+    return make_response(jsonify(postResult), 200)
 
 @app.route("/api/react", methods=["POST"])
 def addReact():
