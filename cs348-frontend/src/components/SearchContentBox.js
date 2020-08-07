@@ -32,10 +32,10 @@ const SearchContentBox = ({orderBy, asc, addResults, setStrict, setIngredientsSt
     }, [orderBy, asc])
 
     useEffect(() => {
-      // If highest page changes, it is because the user has requested the next page of results
-      console.log(highestPage);
-      // TODO : REQUERY FOR THE NEXT PAGE
-      // then, add the next page to the results list using searchRecipes() / addResults
+        // If highest page changes, it is because the user has requested the next page of results
+        console.log(highestPage);
+        // TODO : REQUERY FOR THE NEXT PAGE
+        // then, add the next page to the results list using searchRecipes() / addResults
     }, [highestPage])
 
     const searchRecipes = () => {
@@ -49,17 +49,17 @@ const SearchContentBox = ({orderBy, asc, addResults, setStrict, setIngredientsSt
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  recipeName: recipeName, 
-                  ingredients: ingredients, 
-                  tags: tags, 
-                  orderBy: orderBy, 
-                  isAsc: asc,
-                  isStrict: isStrict, 
-                  isSubs: isSubs,
-                  exclude: exclude,
-                  resultsPerPage: 15,
-                  // page: highestPage
-                  // getCount: true or false :)
+                    recipeName: recipeName, 
+                    ingredients: ingredients, 
+                    tags: tags, 
+                    orderBy: orderBy, 
+                    isAsc: asc,
+                    isStrict: isStrict, 
+                    isSubs: isSubs,
+                    exclude: exclude,
+                    resultsPerPage: 15,
+                    // page: highestPage
+                    // getCount: true or false :)
                 }),
             });
             const data = await response.json();
@@ -76,13 +76,13 @@ const SearchContentBox = ({orderBy, asc, addResults, setStrict, setIngredientsSt
     }
 
     const handleCollapseChange = (e) => {
-      if (!e.target.checked){
-        setExclude([]);
-        setIsStrict(false);
-        setStrict(false);
-        setIsSubs(false);
-      }
-      setIsCollapse(e.target.checked)
+        if (!e.target.checked){
+            setExclude([]);
+            setIsStrict(false);
+            setStrict(false);
+            setIsSubs(false);
+        }
+        setIsCollapse(e.target.checked)
     }
 
     return (

@@ -60,22 +60,21 @@ const ResultsContentBox = ({results, handleClick, setResultsOrder, setResultsAsc
             <div className="section-title">
                 <div className="section-title-text">
                     Search Results
-                    {getAscButton()}
-                    <select onChange={updateOrder} className="form-control form-control-lg results-order-control">
+                </div>
+                <div>
+                    {/* TODO */}
+                    {currentPage}
+                    {pageCount}
+                </div>
+                <div className="section-title-controls">
+                    <span className="section-title-controls-label">Order by:</span>
+                    <select onChange={updateOrder} className="form-control form-control-lg section-title-dropdown results-order-control">
                         <option value={0}>Closest Match </option>
                         <option value={1}>Difficulty</option>
                         <option value={2}>Cook Time</option>
                         {(!strictMode)? <option value={3}>Missing Ingredients</option> : null}
                     </select>
-                    <div className="results-order-control-tag">
-                        Order by:
-                    </div>
-                    {(currentPage > 0)? <button> {"<<"} </button> : null}
-                    {/* TODO: ADD PAGINATION CONTROLS
-                        show currentPage / pageCount display (ie. Showing results 1-30 of 300)
-                    */}     
-                    {(currentPage < highestPage)? <button> {">>"} </button> : null}   
-
+                    {getAscButton()}
                 </div>
             </div>
             <div className="section-body">
