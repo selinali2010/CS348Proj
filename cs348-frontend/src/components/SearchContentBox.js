@@ -33,7 +33,6 @@ const SearchContentBox = ({orderBy, asc, page, pageCount, addResults, setStrict,
     }, [orderBy, asc])
 
     useEffect(() => {
-        console.log(page);
         if (activeSearch) {
             searchRecipes(false)();
         }
