@@ -324,7 +324,7 @@ def search():
     isSubs = args["isSubs"] if "isSubs" in args else False
     exclude = args["exclude"] if "exclude" in args else []
     getCount = args["getCount"] if "getCount" in args else False
-    page = args["page"]-1 if "page" in args else 1
+    page = args["page"] if "page" in args else 1
     resultsPerPage = args["resultsPerPage"] if "resultsPerPage" in args else 15
     result = {}
 
@@ -335,6 +335,7 @@ def search():
     # get sql string for pagination
     def getPagination():
         # for front end, page is indexed starting from 1
+        print(" LIMIT " + str(resultsPerPage) + " OFFSET " + str((page-1)*resultsPerPage) + ";")
         return " LIMIT " + str(resultsPerPage) + " OFFSET " + str((page-1)*resultsPerPage) + ";"
 
     # get sql string for sorting
