@@ -145,6 +145,16 @@ body {
   color: white;
 }
 
+.MuiPaginationItem-root {
+  color: white !important;
+  font-family: var(--font-body) !important;
+}
+
+button.MuiPaginationItem-root:focus {
+  border: none !important;
+  outline: none !important;
+}
+
 .section-body {
   width: 100%;
   background: var(--paper);
