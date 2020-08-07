@@ -105,13 +105,6 @@ def tags(id):
     result = query(queryText, id)
     return jsonify(result)
 
-@app.route("/api/substitutions/<int:id>", methods=["GET"])
-def substitutions(id):
-    with open("sql_scripts/recipeDetails/substitutionsQuery.sql") as file:
-        queryText = file.read()
-    result = query(queryText, id)
-    return jsonify(result)
-
 @app.route("/api/reactCount/<int:id>", methods=["GET"])
 def reactCount(id):
     with open("sql_scripts/recipeDetails/reactCountQuery.sql") as file:

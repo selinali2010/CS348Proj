@@ -1,8 +1,9 @@
 -- Returns all recipes with the provided ingredients, allows for substitutions and eliminates excluded ingredients (not subs)
--- Not strict mode
 -- Sort by ingredient match
-SELECT r.recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName, count, total
+-- Not strict mode
+SELECT r.recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName, IFNULL(count, 0) as count, total
 FROM (
+  -- Perform normal query
   SELECT recipe.recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName, COUNT(foodName) as count
   FROM recipe JOIN ingredient ON recipe.recipeId = ingredient.recipeId
   WHERE foodName NOT REGEXP @exclude AND (

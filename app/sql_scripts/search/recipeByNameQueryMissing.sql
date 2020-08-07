@@ -1,5 +1,6 @@
 -- Returns all recipes based on the recipe's name
 -- Sort by ingredient match
+-- Not strict mode
 SELECT r.recipeId, recipeName, cookTime, difficulty, cuisine, servings, imageUrl, instructionsLink, authorName, IFNULL(count,0) as count, total
 FROM (
   -- Perform normal query
