@@ -1,28 +1,40 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from "react-redux";
 import RecipeCard from './RecipeCard';
-import { getResultsState, getStrict } from '../redux/selectors'
-import { setResultsOrder, setResultsAsc } from "../redux/actions";
+import { getResultsState, getStrict, getPaginationState } from '../redux/selectors'
+import { setResultsOrder, setResultsAsc, setPaginationState } from "../redux/actions";
 import { ArrowDownward, ArrowUpward } from '@material-ui/icons';
 
 const mapStateToProps = state => {
+    let pageCount, highestPage;
     const results = getResultsState(state);
     const strictMode = getStrict(state);
-    return { results, strictMode };
+    ({ pageCount, highestPage } = getPaginationState(state));
+
+    return { results, strictMode, pageCount, highestPage };
 };
 
 const getIsEmpty = (results) => {
     return results && results.isEmpty ? <div className="results-message"> No results matched your search criteria. Displaying all recipes instead. </div> : null;
 }   
 
-const ResultsContentBox = ({results, handleClick, setResultsOrder, setResultsAsc, strictMode}) => {
+const ResultsContentBox = ({results, handleClick, setResultsOrder, setResultsAsc, strictMode, pageCount, highestPage}) => {
     const [asc, setAsc] = useState(1);
     const [order, setOrder] = useState(0);
+    const [currentPage, setCurrentPage] = useState(0);
 
     const updateOrder = (e) => {
         let orderBy = parseInt(e.target.options[e.target.selectedIndex].value)
         setResultsOrder(orderBy);
         setOrder(orderBy);
+    }
+
+    // TODO: PAGINATION CONTROLS
+    const incrementPage = () => {
+        // If (currentPage === highestPage && highestPage < pageCount)
+        //   setPaginationState(pageCount, highestPage++) // This will trigger searchContentBox to add more results
+        // if (pageCount < highestPage)
+        //   setCurrentPage(currentPage++)
     }
 
     useEffect(() => {
@@ -57,7 +69,13 @@ const ResultsContentBox = ({results, handleClick, setResultsOrder, setResultsAsc
                     </select>
                     <div className="results-order-control-tag">
                         Order by:
-                    </div>                 
+                    </div>
+                    {(currentPage > 0)? <button> {"<<"} </button> : null}
+                    {/* TODO: ADD PAGINATION CONTROLS
+                        show currentPage / pageCount display (ie. Showing results 1-30 of 300)
+                    */}     
+                    {(currentPage < highestPage)? <button> {">>"} </button> : null}   
+
                 </div>
             </div>
             <div className="section-body">

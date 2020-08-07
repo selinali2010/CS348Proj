@@ -1,11 +1,13 @@
-import { ADD_RESULTS, SET_RESULTS_ORDER, SET_RESULTS_ASC, SET_STRICT, SET_ING } from "../actionTypes";
+import { ADD_RESULTS, SET_RESULTS_ORDER, SET_RESULTS_ASC, SET_STRICT, SET_ING, PAGINATION } from "../actionTypes";
 
 const initialState = {
     results: [],
     ingredients: [],
     orderBy: 0,
     asc: 1,
-    strict: false
+    strict: false,
+    pageCount: 0,
+    highestPage: 0
 };
 
 export default function(state = initialState, action) {
@@ -43,6 +45,14 @@ export default function(state = initialState, action) {
         return {
           ...state,
           ingredients: ingredients
+        };
+      }
+      case PAGINATION: {
+        const { highestPage, pageCount }  = action.payload;
+        return {
+          ...state,
+          pageCount: highestPage,
+          highestPage: pageCount
         };
       }
       default:

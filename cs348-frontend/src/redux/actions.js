@@ -1,4 +1,4 @@
-import { ADD_RESULTS, LOGIN_USER, LOGOUT_USER, SET_FAVOURITES, 
+import { ADD_RESULTS, LOGIN_USER, LOGOUT_USER, SET_FAVOURITES, PAGINATION,
   SET_FAVOURITES_FILTER, SET_RESULTS_ORDER, SET_RESULTS_ASC, SET_STRICT, SET_ING } from "./actionTypes";
 
 export const addResults = content => ({
@@ -60,5 +60,13 @@ export const setIngredientsState = (ingredients) => ({
   type: SET_ING, 
   payload: {
     ingredients: ingredients
+  } 
+});
+
+export const setPaginationState = (pageCount, highestPage) => ({ 
+  type: PAGINATION, 
+  payload: {
+    pageCount: pageCount,
+    highestPage: highestPage
   } 
 });
