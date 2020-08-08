@@ -107,45 +107,45 @@ const SearchContentBox = ({orderBy, asc, page, pageCount, addResults, setStrict,
                         values={tags}
                         setValues={ (values) => setTags(values) } />
                     <FormControlLabel
-                      control={
-                        <Checkbox
-                          color="default"
-                          size="small"
-                          checked={isCollapse}
-                          icon={<AddSharp/>}
-                          checkedIcon={<RemoveSharp/>}
-                          onChange={handleCollapseChange}
-                        />
-                      }
-                      label={<div className="fm-checkbox-label">{isCollapse ? "Close Advanced Search" : "See Advanced Search"}</div>}
+                        control={
+                            <Checkbox
+                            color="default"
+                            size="small"
+                            checked={isCollapse}
+                            icon={<AddSharp/>}
+                            checkedIcon={<RemoveSharp/>}
+                            onChange={handleCollapseChange}
+                            />
+                        }
+                        label={<div className="fm-checkbox-label">{isCollapse ? "Close Advanced Search" : "See Advanced Search"}</div>}
                     />
                     <Collapse in={isCollapse}>
-                      <div> Ingredients to Exclude: </div>
-                      <ChipInput typeName="ingredient"
-                          values={exclude}
-                          setValues={(values) => setExclude(values)} />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            color="default"
-                            size="small"
-                            checked={isStrict}
-                            onChange={(event) => {setIsStrict(event.target.checked); setStrict(event.target.checked)}}
-                          />
-                        }
-                        label={<div className="fm-checkbox-label">Strict Mode</div>}
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            color="default"
-                            size="small"
-                            checked={isSubs}
-                            onChange={(event) => setIsSubs(event.target.checked)}
-                          />
-                        }
-                        label={<div className="fm-checkbox-label">Allow Substitutions</div>}
-                      />
+                        <div> Ingredients to Exclude: </div>
+                        <ChipInput typeName="ingredient"
+                            values={exclude}
+                            setValues={(values) => setExclude(values)} />
+                        <FormControlLabel
+                            control={
+                            <Checkbox
+                                color="default"
+                                size="small"
+                                checked={isStrict}
+                                onChange={(event) => {setIsStrict(event.target.checked); setStrict(event.target.checked)}}
+                            />
+                            }
+                            label={<div className="fm-checkbox-label">Strict Mode</div>}
+                        />
+                        <FormControlLabel
+                            control={
+                            <Checkbox
+                                color="default"
+                                size="small"
+                                checked={isSubs}
+                                onChange={(event) => setIsSubs(event.target.checked)}
+                            />
+                            }
+                            label={<div className="fm-checkbox-label">Allow Substitutions</div>}
+                        />
                     </Collapse>
                 </form>
                 <div className="fm-centered-button">
