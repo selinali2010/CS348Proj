@@ -150,7 +150,8 @@ const SearchContentBox = ({orderBy, asc, page, pageCount, addResults, setStrict,
                 </form>
                 <div className="fm-centered-button">
                     <button className="fm-button" onClick={searchRecipes(true)}>
-                    <Search className="asc-button-icon" fontSize="small"/> Search
+                        <Search className="fm-button-icon"/>
+                        <span className="fm-button-text">Search</span>
                     </button>
                 </div>
             </div>

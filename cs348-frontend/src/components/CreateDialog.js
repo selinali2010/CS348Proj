@@ -23,13 +23,13 @@ const CreateDialog = ({open, handleClose, userName}) => {
     const validateInput = () => {
         let errors = "";
         let requiredFields = [];
-        if (recipeName === "") requiredFields.push("Recipe Name");
-        if (cuisine === "") requiredFields.push("Cuisine");
+        if (recipeName === "") requiredFields.push("Recipe Title");
         if (cookTime <= 0) requiredFields.push("Cook Time");
-        if (difficulty <= 0) requiredFields.push("Difficulty");
         if (servings <= 0) requiredFields.push("Servings");
-        if (imageUrl === "") requiredFields.push("ImageUrl");
+        if (difficulty <= 0) requiredFields.push("Difficulty");
+        if (cuisine === "") requiredFields.push("Cuisine");
         if (instructionsLink === "") requiredFields.push("Instructions Link");
+        if (imageUrl === "") requiredFields.push("Image URL");
         ingredients.forEach(ing => {
             if (ing.foodName === "" && !requiredFields.includes("Ingredient Name")) requiredFields.push("Ingredient Name");
             if (ing.quantity <= 0 && !requiredFields.includes("Ingredient Quantity")) requiredFields.push("Ingredient Quantity");
@@ -114,42 +114,77 @@ const CreateDialog = ({open, handleClose, userName}) => {
 return (
     <Dialog open={open} onClose={closeModal} fullWidth={true} maxWidth="md">
         <DialogContent className="fm-dialog-content">
-        <div className="no-gutters recipe-details" style={{'overflowY': 'auto'}} >
+        <div className="row no-gutters recipe-details recipe-create" >
             <button className="close" aria-label="Close" onClick={closeModal}>
                 <Close aria-hidden="true" />
             </button>
-            <div className="recipe-details-section">
-                <h1>Add a Recipe: </h1>
-            </div>
-            <h2> Recipe Details </h2>
-            <div className="recipe-details-section row">
-                <div className ="col-6">
-                    <div className="row"> <div className="col-4"> Recipe Name: </div>
-                        <input type="text" className="fm-text-input col-8" placeholder="Recipe name..."
-                            onChange={ (e) => setRecipeName(e.target.value) } /></div>
-                    <div className="row"> <div className="col-4"> Cuisine: </div>
-                        <input type="text" className="fm-text-input col-8" placeholder="Cuisine..."
-                            onChange={ (e) => setCuisine(e.target.value) } /></div>
-                    <div className="row"> <div className="col-4"> Cook Time: </div>
-                        <input type="number" className="fm-text-input col-8" placeholder="Cook Time in minutes"
-                            onChange={ (e) => setCookTime(e.target.value) } /></div>
-                    <div className="row"> <div className="col-4"> Difficulty: </div>
-                        <input type="number" min="1" max="5" className="fm-text-input col-8" placeholder="Difficulty Rating..."
-                            onChange={ (e) => setDifficulty(e.target.value) } /></div>
-                </div>
-                <div className ="col-6">
-                    <div className="row"> <div className="col-4">Servings:</div>
-                        <input type="number" className="fm-text-input col-8" placeholder="Servings..."
-                            onChange={ (e) => setServings(e.target.value) } /></div>
-                    <div className="row"> <div className="col-4"> Image URL: </div>
-                        <input type="text" className="fm-text-input col-8" placeholder="Image URL..."
-                            onChange={ (e) => setImageUrl(e.target.value) } /></div>
-                    <div className="row"> <div className="col-4"> Instructions Link: </div>
-                        <input type="text" className="fm-text-input col-8" placeholder="Instructions Link..."
-                            onChange={ (e) => setInstructionsLink(e.target.value) } /> </div>
+            <div className="col-12 recipe-details-col">
+                <div className="recipe-details-section">
+                    <input type="text" className="fm-text-input fm-text-input-large" placeholder="Recipe Title..." />
                 </div>
             </div>
-            <div className="recipe-details-section"> 
+            <div className="col-md-5 recipe-details-col">
+                <div className="recipe-details-section">
+                    <table className="recipe-create-table"><tbody>
+                        <tr>
+                            <th>Cook&nbsp;Time:</th>
+                            <td>
+                                <span><input type="number" className="fm-text-input fm-text-input-number" placeholder="Cook Time..."
+                                    onChange={ (e) => setCookTime(e.target.value) } /></span>
+                                <span>&nbsp;mins</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Serves:</th>
+                            <td>
+                                <input type="number" min="1" className="fm-text-input fm-text-input-number" placeholder="Servings..."
+                                    onChange={ (e) => setServings(e.target.value) } />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Difficulty:</th>
+                            <td>
+                                <input type="number" min="1" className="fm-text-input fm-text-input-number" placeholder="Difficulty Rating..."
+                                    onChange={ (e) => setDifficulty(e.target.value) } />
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </div>
+            </div>
+            <div className="col-md-7 recipe-details-col">
+                <div className="recipe-details-section">
+                    <table className="recipe-create-table"><tbody>
+                        <tr>
+                            <th>Cuisine:</th>
+                            <td>
+                                <input type="text" className="fm-text-input" placeholder="Cuisine..."
+                                    onChange={ (e) => setCuisine(e.target.value) } />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Instructions:</th>
+                            <td>
+                                <input type="text" className="fm-text-input" placeholder="Instructions Link..."
+                                    onChange={ (e) => setInstructionsLink(e.target.value) } />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Image:</th>
+                            <td>
+                                <input type="text" className="fm-text-input" placeholder="Image URL..."
+                                    onChange={ (e) => setImageUrl(e.target.value) } />
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </div>
+            </div>
+            <div className="col-12 recipe-details-col recipe-details-section">
+                <h2> Tags </h2>
+                <ChipInput typeName="tag"
+                    values={tags}
+                    setValues={ (values) => setTags(values) } />
+            </div>
+            <div className="col-12 recipe-details-col recipe-details-section"> 
                 <h2> Ingredients </h2>
                 <div className="row"> <div className="col-11"> <div className="row">
                     <div className="col-3"> Ingredient Name </div>
@@ -163,29 +198,27 @@ return (
                         <IngredientInput index={index} updateIngredient={updateIngredient} ingredient={item}/>
                         </div>
                         <div className="col-1">
-                        {(ingredients.length > 1)? 
-                            <button className="delete-ing-button" onClick={()=>{removeIngredient(index)}}>
-                                <Close className="asc-button-icon" fontSize="small"/>
-                            </button> : <div/>}
+                        <button className="fm-button delete-ing-button" onClick={()=>{removeIngredient(index)}}>
+                            <Close className="fm-button-icon"/>
+                        </button>
                         </div>
                     </div>
                 )}
                 <div className="fm-centered-button">
                     <button className="fm-button" onClick={addIngredient}>
-                        <Add className="asc-button-icon" fontSize="small"/> Add Ingredient
+                        <Add className="fm-button-icon"/>
+                        <span className="fm-button-text">Add Ingredient</span>
                     </button>
                 </div>
             </div>
-            <div className="recipe-details-section">
-            <h2> Tags </h2>
-            <ChipInput typeName="tag"
-                values={tags}
-                setValues={ (values) => setTags(values) } /></div>
-            {getErrorMessage()}
-            <div className="fm-centered-button">
-                <button className="fm-button" onClick={validateInput}>
-                    <Add className="asc-button-icon" fontSize="small"/> Create Recipe
-                </button>
+            <div className="col-12 recipe-details-col recipe-details-section"> 
+                {getErrorMessage()}
+                <div className="fm-centered-button">
+                    <button className="fm-button" onClick={validateInput}>
+                        <Add className="fm-button-icon"/>
+                        <span className="fm-button-text">Create Recipe</span>
+                    </button>
+                </div>
             </div>
         </div>
         </DialogContent>

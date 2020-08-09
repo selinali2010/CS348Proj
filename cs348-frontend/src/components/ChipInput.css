@@ -16,7 +16,9 @@
 
 .fm-chip-input-add-chip {
   display: inline-flex;
-  height: 2rem;
+  height: 1.875rem;
+  padding-top: 0;
+  padding-bottom: 0;
   flex-grow: 1;
   border: none !important;
   background: none;
@@ -26,4 +28,9 @@
 .fm-chip-input-add-chip::placeholder {
   color: var(--olive);
   /* font-style: italic; */
+}
+
+.fm-chip-input .fm-chip {
+  margin-top: 0.1875rem;
+  margin-bottom: 0.1875rem;
 }

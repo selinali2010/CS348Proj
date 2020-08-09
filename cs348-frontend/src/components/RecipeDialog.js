@@ -266,7 +266,8 @@ const RecipeDialog = ({open, recipe, handleClose, userId, favourites, favourites
             <div className="recipe-details-section">
               <a className="fm-button" 
                   href={recipe.instructionsLink} target="_blank" rel="noopener noreferrer">
-                <Launch className="asc-button-icon" fontSize="small"/> View Full Recipe
+                <Launch className="fm-button-icon"/>
+                <span className="fm-button-text">View Full Recipe</span>
               </a>
             </div>
           </div>

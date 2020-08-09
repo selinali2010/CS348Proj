@@ -37,12 +37,14 @@ const AccountContentBox = ({userName, logoutUser}) => {
                     </div>
                     <div className="fm-centered-button">
                         <button className="fm-button" onClick={handleShow}>
-                            <Add className="asc-button-icon" fontSize="small"/> Add Recipe
+                            <Add className="fm-button-icon"/>
+                            <span className="fm-button-text">Add Recipe</span>
                         </button>
                     </div>
                     <div className="fm-centered-button">
                         <button className="fm-button" onClick={handleLogout}>
-                            <ExitToApp className="asc-button-icon" fontSize="small"/> Log out
+                            <ExitToApp className="fm-button-icon"/>
+                            <span className="fm-button-text">Log out</span>
                         </button>
                     </div>
                     
