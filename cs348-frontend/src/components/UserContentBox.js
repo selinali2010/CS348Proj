@@ -114,10 +114,12 @@ const UserContentBox = ({loginUser}) => {
                     <div className="col-4">
                         <div className="user-content-buttons">
                             <button className="fm-button login-button" onClick={login}>
-                                <ArrowForward className="asc-button-icon" fontSize="small"/> Login
+                                <ArrowForward className="fm-button-icon"/>
+                                <span className="fm-button-text">Login</span>
                             </button>
                             <button className="fm-button" onClick={register}>
-                                <PersonAdd className="asc-button-icon" fontSize="small"/> Register
+                                <PersonAdd className="fm-button-icon"/>
+                                <span className="fm-button-text">Register</span>
                             </button>
                         </div>
                     </div>

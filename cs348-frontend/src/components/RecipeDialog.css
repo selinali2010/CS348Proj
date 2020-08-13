@@ -110,3 +110,13 @@
 .recipe-details-chart {
   flex: 1;
 }
+
+/* CREATE RECIPE DIALOG */
+
+.recipe-create {
+  overflow-y: auto;
+}
+
+.recipe-create-table td {
+  width: 100%;
+}

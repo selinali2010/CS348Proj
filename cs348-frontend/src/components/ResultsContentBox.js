@@ -43,11 +43,11 @@ const ResultsContentBox = ({handleClick, results, strictMode, page, pageCount, s
     const getAscButton = () => {
         if (asc === 1) {
             return <button onClick={() => {setResultsAsc(0); setAsc(0)}} className='btn btn-light results-order-control-asc'>
-                <ArrowUpward className="asc-button-icon" fontSize="small"/>
+                <ArrowUpward className="fm-button-icon"/>
             </button>
         } else {
             return <button onClick={() => {setResultsAsc(1); setAsc(1)}} className='btn btn-light results-order-control-asc'>
-                <ArrowDownward className="asc-button-icon" fontSize="small"/>
+                <ArrowDownward className="fm-button-icon"/>
             </button>
         }
     }
