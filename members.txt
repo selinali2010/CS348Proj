@@ -7,6 +7,9 @@ Selina Li (sk6li)
 - Implemented backend API endpoints for user login/register, react related queries
 - Added additional sorting/ordering to search queries
 - Added the modal to display recipe details and chart to display react information
+- Implemented SQL code to allow for sorting based on score and ratio of missing ingredient to total ingredients
+- Implemented SQL code for advanced search features and its respective UI view
+- Contributed to demo video
 
 Ethan Guo (ehguo)
 - Participated in project brainstorm and preparation
@@ -17,6 +20,9 @@ Ethan Guo (ehguo)
 - Added chip functionality for multi-input search bars
 - Organized and restructured front-end page layout and styles
 - Created high fidelity mockups for front end design
+- Implemented pagination functionality on front-end
+- Front-end polish
+- Editted and contributed to demo video
 
 Hemit Shah (h39shah)
 - Participated in project brainstorm and preparation
@@ -30,6 +36,7 @@ Hemit Shah (h39shah)
 - Wrote scripts to scrape recipe images from the web
 - Tested SQL scripts for production database
 - Exported local tables to cloud database
+- Editted and contributed to demo video
 
 Linda Zheng (ll2zheng)
 - Participated in project brainstorm and preparation
@@ -42,6 +49,9 @@ Linda Zheng (ll2zheng)
 - Implemented backend API endpoints for user login/register
 - Wrote scripts to scrape recipe images from the web
 - Implemented user reaction interface (emojis)
+- Implemented SQL for adding a recipe and all related details (ingredients, substitutions, etc) to the database
+- Implemented SQL for limiting results and ensuring compatibility with pagination
+- Contributed to demo video
 
 Robert Nadal (rmnadal)
 - Participated in project brainstorm and preparation
@@ -52,3 +62,7 @@ Robert Nadal (rmnadal)
 - Implemented user login/register interface with error handling
 - Implemented user display for favourite recipes
 - Added account details box and sort/order controls
+- Added ability to filter by different reacts for a user's reacted to recipes
+- Implemented user display for adding a new recipe
+- Added styling on recipe modal (display substitutions, selecting a react and indicate matched ingredients)
+- Contributed to demo video
