@@ -45,6 +45,12 @@ For the sake of simplicity, the use of a custom google search module for finding
   - search parameters are collected and results queried from cs348-frontend/src/components/SearchContentBox.js
   - results displayed in cs348-frontend/src/components/ResultsContentBox.js
 
+**Display Results:** User can control number of results per page
+- Scripts with SQL queries: app/main.py
+- Backend endpoint: app/main.py
+- Frontend:
+  - Pagination controls in cs348-frontend/src/components/ResultsContentBox.js, 
+
 **Sort Results:** Users can order/sort recipe results by one of the following
 - Adding order by to SQL query: app/main.py
 - Backend endpoint: app/main.py
@@ -72,9 +78,23 @@ For the sake of simplicity, the use of a custom google search module for finding
 - Backend endpoint: app/main.py
 - Frontend: 
   - Favorite recipe results are fetched and displayed from cs348-frontend/src/components/FavoriteContentBox.js
-  - Recipe Details: User’s can select recipes for more information (modal) such as :
+
+**Recipe Details:** User’s can select recipes for more information (modal) such as :
 - Scripts with SQL queries: app/sql_scripts/recipeDetails/*
 - Backend endpoint: app/main.py
 - Frontend:
   - Recipe details displayed in a modal whose content is fetched and organized from cs348-frontend/src/components/RecipeDetails.js
   - Reaction chart details and emojis defined in cs348-frontend/src/components/Chart.js and cs348-frontend/src/components/Emoji.js
+
+**Advanced Search:** Users can apply specific advanced Search Settings
+- Scripts with SQL queries: app/sql_scripts/search/* (all files containing "strict", "subs" or "exclude")
+- Backend endpoint: app/main.py
+- Frontend: 
+  - search parameters are collected and results queried from cs348-frontend/src/components/SearchContentBox.js
+  - results displayed in cs348-frontend/src/components/ResultsContentBox.js
+
+**Add-a-Recipe:** Users can add their own recipes by filling out all necessary info
+- Scripts with SQL queries: app/sql_scripts/newRecipe/*
+- Backend endpoint: app/main.py
+- Frontend:
+  - Modal for user to input values in cs348-frontend/src/components/CreateDialog.js
