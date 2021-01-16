@@ -1,4 +1,4 @@
-# CS348Proj
+# Food Mood - CS348Proj
 
 ## Starting local server
 Ensure you have a credentials file for your GCP MySQL server.
